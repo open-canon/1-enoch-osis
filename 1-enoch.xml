@@ -1390,6 +1390,9 @@
           <verse canonical="true" osisID="1En.59.3"> And after that all the secrets of the lights and lightnings were shown to me, and they lighten for blessing and for satisfying.]</verse>
         </chapter>
         <chapter osisID="1En.60" TEIform="div">
+          <title canonical="false" type="sub" TEIform="title">
+            <pCT canonical="false" TEIform="p">A Fragment of the Book of Noah</pCT>
+          </title>
           <div canonical="false" type="summary" TEIform="div">
             <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
           </div>
@@ -1880,7 +1883,131 @@
           <verse canonical="true" osisID="1En.70.4"> West, where the angels took the cords to measure for me the place for the elect and righteous. And there I saw the first fathers and the righteous who from the beginning dwell in that place.</verse>
         </chapter>
 
+        <chapter osisID="1En.71" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+          </div>
 
+          <verse canonical="true" osisID="1En.71.1">
+            <lg>
+              <l>And it came to pass after this that my spirit was translated</l>
+              <l>And it ascended into the heavens:</l>
+              <l>And I saw the holy sons of God.</l>
+              <l>They were stepping on flames of fire:</l>
+              <l>Their garments were white [and their raiment],</l>
+              <l>And their faces shone like snow.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.71.2">
+            <lg>
+              <l>And I saw two streams of fire,</l>
+              <l>And the light of that fire shone like hyacinth,</l>
+              <l>And I fell on my face before the Lord of Spirits.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.71.3">
+            <lg>
+              <l>And the angel Michael [one of the archangels] seized me by my right hand,</l>
+              <l>And lifted me up and led me forth into all the secrets,</l>
+              <l>And he showed me all the secrets of righteousness.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.71.4">
+            <lg>
+              <l>And he showed me all the secrets of the ends of the heaven,</l>
+              <l>And all the chambers of all the stars, and all the luminaries,</l>
+              <l>Whence they proceed before the face of the holy ones.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.71.5">
+            <lg>
+              <l>And he translated my spirit into the heaven of heavens,</l>
+              <l>And I saw there as it were a structure built of crystals,</l>
+              <l>And between those crystals tongues of living fire.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.71.6">
+            <lg>
+              <l>And my spirit saw the girdle which girt that house of fire,</l>
+              <l>And on its four sides were streams full of living fire,</l>
+              <l>And they girt that house.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.71.7">
+            <lg>
+              <l>And round about were Seraphin, Cherubic, and Ophannin:</l>
+              <l>And these are they who sleep not</l>
+              <l>And guard the throne of His glory.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.71.8">
+            <lg>
+              <l>And I saw angels who could not be counted,</l>
+              <l>A thousand thousands, and ten thousand times ten thousand,</l>
+              <l>Encircling that house.</l>
+              <lb TEIform="milestone"/>
+              <l>And Michael, and Raphael, and Gabriel, and Phanuel,</l>
+              <l>And the holy angels who are above the heavens,</l>
+              <l>Go in and out of that house.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.71.9">
+            <lg>
+              <l>And they came forth from that house,</l>
+              <l>And Michael and Gabriel, Raphael and Phanuel,</l>
+              <l>And many holy angels without number.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.71.10">
+            <lg>
+              <l>And with them the Head of Days,</l>
+              <l>His head white and pure as wool,</l>
+              <l>And His raiment indescribable.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.71.11">
+            <lg>
+              <l>And I fell on my face,</l>
+              <l>And my whole body became relaxed,</l>
+              <l>And my spirit was transfigured;</l>
+              <lb TEIform="milestone"/>
+              <l>And I cried with a loud voice, ...</l>
+              <l>with the spirit of power,</l>
+              <l>And blessed and glorified and extolled.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.71.12">And these blessings which went forth out of my mouth were well pleasing before that Head of Days. And that Head of Days came with Michael and Gabriel, Raphael and Phanuel, thousands and ten thousands of angels without number.</verse>
+          <title canonical="false" type="sub" TEIform="title">
+            <pCT canonical="false" TEIform="p">[Lost passage wherein the Son of Man was described as accompanying the Head of Days, and Enoch asked one of the angels (as in 1 Enoch 46:3) concerning the Son of Man as to who he was.]</pCT>
+          </title>
+          <verse canonical="true" osisID="1En.71.14">
+            <lg>
+              <l>And he (i.e. the angel) came to me and greeted me with His voice, and said unto me '</l>
+              <l>This is the Son of Man who is born unto righteousness,</l>
+              <l>And righteousness abides over him,</l>
+              <l>And the righteousness of the Head of Days forsakes him not.'</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.71.15">
+            <lg>
+              <l>And he said unto me:</l>
+              <l>' He proclaims unto thee peace in the name of the world to come;</l>
+              <l>For from hence has proceeded peace since the creation of the world,</l>
+              <l>And so shall it be unto thee for ever and for ever and ever.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.71.16">
+            <lg>
+              <l>And all shall walk in his ways since righteousness never forsaketh him:</l>
+              <l>With him will be their dwelling-places, and with him their heritage,</l>
+              <l>And they shall not be separated from him for ever and ever and ever.</l>
+              <lb TEIform="milestone"/>
+              <l>And so there shall be length of days with that Son of Man,</l>
+              <l>And the righteous shall have peace and an upright way</l>
+              <l>In the name of the Lord of Spirits for ever and ever.'</l>
+            </lg>
+          </verse>
+        </chapter>
 
 
 
