@@ -1509,13 +1509,10 @@
           </verse>
         </chapter>
 
-
         <chapter osisID="1En.62" TEIform="div">
           <div canonical="false" type="summary" TEIform="div">
             <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
           </div>
-
-
 
           <verse canonical="true" osisID="1En.62.1"> And thus the Lord commanded the kings and the mighty and the exalted, and those who dwell on the earth, and said:
             <lg>
@@ -1628,10 +1625,83 @@
               <l>Nor your glory pass away before the Lord of Spirits.</l>
             </lg>
           </verse>
-
-
         </chapter>
-
+        <chapter osisID="1En.63" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+          </div>
+          <verse canonical="true" osisID="1En.63.1"> In those days shall the mighty and the kings who possess the earth implore (Him) to grant them a little respite from His angels of punishment to whom they were delivered, that they might fall </verse>
+          <verse canonical="true" osisID="1En.63.2"> down and worship before the Lord of Spirits, and confess their sins before Him. And they shall bless and glorify the Lord of Spirits, and say: 
+            <lb TEIform="milestone"/>
+            <lg>
+              <l>' Blessed is the Lord of Spirits and the Lord of kings,</l>
+              <l>And the Lord of the mighty and the Lord of the rich,</l>
+              <l>And the Lord of glory and the Lord of wisdom,</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.63.3">
+            <lg>
+              <l>And splendid in every secret thing is Thy power from generation to generation,</l>
+              <l>And Thy glory for ever and ever:</l>
+              <lb TEIform="milestone"/>
+              <l>Deep are all Thy secrets and innumerable,</l>
+              <l>And Thy righteousness is beyond reckoning.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.63.4">
+            <lg>
+              <l>We have now learnt that we should glorify</l>
+              <l>And bless the Lord of kings and Him who is king over all kings.'</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.63.5">
+            <lg>
+              <l>And they shall say:</l>
+              <l>' Would that we had rest to glorify and give thanks</l>
+              <l>And confess our faith before His glory !</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.63.6">
+            <lg>
+              <l>And now we long for a little rest but find it not:</l>
+              <l>We follow hard upon and obtain (it) not:</l>
+              <lb TEIform="milestone"/>
+              <l>And light has vanished from before us,</l>
+              <l>And darkness is our dwelling-place for ever and ever:</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.63.7">
+            <lg>
+              <l>For we have not believed before Him</l>
+              <l>Nor glorified the name of the Lord of Spirits, [nor glorified our Lord]</l>
+              <lb TEIform="milestone"/>
+              <l>But our hope was in the sceptre of our kingdom,</l>
+              <l>And in our glory.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.63.8">
+            <lg>
+              <l>And in the day of our suffering and tribulation He saves us not,</l>
+              <l>And we find no respite for confession</l>
+              <lb TEIform="milestone"/>
+              <l>That our Lord is true in all His works, and in His judgements and His justice,</l>
+              <l>And His judgements have no respect of persons.</l>
+              <lb TEIform="milestone"/>
+              <l>And we pass away from before His face on account of our works,</l>
+              <l>And all our sins are reckoned up in righteousness.'</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.63.10"> Now they shall say unto themselves: ' Our souls are full of unrighteous gain, but it does not prevent us from descending from the midst thereof into the burden of Sheol.'</verse>
+          <verse canonical="true" osisID="1En.63.11">
+            <lg>
+              <l>And after that their faces shall be filled with darkness</l>
+              <l>And shame before that Son of Man,</l>
+              <l>And they shall be driven from his presence,</l>
+              <l>And the sword shall abide before his face in their midst.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.63.12"> Thus spake the Lord of Spirits: ' This is the ordinance and judgement with respect to the mighty and the kings and the exalted and those who possess the earth before the Lord of Spirits.'</verse>
+        </chapter>
 
 
 
