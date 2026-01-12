@@ -2165,6 +2165,62 @@
           <verse canonical="true" osisID="1En.79.6"> this place which thou seest has been traversed. Such is the picture and sketch of every luminary which Uriel the archangel, who is their leader, showed unto me.</verse>
         </chapter>
 
+        <chapter osisID="1En.80" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+          </div>
+          <verse canonical="true" osisID="1En.80.1"> And in those days the angel Uriel answered and said to me: ' Behold, I have shown thee everything, Enoch, and I have revealed everything to thee that thou shouldst see this sun and this moon, and the leaders of the stars of the heaven and all those who turn them, their tasks and times and departures.</verse>
+          <verse canonical="true" osisID="1En.80.2">
+            <lg>
+              <l>And in the days of the sinners the years shall be shortened,</l>
+              <l>And their seed shall be tardy on their lands and fields,</l>
+              <l>And all things on the earth shall alter,</l>
+              <l>And shall not appear in their time:</l>
+              <l>And the rain shall be kept back</l>
+              <l>And the heaven shall withhold (it).</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.80.3">
+            <lg>
+              <l>And in those times the fruits of the earth shall be backward,</l>
+              <l>And shall not grow in their time,</l>
+              <l>And the fruits of the trees shall be withheld in their time.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.80.4">
+            <lg>
+              <l>And the moon shall alter her order,</l>
+              <l>And not appear at her time.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.80.5">[And in those days the sun shall be seen and he shall journey in the evening on the extremity of the great chariot in the west]
+            <lb TEIform="milestone"/>
+            <lg>
+              <l>And shall shine more brightly than accords with the order of light.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.80.6">
+            <lg>
+              <l>And many chiefs of the stars shall transgress the order (prescribed).</l>
+              <l>And these shall alter their orbits and tasks,</l>
+              <l>And not appear at the seasons prescribed to them.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.80.7">
+            <lg>
+              <l>And the whole order of the stars shall be concealed from the sinners,</l>
+              <l>And the thoughts of those on the earth shall err concerning them,</l>
+              <l>[And they shall be altered from all their ways],</l>
+              <l>Yea, they shall err and take them to be gods.</l>
+            </lg>
+          </verse>
+          <verse canonical="true" osisID="1En.80.8">
+            <lg>
+              <l>And evil shall be multiplied upon them,</l>
+              <l>And punishment shall come upon them So as to destroy all.'</l>
+            </lg>
+          </verse>
+        </chapter>
 
       </div>
 
