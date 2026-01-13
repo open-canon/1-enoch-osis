@@ -885,8 +885,8 @@
         </verse>
       </chapter>
       <div canonical="false" type="introduction">
-          <p>Astronomical Secrets. Comprising chapters 43 through 44. </p>
-        </div>
+        <p>Astronomical Secrets. Comprising chapters 43 through 44. </p>
+      </div>
       <chapter osisID="1En.43" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -1160,8 +1160,8 @@ TODO: Chapter 47 is missing
         </verse>
       </chapter>
       <div canonical="false" type="introduction">
-          <p>The Glorification and Victory of the Righteous: the Repentance of the Gentiles. Comprising chapter 50. </p>
-        </div>
+        <p>The Glorification and Victory of the Righteous: the Repentance of the Gentiles. Comprising chapter 50. </p>
+      </div>
       <chapter osisID="1En.50" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -1260,8 +1260,8 @@ TODO: Chapter 47 is missing
         </verse>
       </chapter>
       <div canonical="false" type="introduction">
-          <p>The Seven Metal Mountains and the Elect One. Comprising chapter 52. </p>
-        </div>
+        <p>The Seven Metal Mountains and the Elect One. Comprising chapter 52. </p>
+      </div>
       <chapter osisID="1En.52" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -1306,8 +1306,8 @@ TODO: Chapter 47 is missing
         </verse>
       </chapter>
       <div canonical="false" type="introduction">
-          <p>6. The Valley of Judgement: The Angels of Punishment: the Communities of the Elect One. Comprising chapters 53 through 54. </p>
-        </div>
+        <p>6. The Valley of Judgement: The Angels of Punishment: the Communities of the Elect One. Comprising chapters 53 through 54. </p>
+      </div>
       <chapter osisID="1En.53" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -2119,7 +2119,7 @@ TODO: Chapter 47 is missing
         </title>
         <chapter osisID="1En.72" TEIform="div">
           <div canonical="false" type="summary" TEIform="div">
-            <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            <p TEIform="p">The sun.</p>
           </div>
 
           <verse canonical="true" osisID="1En.72.1"> The book of the courses of the luminaries of the heaven, the relations of each, according to their classes, their dominion and their seasons, according to their names and places of origin, and according to their months, which Uriel, the holy angel, who was with me, who is their guide, showed me; and he showed me all their laws exactly as they are, and how it is with regard to all the years of the world </verse>
@@ -2159,7 +2159,7 @@ TODO: Chapter 47 is missing
         </chapter>
         <chapter osisID="1En.73" TEIform="div">
           <div canonical="false" type="summary" TEIform="div">
-            <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            <p TEIform="p">The Moon and its Phases.</p>
           </div>
 
           <verse canonical="true" osisID="1En.73.1"> And after this law I saw another law dealing with the smaller luminary, which is named the Moon. And her circumference is like the circumference of the heaven, and her chariot in which she rides is driven by the wind, and light is given to her in (definite) measure. And her rising and setting change every month: and her days are like the days of the sun, and when her light is uniform (i.e. full) it amounts to the seventh part of the light of the sun. And thus she rises. And her first phase in the east comes forth on the thirtieth morning: and on that day she becomes visible, and constitutes for you the first phase of the moon on the thirtieth day together with the sun in the portal where the sun rises. And the one half of her goes forth by a seventh part, and her whole circumference is empty, without light, with the exception of one-seventh part of it, (and) the </verse>
@@ -2169,7 +2169,7 @@ TODO: Chapter 47 is missing
         </chapter>
         <chapter osisID="1En.74" TEIform="div">
           <div canonical="false" type="summary" TEIform="div">
-            <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            <p TEIform="p">The Lunar Year.</p>
           </div>
 
           <verse canonical="true" osisID="1En.74.1"> And I saw another course, a law for her, (and) how according to that law she performs her monthly </verse>
@@ -2201,7 +2201,7 @@ TODO: Chapter 47 is missing
         </chapter>
         <chapter osisID="1En.76" TEIform="div">
           <div canonical="false" type="summary" TEIform="div">
-            <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            <p TEIform="p">The Twelve Winds and their Portals.</p>
           </div>
 
           <verse canonical="true" osisID="1En.76.1"> And at the ends of the earth I saw twelve portals open to all the quarters (of the heaven), from </verse>
@@ -2219,7 +2219,7 @@ TODO: Chapter 47 is missing
 
         <chapter osisID="1En.77" TEIform="div">
           <div canonical="false" type="summary" TEIform="div">
-            <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            <p TEIform="p">The Four Quarters of the World, the Seven Mountains, the Seven Rivers.</p>
           </div>
 
           <verse canonical="true" osisID="1En.77.1"> And the first quarter is called the east, because it is the first: and the second, the south, because the Most High will descend there, yea, there in quite a special sense will He who is blessed for ever </verse>
@@ -2233,9 +2233,8 @@ TODO: Chapter 47 is missing
         </chapter>
         <chapter osisID="1En.78" TEIform="div">
           <div canonical="false" type="summary" TEIform="div">
-            <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            <p TEIform="p">The Sun and Moon. The Waxing and Waning of the Moon.</p>
           </div>
-
           <verse canonical="true" osisID="1En.78.1,2"> And the names of the sun are the following: the first Orjares, and the second Tomas. And the moon has four names: the first name is Asonja, the second Ebla, the third Benase, and the fourth </verse>
           <verse canonical="true" osisID="1En.78.3"> Erae. These are the two great luminaries: their circumference is like the circumference of the </verse>
           <verse canonical="true" osisID="1En.78.4"> heaven, and the size of the circumference of both is alike. In the circumference of the sun there are seven portions of light which are added to it more than to the moon, and in definite measures it is s transferred till the seventh portion of the sun is exhausted. And they set and enter the portals of the west, and make their revolution by the north, and come forth through the eastern portals </verse>
@@ -2249,7 +2248,7 @@ TODO: Chapter 47 is missing
         </chapter>
         <chapter osisID="1En.79" TEIform="div">
           <div canonical="false" type="summary" TEIform="div">
-            <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            <p TEIform="p">Recapitulation of several of the Laws.</p>
           </div>
 
           <verse canonical="true" osisID="1En.79.1"> And now, my son, I have shown thee everything, and the law of all the stars of the heaven is </verse>
@@ -2262,7 +2261,7 @@ TODO: Chapter 47 is missing
 
         <chapter osisID="1En.80" TEIform="div">
           <div canonical="false" type="summary" TEIform="div">
-            <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            <p TEIform="p">1, Recapitulation of several of the Laws; 2-, Perversion of Nature and the heavenly Bodies owing to the Sin of Men.</p>
           </div>
           <verse canonical="true" osisID="1En.80.1"> And in those days the angel Uriel answered and said to me: ' Behold, I have shown thee everything, Enoch, and I have revealed everything to thee that thou shouldst see this sun and this moon, and the leaders of the stars of the heaven and all those who turn them, their tasks and times and departures.</verse>
           <verse canonical="true" osisID="1En.80.2">
@@ -2319,7 +2318,7 @@ TODO: Chapter 47 is missing
 
         <chapter osisID="1En.81" TEIform="div">
           <div canonical="false" type="summary" TEIform="div">
-            <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            <p TEIform="p">The Heavenly Tablets and the Mission of Enoch.</p>
           </div>
           <verse canonical="true" osisID="1En.81.1">
             <lg>
@@ -2373,7 +2372,7 @@ TODO: Chapter 47 is missing
           </chapter>
           <chapter osisID="1En.82" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">Charge given to Enoch, the four Intercalary Days, the Stars which lead the Seasons and the Months.</p>
             </div>
             <verse canonical="true" osisID="1En.82.1"> And now, my son Methuselah, all these things I am recounting to thee and writing down for thee! and I have revealed to thee everything, and given thee books concerning all these: so preserve, my son Methuselah, the books from thy father's hand, and (see) that thou deliver them to the generations of the world.</verse>
             <verse canonical="true" osisID="1En.82.2">
@@ -2416,7 +2415,9 @@ TODO: Chapter 47 is missing
           <title canonical="false" type="sub" TEIform="title">
             <pCT canonical="false" TEIform="p">The Dream-Visions.</pCT>
           </title>
-
+          <div canonical="false" type="introduction">
+            <p>First Dream-Vision on the Deluge. Comprising chapters 83 through 84. </p>
+          </div>
           <chapter osisID="1En.83" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
               <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -2486,7 +2487,9 @@ TODO: Chapter 47 is missing
               </lg>
             </verse>
           </chapter>
-
+          <div canonical="false" type="introduction">
+            <p>The Second Dream-Vision of Enoch. The history of the World to the Founding of the Messianic Kingdom. Comprising chapters 85 through 90. </p>
+          </div>
           <chapter osisID="1En.85" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
               <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -2502,7 +2505,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.86" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">The Fall of the Angels and the Demoralization of Mankind.</p>
             </div>
             <verse canonical="true" osisID="1En.86.1"> And again I saw with mine eyes as I slept, and I saw the heaven above, and behold a star fell </verse>
             <verse canonical="true" osisID="1En.86.2"> from heaven, and it arose and eat and pastured amongst those oxen. And after that I saw the large and the black oxen, and behold they all changed their stalls and pastures and their cattle, and began </verse>
@@ -2514,7 +2517,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.87" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">The Advent of the Seven Archangels.</p>
             </div>
             <verse canonical="true" osisID="1En.87.1"> And again I saw how they began to gore each other and to devour each other, and the earth </verse>
             <verse canonical="true" osisID="1En.87.2"> began to cry aloud. And I raised mine eyes again to heaven, and I saw in the vision, and behold there came forth from heaven beings who were like white men: and four went forth from that place </verse>
@@ -2524,7 +2527,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.88" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">The Punishment of the Fallen Angels by the Archangels.</p>
             </div>
             <verse canonical="true" osisID="1En.88.1"> And I saw one of those four who had come forth first, and he seized that first star which had fallen from the heaven, and bound it hand and foot and cast it into an abyss: now that abyss was </verse>
             <verse canonical="true" osisID="1En.88.2"> narrow and deep, and horrible and dark. And one of them drew a sword, and gave it to those elephants and camels and asses: then they began to smite each other, and the whole earth quaked </verse>
@@ -2533,7 +2536,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.89" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">1-9. The deluge and deliverance of Noah; 10-27, From the Death of Noah to the Exodus; 28-40, Israel in the Desert, the Giving of the Law, the Entrance into Palestine; 41-50, From the Time of the Judges till the BUilding of the Temple; 51-67, The Two Kingdoms of Israel and Judah to the Destruction of Jerusalem; 68-71, First Period of the Angelic Rulers--from the Destruction of Jerusalem to the Return from the Captivity; 72-77, Second Period--from the Time of Cyrus to that of Alexander the Great.</p>
             </div>
             <verse canonical="true" osisID="1En.89.1"> And one of those four went to that white bull and instructed him in a secret, without his being terrified: he was born a bull and became a man, and built for himself a great vessel and dwelt thereon; </verse>
             <verse canonical="true" osisID="1En.89.2"> and three bulls dwelt with him in that vessel and they were covered in. And again I raised mine eyes towards heaven and saw a lofty roof, with seven water torrents thereon, and those torrents </verse>
@@ -2611,7 +2614,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.90" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">1-5, Third Period--From Alexander the Great to the Graeco-Syrian Domination; 6-12, Fourth Period--from the Graeco-Syrian Domination to the Maccabean Revolt; 13-19, The last Assault of the Gentiles on the Jews (where vv 13-15 and 16-18 are doublets); 20-27, Judgement of the Fallen Angels, the Shepherds, and the Apostates; 28-42, The New Jerusalem, the Conversion of the surviving Gentiles, the Resurrection of the Righteous, the Messiah, Enoch awakes and weeps.</p>
             </div>
             <verse canonical="true" osisID="1En.90.1"> And I saw till that in this manner thirty-five shepherds undertook the pasturing (of the sheep), and they severally completed their periods as did the first; and others received them into their </verse>
             <verse canonical="true" osisID="1En.90.2"> hands, to pasture them for their period, each shepherd in his own period. And after that I saw in my vision all the birds of heaven coming, the eagles, the vultures, the kites, the ravens; but the eagles led all the birds; and they began to devour those sheep, and to pick out their eyes and to </verse>
