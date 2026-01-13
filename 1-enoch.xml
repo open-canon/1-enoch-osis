@@ -31,6 +31,9 @@
         <title canonical="false" type="sub" TEIform="title">
           <pCT canonical="false" TEIform="p">Introduction</pCT>
         </title>
+        <div canonical="false" type="introduction">
+          <p> Parable of Enoch on the Future Lot of the Wicked and the Righteous. Comprising chapters 1 through 5. </p>
+        </div>
         <chapter osisID="1En.1" TEIform="div">
           <div canonical="false" type="summary" TEIform="div">
             <p TEIform="p"> TODO: CREATE SECTION SUMMARY <hi type="small-caps" TEIform="hi">B.C.</hi>
@@ -222,6 +225,9 @@
           </lg>
         </verse>
       </chapter>
+      <div canonical="false" type="introduction">
+        <p>The Fall of the Angels: the Demoralization of Mankind: the Intercession of the Angels on behalf of Mankind. The Dooms pronounced by God on the Angels: the Messianic Kingdom— (a Noah fragment).  Comprising chapters 6 through 11. </p>
+      </div>
       <chapter osisID="1En.6" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -310,6 +316,9 @@
         <verse canonical="true" osisID="1En.11.1"> And in those days I will open the store chambers of blessing which are in the heaven, so as to send</verse>
         <verse canonical="true" osisID="1En.11.2"> them down upon the earth over the work and labour of the children of men. And truth and peace shall be associated together throughout all the days of the world and throughout all the generations of men.'</verse>
       </chapter>
+      <div canonical="false" type="introduction">
+        <p>Dream-Vision of Enoch: his Intercession for Azazel and the fallen Angels: and his Announcement of their first and final Doom. Comprising chapters 12 through 16. </p>
+      </div>
       <chapter osisID="1En.12" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -392,6 +401,12 @@
         <verse canonical="true" osisID="1En.16.3"> to them): "You have been in heaven, but all the mysteries had not yet been revealed to you, and you knew worthless ones, and these in the hardness of your hearts you have made known to the women, and through these mysteries women and men work much evil on earth." </verse>
         <verse canonical="true" osisID="1En.16.4"> Say to them therefore: " You have no peace."'</verse>
       </chapter>
+      <div canonical="false" type="introduction">
+        <p>Enoch's Journeys through the Earth and Sheol. Comprising chapters 17 through 36. </p>
+      </div>
+      <div canonical="false" type="introduction">
+        <p>The First Journey. Comprising chapters 17 through 19. </p>
+      </div>
       <chapter osisID="1En.17" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -431,6 +446,9 @@
         <verse canonical="true" osisID="1En.19.2"> which they shall be judged till they are made an end of. And the women also of the angels who </verse>
         <verse canonical="true" osisID="1En.19.3"> went astray shall become sirens.' And I, Enoch, alone saw the vision, the ends of all things: and no man shall see as I have seen.</verse>
       </chapter>
+      <div canonical="false" type="introduction">
+        <p>Names and Functions of the Seven Archangels. Comprising chapter 20. </p>
+      </div>
       <chapter osisID="1En.20" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -442,6 +460,12 @@
         <verse canonical="true" osisID="1En.20.7"> one of the holy angels, who is set over the spirits, who sin in the spirit. Gabriel, one of the holy </verse>
         <verse canonical="true" osisID="1En.20.8"> angels, who is over Paradise and the serpents and the Cherubim. Remiel, one of the holy angels, whom God set over those who rise.</verse>
       </chapter>
+      <div canonical="false" type="introduction">
+        <p>The Second Journey of Enoch. Comprising chapters 21 through 36. </p>
+      </div>
+      <div canonical="false" type="introduction">
+        <p>Preliminary and final Place of Punishment of the fallen Angels (stars). Comprising chapter 21. </p>
+      </div>
       <chapter osisID="1En.21" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -456,6 +480,9 @@
         <verse canonical="true" osisID="1En.21.9"> fearful is the place and how terrible to look upon!' Then Uriel answered me, one of the holy angels who was with me, and said unto me: 'Enoch, why hast thou such fear and affright?' And </verse>
         <verse canonical="true" osisID="1En.21.10"> I answered: 'Because of this fearful place, and because of the spectacle of the pain.' And he said unto me: 'This place is the prison of the angels, and here they will be imprisoned for ever.'</verse>
       </chapter>
+      <div canonical="false" type="introduction">
+        <p>Sheol or the Underworld. Comprising chapter 22. </p>
+      </div>
       <chapter osisID="1En.22" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -475,6 +502,9 @@
         <verse canonical="true" osisID="1En.22.13"> of the sinners. Such has been made for the spirits of men who were not righteous but sinners, who were complete in transgression, and of the transgressors they shall be companions: but their spirits shall not be slain in the day of judgement nor shall they be raised from thence.' </verse>
         <verse canonical="true" osisID="1En.22.14"> The I blessed the Lord of glory and said: 'Blessed be my Lord, the Lord of righteousness, who ruleth for ever.'</verse>
       </chapter>
+      <div canonical="false" type="introduction">
+        <p>The fires that deal with the Luminaries of Heaven. Comprising chapter 23. </p>
+      </div>
       <chapter osisID="1En.23" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -483,6 +513,9 @@
         <verse canonical="true" osisID="1En.23.3"> fire which ran without resting, and paused not from its course day or night but (ran) regularly. And </verse>
         <verse canonical="true" osisID="1En.23.4"> I asked saying: 'What is this which rests not?' Then Raguel, one of the holy angels who was with me, answered me and said unto me: 'This course of fire which thou hast seen is the fire in the west which persecutes all the luminaries of heaven.'</verse>
       </chapter>
+      <div canonical="false" type="introduction">
+        <p>The Seven Mountains in the North-west and the Tree of Life. Comprising chapters 24 through 25. </p>
+      </div>
       <chapter osisID="1En.24" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -517,6 +550,9 @@
         </verse>
         <verse canonical="true" osisID="1En.25.7">Then blessed I the God of Glory, the Eternal King, who hath prepared such things for the righteous, and hath created them and promised to give to them.</verse>
       </chapter>
+      <div canonical="false" type="introduction">
+        <p>Jerusalem and the Mountains, Ravines, and Streams. Comprising chapter 26. </p>
+      </div>
       <chapter osisID="1En.26" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -527,6 +563,9 @@
         <verse canonical="true" osisID="1En.26.4"> ravine: in it also ran a stream underneath the mountain. And to the west thereof there was another mountain, lower than the former and of small elevation, and a ravine deep and dry between them: and another deep and dry ravine was at the extremities of the three mountains. And all the ravines were deep and narrow, (being formed) of hard rock, and trees were not planted upon </verse>
         <verse canonical="true" osisID="1En.26.6"> them. And I marveled at the rocks, and I marveled at the ravine, yea, I marveled very much.</verse>
       </chapter>
+      <div canonical="false" type="introduction">
+        <p>The Purpose of the Accursed Valley. Comprising chapter 27. </p>
+      </div>
       <chapter osisID="1En.27" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -537,6 +576,9 @@
         <verse canonical="true" osisID="1En.27.4"> In the days of judgement over the former, they shall bless Him for the mercy in accordance with </verse>
         <verse canonical="true" osisID="1En.27.5"> which He has assigned them (their lot).' Then I blessed the Lord of Glory and set forth His glory and lauded Him gloriously.</verse>
       </chapter>
+      <div canonical="false" type="introduction">
+        <p>Further Journey to the East. Comprising chapters 28 through 33. </p>
+      </div>
       <chapter osisID="1En.28" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -552,6 +594,7 @@
         <verse canonical="true" osisID="1En.29.1"> And thence I went to another place in the desert, and approached to the east of this mountain </verse>
         <verse canonical="true" osisID="1En.29.2"> range. And there I saw aromatic trees exhaling the fragrance of frankincense and myrrh, and the trees also were similar to the almond tree.</verse>
       </chapter>
+
       <chapter osisID="1En.30" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -588,6 +631,9 @@
         <verse canonical="true" osisID="1En.33.4"> times and their months, as Uriel the holy angel who was with me showed me. He showed all things to me and wrote them down for me: also their names he wrote for me, and their laws and their companies.</verse>
         <verse canonical="true" osisID="1En.33.1"> And from thence I went towards the north to the ends of the earth, and there I saw a great and </verse>
       </chapter>
+      <div canonical="false" type="introduction">
+        <p>Enoch's Journey to the North. Comprising chapters 34 through 35. </p>
+      </div>
       <chapter osisID="1En.34" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -602,6 +648,9 @@
         </div>
         <verse canonical="true" osisID="1En.35.1"> And from thence I went towards the west to the ends of the earth, and saw there three portals of the heaven open such as I had seen in the east, the same number of portals, and the same number of outlets.</verse>
       </chapter>
+      <div canonical="false" type="introduction">
+        <p>The Journey to the South. Comprising chapter 36. </p>
+      </div>
       <chapter osisID="1En.36" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
@@ -610,7 +659,6 @@
         <verse canonical="true" osisID="1En.36.2"> of the heaven: and thence there come dew, rain, and wind. And from thence I went to the east to the ends of the heaven, and saw here the three eastern portals of heaven open and small portals </verse>
         <verse canonical="true" osisID="1En.36.3"> above them. Through each of these small portals pass the stars of heaven and run their course to the west on the path which is shown to them. And as often as I saw I blessed always the Lord of Glory, and I continued to bless the Lord of Glory who has wrought great and glorious wonders, to show the greatness of His work to the angels and to spirits and to men, that they might praise His work and all His creation: that they might see the work of His might and praise the great work of His hands and bless Him for ever.</verse>
       </chapter>
-
     </div>
     <div canonical="true" type="section" TEIform="div">
       <title canonical="false" type="sub" TEIform="title">
@@ -3641,9 +3689,12 @@
             <verse canonical="true" osisID="1En.105.2"> For I and My son will be united with them for ever in the paths of uprightness in their lives; and ye shall have peace: rejoice, ye children of uprightness. Amen.</verse>
 
           </chapter>
-          <title canonical="false" type="sub" TEIform="title">
-            <pCT canonical="false" TEIform="p">Fragment of the Book of Noah (Chapters 106-108)</pCT>
+          <title canonical="true" type="sub" TEIform="title">
+            <pCT canonical="true" TEIform="p">Fragment of the Book of Noah</pCT>
           </title>
+          <div canonical="false" type="introduction">
+            <p> Comprising chapters 106 through 108. </p>
+          </div>
 
           <chapter osisID="1En.106" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
