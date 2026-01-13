@@ -2661,9 +2661,12 @@ TODO: Chapter 47 is missing
           <title canonical="false" type="sub" TEIform="title">
             <pCT canonical="false" TEIform="p">A Book of Exhortation and Promised Blessing for the Righteous and of Malediction and Woe for the Sinners.</pCT>
           </title>
+          <div canonical="false" type="introduction">
+            <p>Editor's Note: the manuscripts forming this translation split what is normally chapter 91 into two portions, in the order 92, 91A, 93, 91B, 94...</p>
+          </div>
           <chapter osisID="1En.92" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">1-10, 18-19, Enoch's Book of Admonition for his Children.</p>
             </div>
             <verse canonical="true" osisID="1En.92.1"> The book written by Enoch-[Enoch indeed wrote this complete doctrine of wisdom, (which is) praised of all men and a judge of all the earth] for all my children who shall dwell on the earth. And for the future generations who shall observe uprightness and peace.</verse>
             <verse canonical="true" osisID="1En.92.2">
@@ -2697,7 +2700,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.91" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">1-10, 18-19, Enoch's Admonition to his Children.</p>
             </div>
             <verse canonical="true" osisID="1En.91.1">
               <lg>
@@ -2800,7 +2803,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.93" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">The Apocalypse of Weeks.</p>
             </div>
             <verse canonical="true" osisID="1En.93.1,2"> And after that Enoch both gave and began to recount from the books. And Enoch said:
               <lb TEIform="milestone"/>
@@ -2886,7 +2889,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.91" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">12-17, The Last Three Weeks</p>
             </div>
 
             <verse canonical="true" osisID="1En.91.12">
@@ -2947,7 +2950,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.94" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">1-5, Admonitions to the Righteous; 6-11, Woes for the Sinners.</p>
             </div>
             <verse canonical="true" osisID="1En.94.1">
               <lg>
@@ -3035,7 +3038,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.95" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">Enoch's Grief: Fresh Woes against the Sinners.</p>
             </div>
             <verse canonical="true" osisID="1En.95.1">
               <lg>
@@ -3088,7 +3091,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.96" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">Grounds of Hopefulness for the Righteous, Woes for the Wicked.</p>
             </div>
             <verse canonical="true" osisID="1En.96.1">
               <lg>
@@ -3155,7 +3158,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.97" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">The Evils in Store for Sinners and the Possessors of Unrighteous Wealth.</p>
             </div>
 
             <verse canonical="true" osisID="1En.97.1">
@@ -3239,7 +3242,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.98" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">Self-indulgence of Sinners, Sin originated by Man, all Sin recorded in Heaven, Woes for the Sinners.</p>
             </div>
             <verse canonical="true" osisID="1En.98.1">
               <lg>
@@ -3300,7 +3303,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.99" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">Woes pronounced on the Godless, the Lawbreakers; evil Plight of Sinners in the Last Days; Further Woes.</p>
             </div>
 
 
@@ -3424,7 +3427,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.100" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">The Sinners destroy each other; Judgement of the Fallen Angels; the Safety of the Righteous; furhter Woes for the Sinners.</p>
             </div>
             <verse canonical="true" osisID="1En.100.1">
               <lg>
@@ -3507,7 +3510,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.101" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">Exhortation to the Fear of God; all Nature fears Him but not the Sinners.</p>
             </div>
             <verse canonical="true" osisID="1En.101.1"> Observe the heaven, ye children of heaven, and every work of the Most High, and fear ye Him </verse>
             <verse canonical="true" osisID="1En.101.2"> and work no evil in His presence. If He closes the windows of heaven, and withholds the rain and </verse>
@@ -3522,7 +3525,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.102" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">Terrors of the Day of Judgement; the adverse Fortunes of the Righteous on the Earth.</p>
             </div>
             <verse canonical="true" osisID="1En.102.1">
               <lg>
@@ -3595,7 +3598,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.103" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">Different Destinies of the Righteous and the Sinners; fresh Objections of the Sinners.</p>
             </div>
 
             <verse canonical="true" osisID="1En.103.1"> Now, therefore, I swear to you, the righteous, by the glory of the Great and Honoured and </verse>
@@ -3713,7 +3716,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.104" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">Assurances given to the Righteous; Admonitions to Sinners and the Falsifiers of the Words of Uprightness.</p>
             </div>
 
             <verse canonical="true" osisID="1En.104.1"> I swear unto you, that in heaven the angels remember you for good before the glory of the Great </verse>
@@ -3733,7 +3736,7 @@ TODO: Chapter 47 is missing
 
           <chapter osisID="1En.105" TEIform="div">
             <div canonical="false" type="summary" TEIform="div">
-              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+              <p TEIform="p">God and the Messiah to dwell with Man.</p>
             </div>
             <verse canonical="true" osisID="1En.105.1"> In those days the Lord bade (them) to summon and testify to the children of earth concerning their wisdom: Show (it) unto them; for ye are their guides, and a recompense over the whole earth. </verse>
             <verse canonical="true" osisID="1En.105.2"> For I and My son will be united with them for ever in the paths of uprightness in their lives; and ye shall have peace: rejoice, ye children of uprightness. Amen.</verse>
