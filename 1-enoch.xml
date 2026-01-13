@@ -2563,6 +2563,1139 @@
           <title canonical="false" type="sub" TEIform="title">
             <pCT canonical="false" TEIform="p">A Book of Exhortation and Promised Blessing for the Righteous and of Malediction and Woe for the Sinners.</pCT>
           </title>
+          <chapter osisID="1En.92" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+            <verse canonical="true" osisID="1En.92.1"> The book written by Enoch-[Enoch indeed wrote this complete doctrine of wisdom, (which is) praised of all men and a judge of all the earth] for all my children who shall dwell on the earth. And for the future generations who shall observe uprightness and peace.</verse>
+            <verse canonical="true" osisID="1En.92.2">
+              <lg>
+                <l>Let not your spirit be troubled on account of the times;</l>
+                <l>For the Holy and Great One has appointed days for all things.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.92.3">
+              <lg>
+                <l>And the righteous one shall arise from sleep,</l>
+                <l>[Shall arise] and walk in the paths of righteousness,</l>
+                <l>And all his path and conversation shall be in eternal goodness and grace.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.92.4">
+              <lg>
+                <l>He will be gracious to the righteous and give him eternal uprightness,</l>
+                <l>And He will give him power so that he shall be (endowed) with goodness and righteousness.</l>
+                <l>And he shall walk in eternal light.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.92.5">
+              <lg>
+                <l>And sin shall perish in darkness for ever,</l>
+                <l>And shall no more be seen from that day for evermore.</l>
+              </lg>
+            </verse>
+          </chapter>
+
+
+          <chapter osisID="1En.91" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+            <verse canonical="true" osisID="1En.91.1">
+              <lg>
+                <l>And now, my son Methuselah, call to me all thy brothers</l>
+                <l>And gather together to me all the sons of thy mother;</l>
+                <l>For the word calls me,</l>
+                <l>And the spirit is poured out upon me,</l>
+                <l>That I may show you everything</l>
+                <l>That shall befall you for ever.'</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.91.2"> And there upon Methuselah went and summoned to him all his brothers and assembled his relatives.</verse>
+            <verse canonical="true" osisID="1En.91.3"> And he spake unto all the children of righteousness and said:
+              <lb TEIform="milestone"/>
+              <lg>
+                <l>'Hear, ye sons of Enoch, all the words of your father,</l>
+                <l>And hearken aright to the voice of my mouth;</l>
+                <l>For I exhort you and say unto you, beloved:</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.91.4">
+              <lg>
+                <l>Love uprightness and walk therein.</l>
+                <l>And draw not nigh to uprightness with a double heart,</l>
+                <l>And associate not with those of a double heart,</l>
+                <lb TEIform="milestone"/>
+                <l>But walk in righteousness, my sons.</l>
+                <l>And it shall guide you on good paths,</l>
+                <l>And righteousness shall be your companion.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.91.5">
+              <lg>
+                <l>For I know that violence must increase on the earth,</l>
+                <l>And a great chastisement be executed on the earth,</l>
+                <l>Yea, it shall be cut off from its roots,</l>
+                <l>And its whole structure be destroyed.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.91.6">
+              <lg>
+                <l>And unrighteousness shall again be consummated on the earth,</l>
+                <l>And all the deeds of unrighteousness and of violence</l>
+                <l>And transgression shall prevail in a twofold degree.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.91.7">
+              <lg>
+                <l>And when sin and unrighteousness and blasphemy</l>
+                <l>And violence in all kinds of deeds increase,</l>
+                <l>And apostasy and transgression and uncleanness increase,</l>
+                <lb TEIform="milestone"/>
+                <l>A great chastisement shall come from heaven upon all these,</l>
+                <l>And the holy Lord will come forth with wrath and chastisement</l>
+                <l>To execute judgement on earth.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.91.8">
+              <lg>
+                <l>In those days violence shall be cut off from its roots,</l>
+                <l>And the roots of unrighteousness together with deceit,</l>
+                <l>And they shall be destroyed from under heaven.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.91.9">
+              <lg>
+                <l>And all the idols of the heathen shall be abandoned,</l>
+                <l>And the temples burned with fire,</l>
+                <l>And they shall remove them from the whole earth,</l>
+                <lb TEIform="milestone"/>
+                <l>And they (i.e. the heathen) shall be cast into the judgement of fire,</l>
+                <l>And shall perish in wrath and in grievous judgement for ever.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.91.10">
+              <lg>
+                <l>And the righteous shall arise from their sleep,</l>
+                <l>And wisdom shall arise and be given unto them.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.91.11-17"> [And after that the roots of unrighteousness shall be cut off, and the sinners shall be destroyed by the sword . . . shall be cut off from the blasphemers in every place, and those who plan violence and those who commit blasphemy shall perish by the sword.]</verse>
+            <verse canonical="true" osisID="1En.91.18">
+              <lg>
+                <l>And now I tell you, my sons, and show you</l>
+                <l>The paths of righteousness and the paths of violence.</l>
+                <l>Yea, I will show them to you again</l>
+                <l>That ye may know what will come to pass.</l>
+              </lg>
+            </verse>
+
+            <verse canonical="true" osisID="1En.91.19">
+              <lg>
+                <l>And now, hearken unto me, my sons,</l>
+                <l>And walk in the paths of righteousness,</l>
+                <l>And walk not in the paths of violence;</l>
+                <l>For all who walk in the paths of unrighteousness shall perish for ever.'</l>
+              </lg>
+            </verse>
+          </chapter>
+
+          <chapter osisID="1En.93" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+            <verse canonical="true" osisID="1En.93.1,2"> And after that Enoch both gave and began to recount from the books. And Enoch said:
+              <lb TEIform="milestone"/>
+              <lg>
+                <l>' Concerning the children of righteousness and concerning the elect of the world,</l>
+                <l>And concerning the plant of uprightness, I will speak these things,</l>
+                <l>Yea, I Enoch will declare (them) unto you, my sons:</l>
+                <lb TEIform="milestone"/>
+                <l>According to that which appeared to me in the heavenly vision,</l>
+                <l>And which I have known through the word of the holy angels,</l>
+                <l>And have learnt from the heavenly tablets.'</l>
+              </lg>
+            </verse>
+
+            <verse canonical="true" osisID="1En.93.3">
+              <lg>
+                <l>And Enoch began to recount from the books and said:</l>
+                <l>' I was born the seventh in the first week,</l>
+                <l>While judgement and righteousness still endured.</l>
+              </lg>
+            </verse>
+
+            <verse canonical="true" osisID="1En.93.4">
+              <lg>
+                <l>And after me there shall arise in the second week great wickedness,</l>
+                <l>And deceit shall have sprung up;</l>
+                <l>And in it there shall be the first end.</l>
+                <lb TEIform="milestone"/>
+                <l>And in it a man shall be saved;</l>
+                <l>And after it is ended unrighteousness shall grow up,</l>
+                <l>And a law shall be made for the sinners.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.93.5">
+              <lg>
+                <l>And after that in the third week at its close</l>
+                <l>A man shall be elected as the plant of righteous judgement,</l>
+                <l>And his posterity shall become the plant of righteousness for evermore.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.93.6">
+              <lg>
+                <l>And after that in the fourth week, at its close,</l>
+                <l>Visions of the holy and righteous shall be seen,</l>
+                <l>And a law for all generations and an enclosure shall be made for them.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.93.7">
+              <lg>
+                <l>And after that in the fifth week, at its close,</l>
+                <l>The house of glory and dominion shall be built for ever.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.93.8">
+              <lg>
+                <l>And after that in the sixth week all who live in it shall be blinded,</l>
+                <l>And the hearts of all of them shall godlessly forsake wisdom.</l>
+                <l>And in it a man shall ascend;</l>
+                <l>And at its close the house of dominion shall be burnt with fire,</l>
+                <l>And the whole race of the chosen root shall be dispersed.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.93.9">
+              <lg>
+                <l>And after that in the seventh week shall an apostate generation arise,</l>
+                <l>And many shall be its deeds,</l>
+                <l>And all its deeds shall be apostate.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.93.10">
+              <lg>
+                <l>And at its close shall be elected</l>
+                <l>The elect righteous of the eternal plant of righteousness,</l>
+                <l>To receive sevenfold instruction concerning all His creation.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.93.11"> [For who is there of all the children of men that is able to hear the voice of the Holy One without being troubled ? And who can think His thoughts ? and who is there that can behold all the works </verse>
+            <verse canonical="true" osisID="1En.93.12"> of heaven ? And how should there be one who could behold the heaven, and who is there that could understand the things of heaven and see a soul or a spirit and could tell thereof, or ascend and see </verse>
+            <verse canonical="true" osisID="1En.93.13"> all their ends and think them or do like them ? And who is there of all men that could know what is the breadth and the length of the earth, and to whom has been shown the measure of all of them ? </verse>
+            <verse canonical="true" osisID="1En.93.14"> Or is there any one who could discern the length of the heaven and how great is its height, and upon what it is founded, and how great is the number of the stars, and where all the luminaries rest ?]</verse>
+          </chapter>
+
+
+          <chapter osisID="1En.91" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+
+            <verse canonical="true" osisID="1En.91.12">
+              <lg>
+                <l>And after that there shall be another, the eighth week, that of righteousness,</l>
+                <l>And a sword shall be given to it that a righteous judgement may be executed on the oppressors,</l>
+                <l>And sinners shall be delivered into the hands of the righteous.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.91.13">
+              <lg>
+                <l>And at its close they shall acquire houses through their righteousness,</l>
+                <l>And a house shall be built for the Great King in glory for evermore,</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.91.14d">
+              <lg>
+                <l>And all mankind shall look to the path of uprightness.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.91.14a">
+              <lg>
+                <l>And after that, in the ninth week, the righteous judgement shall be revealed to the whole world,</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.91.14b">
+              <lg>
+                <l>And all the works of the godless shall vanish from all the earth,</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.91.14c">
+              <lg>
+                <l>And the world shall be written down for destruction.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.91.15">
+              <lg>
+                <l>And after this, in the tenth week in the seventh part,</l>
+                <l>There shall be the great eternal judgement,</l>
+                <l>In which He will execute vengeance amongst the angels.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.91.16">
+              <lg>
+                <l>And the first heaven shall depart and pass away,</l>
+                <l>And a new heaven shall appear,</l>
+                <l>And all the powers of the heavens shall give sevenfold light.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.91.17">
+              <lg>
+                <l>And after that there will be many weeks without number for ever,</l>
+                <l>And all shall be in goodness and righteousness,</l>
+                <l>And sin shall no more be mentioned for ever.</l>
+              </lg>
+            </verse>
+          </chapter>
+
+          <chapter osisID="1En.94" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+            <verse canonical="true" osisID="1En.94.1">
+              <lg>
+                <l>And now I say unto you, my sons, love righteousness and walk therein;</l>
+                <l>For the paths of righteousness are worthy of acceptation,</l>
+                <l>But the paths of unrighteousness shall suddenly be destroyed and vanish.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.94.2">
+              <lg>
+                <l>And to certain men of a generation shall the paths of violence and of death be revealed,</l>
+                <l>And they shall hold themselves afar from them,</l>
+                <l>And shall not follow them.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.94.3">
+              <lg>
+                <l>And now I say unto you the righteous:</l>
+                <l>Walk not in the paths of wickedness, nor in the paths of death,</l>
+                <l>And draw not nigh to them, lest ye be destroyed.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.94.4">
+              <lg>
+                <l>But seek and choose for yourselves righteousness and an elect life,</l>
+                <l>And walk in the paths of peace,</l>
+                <l>And ye shall live and prosper.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.94.5">
+              <lg>
+                <l>And hold fast my words in the thoughts of your hearts,</l>
+                <l>And suffer them not to be effaced from your hearts;</l>
+                <l>For I know that sinners will tempt men to evilly-entreat wisdom,</l>
+                <l>So that no place may be found for her,</l>
+                <l>And no manner of temptation may minish.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.94.6">
+              <lg>
+                <l>Woe to those who build unrighteousness and oppression</l>
+                <l>And lay deceit as a foundation;</l>
+                <l>For they shall be suddenly overthrown,</l>
+                <l>And they shall have no peace.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.94.7">
+              <lg>
+                <l>Woe to those who build their houses with sin;</l>
+                <l>For from all their foundations shall they be overthrown,</l>
+                <l>And by the sword shall they fall.</l>
+                <l>[And those who acquire gold and silver in judgement suddenly shall perish.]</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.94.8">
+              <lg>
+                <l>Woe to you, ye rich, for ye have trusted in your riches,</l>
+                <l>And from your riches shall ye depart,</l>
+                <l>Because ye have not remembered the Most High in the days of your riches.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.94.9">
+              <lg>
+                <l>Ye have committed blasphemy and unrighteousness,</l>
+                <l>And have become ready for the day of slaughter,</l>
+                <l>And the day of darkness and the day of the great judgement.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.94.10">
+              <lg>
+                <l>Thus I speak and declare unto you:</l>
+                <l>He who hath created you will overthrow you,</l>
+                <l>And for your fall there shall be no compassion,</l>
+                <l>And your Creator will rejoice at your destruction.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.94.11">
+              <lg>
+                <l>And your righteous ones in those days shall be</l>
+                <l>A reproach to the sinners and the godless.</l>
+              </lg>
+            </verse>
+          </chapter>
+
+
+          <chapter osisID="1En.95" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+            <verse canonical="true" osisID="1En.95.1">
+              <lg>
+                <l>Oh that mine eyes were [a cloud of] waters</l>
+                <l>That I might weep over you,</l>
+                <l>And pour down my tears as a cloud of waters:</l>
+                <l>That so I might rest from my trouble of heart!</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.95.2">
+              <lg>
+                <l>who has permitted you to practice reproaches and wickedness ?</l>
+                <l>And so judgement shall overtake you, sinners.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.95.3">
+              <lg>
+                <l>Fear not the sinners, ye righteous;</l>
+                <l>For again will the Lord deliver them into your hands,</l>
+                <l>That ye may execute judgement upon them according to your desires.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.95.4">
+              <lg>
+                <l>Woe to you who fulminate anathemas which cannot be reversed:</l>
+                <l>Healing shall therefore be far from you because of your sins.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.95.5">
+              <lg>
+                <l>Woe to you who requite your neighbour with evil;</l>
+                <l>For ye shall be requited according to your works.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.95.6">
+              <lg>
+                <l>Woe to you, lying witnesses,</l>
+                <l>And to those who weigh out injustice,</l>
+                <l>For suddenly shall ye perish.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.95.7">
+              <lg>
+                <l>Woe to you, sinners, for ye persecute the righteous;</l>
+                <l>For ye shall be delivered up and persecuted because of injustice,</l>
+                <l>And heavy shall its yoke be upon you.</l>
+              </lg>
+            </verse>
+          </chapter>
+
+          <chapter osisID="1En.96" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+            <verse canonical="true" osisID="1En.96.1">
+              <lg>
+                <l>Be hopeful, ye righteous; for suddenly shall the sinners perish before you,</l>
+                <l>And ye shall have lordship over them according to your desires.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.96.2">
+              <lg>
+                <l>[And in the day of the tribulation of the sinners,</l>
+                <l>Your children shall mount and rise as eagles,</l>
+                <l>And higher than the vultures will be your nest,</l>
+                <l>And ye shall ascend and enter the crevices of the earth,</l>
+                <l>And the clefts of the rock for ever as coneys before the unrighteous,</l>
+                <l>And the sirens shall sigh because of you-and weep.]</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.96.3">
+              <lg>
+                <l>Wherefore fear not, ye that have suffered;</l>
+                <l>For healing shall be your portion,</l>
+                <l>And a bright light shall enlighten you,</l>
+                <l>And the voice of rest ye shall hear from heaven.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.96.4">
+              <lg>
+                <l>Woe unto you, ye sinners, for your riches make you appear like the righteous,</l>
+                <l>But your hearts convict you of being sinners,</l>
+                <l>And this fact shall be a testimony against you for a memorial of (your) evil deeds.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.96.5">
+              <lg>
+                <l>Woe to you who devour the finest of the wheat,</l>
+                <l>And drink wine in large bowls,</l>
+                <l>And tread under foot the lowly with your might.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.96.6">
+              <lg>
+                <l>Woe to you who drink water from every fountain,</l>
+                <l>For suddenly shall ye be consumed and wither away,</l>
+                <l>Because ye have forsaken the fountain of life.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.96.7">
+              <lg>
+                <l>Woe to you who work unrighteousness</l>
+                <l>And deceit and blasphemy:</l>
+                <l>It shall be a memorial against you for evil.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.96.8">
+              <lg>
+                <l>Woe to you, ye mighty,</l>
+                <l>Who with might oppress the righteous;</l>
+                <l>For the day of your destruction is coming.</l>
+                <l>In those days many and good days shall come to the righteous-in the day of your judgement.</l>
+              </lg>
+            </verse>
+          </chapter>
+
+
+          <chapter osisID="1En.97" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+
+            <verse canonical="true" osisID="1En.97.1">
+              <lg>
+                <l>Believe, ye righteous, that the sinners will become a shame</l>
+                <l>And perish in the day of unrighteousness.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.97.2">
+              <lg>
+                <l>Be it known unto you (ye sinners) that the Most High is mindful of your destruction,</l>
+                <l>And the angels of heaven rejoice over your destruction.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.97.3">
+              <lg>
+                <l>What will ye do, ye sinners,</l>
+                <l>And whither will ye flee on that day of judgement,</l>
+                <l>When ye hear the voice of the prayer of the righteous ?</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.97.4">
+              <lg>
+                <l>Yea, ye shall fare like unto them,</l>
+                <l>Against whom this word shall be a testimony:</l>
+                <l>" Ye have been companions of sinners."</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.97.5">
+              <lg>
+                <l>And in those days the prayer of the righteous shall reach unto the Lord,</l>
+                <l>And for you the days of your judgement shall come.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.97.6">
+              <lg>
+                <l>And all the words of your unrighteousness shall be read out before the Great Holy One,</l>
+                <l>And your faces shall be covered with shame,</l>
+                <l>And He will reject every work which is grounded on unrighteousness.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.97.7">
+              <lg>
+                <l>Woe to you, ye sinners, who live on the mid ocean and on the dry land,</l>
+                <l>Whose remembrance is evil against you.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.97.8">
+              <lg>
+                <l>Woe to you who acquire silver and gold in unrighteousness and say:</l>
+                <l>" We have become rich with riches and have possessions;</l>
+                <l>And have acquired everything we have desired.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.97.9">
+              <lg>
+                <l>And now let us do what we purposed:</l>
+                <l>For we have gathered silver,</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.97.9c">
+              <lg>
+                <l>And many are the husbandmen in our houses."</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.97.9d">
+              <lg>
+                <l>And our granaries are (brim) full as with water,</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.97.10">
+              <lg>
+                <l>Yea and like water your lies shall flow away;</l>
+                <l>For your riches shall not abide</l>
+                <l>But speedily ascend from you;</l>
+                <l>For ye have acquired it all in unrighteousness,</l>
+                <l>And ye shall be given over to a great curse.</l>
+              </lg>
+            </verse>
+          </chapter>
+
+          <chapter osisID="1En.98" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+            <verse canonical="true" osisID="1En.98.1">
+              <lg>
+                <l>And now I swear unto you, to the wise and to the foolish,</l>
+                <l>For ye shall have manifold experiences on the earth.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.98.2">
+              <lg>
+                <l>For ye men shall put on more adornments than a woman,</l>
+                <l>And coloured garments more than a virgin:</l>
+                <l>In royalty and in grandeur and in power,</l>
+                <l>And in silver and in gold and in purple,</l>
+                <l>And in splendour and in food they shall be poured out as water.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.98.3">
+              <lg>
+                <l>Therefore they shall be wanting in doctrine and wisdom,</l>
+                <l>And they shall perish thereby together with their possessions;</l>
+                <l>And with all their glory and their splendour,</l>
+                <l>And in shame and in slaughter and in great destitution,</l>
+                <l>Their spirits shall be cast into the furnace of fire.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.98.4">
+              <lg>
+                <l>I have sworn unto you, ye sinners, as a mountain has not become a slave,</l>
+                <l>And a hill does not become the handmaid of a woman,</l>
+                <l>Even so sin has not been sent upon the earth,</l>
+                <l>But man of himself has created it,</l>
+                <l>And under a great curse shall they fall who commit it.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.98.5">
+              <lg>
+                <l>And barrenness has not been given to the woman,</l>
+                <l>But on account of the deeds of her own hands she dies without children.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.98.6">
+              <lg>
+                <l>I have sworn unto you, ye sinners, by the Holy Great One,</l>
+                <l>That all your evil deeds are revealed in the heavens,</l>
+                <l>And that none of your deeds of oppression are covered and hidden.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.98.7"> And do not think in your spirit nor say in your heart that ye do not know and that ye do not see </verse>
+            <verse canonical="true" osisID="1En.98.8"> that every sin is every day recorded in heaven in the presence of the Most High. From henceforth ye know that all your oppression wherewith ye oppress is written down every day till the day of your judgement. </verse>
+            <verse canonical="true" osisID="1En.98.9"> Woe to you, ye fools, for through your folly shall ye perish: and ye transgress against the wise, </verse>
+            <verse canonical="true" osisID="1En.98.10"> and so good hap shall not be your portion. And now, know ye that ye are prepared for the day of destruction: wherefore do not hope to live, ye sinners, but ye shall depart and die; for ye know no ransom; for ye are prepared for the day of the great judgement, for the day of tribulation and great shame for your spirits. </verse>
+            <verse canonical="true" osisID="1En.98.11"> Woe to you, ye obstinate of heart, who work wickedness and eat blood: Whence have ye good things to eat and to drink and to be filled ? From all the good things which the Lord the Most High has placed in abundance on the earth; therefore ye shall have no peace. </verse>
+            <verse canonical="true" osisID="1En.98.12"> Woe to you who love the deeds of unrighteousness: wherefore do ye hope for good hap unto yourselves? know that ye shall be delivered into the hands of the righteous, and they shall cut </verse>
+            <verse canonical="true" osisID="1En.98.13"> off your necks and slay you, and have no mercy upon you. Woe to you who rejoice in the tribulation of the righteous; for no grave shall be dug for you. Woe to you who set at nought the words of </verse>
+            <verse canonical="true" osisID="1En.98.15"> the righteous; for ye shall have no hope of life. Woe to you who write down lying and godless words; for they write down their lies that men may hear them and act godlessly towards (their) </verse>
+            <verse canonical="true" osisID="1En.98.16"> neighbour. Therefore they shall have no peace but die a sudden death.</verse>
+          </chapter>
+
+          <chapter osisID="1En.99" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+
+
+            <verse canonical="true" osisID="1En.99.1">
+              <lg>
+                <l>Woe to you who work godlessness,</l>
+                <l>And glory in lying and extol them:</l>
+                <l>Ye shall perish, and no happy life shall be yours.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.99.2">
+              <lg>
+                <l>Woe to them who pervert the words of uprightness,</l>
+                <l>And transgress the eternal law,</l>
+                <l>And transform themselves into what they were not [into sinners]:</l>
+                <l>They shall be trodden under foot upon the earth.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.99.3">
+              <lg>
+                <l>In those days make ready, ye righteous, to raise your prayers as a memorial,</l>
+                <l>And place them as a testimony before the angels,</l>
+                <l>That they may place the sin of the sinners for a memorial before the Most High.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.99.4">
+              <lg>
+                <l>In those days the nations shall be stirred up,</l>
+                <l>And the families of the nations shall arise on the day of destruction.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.99.5">
+              <lg>
+                <l>And in those days the destitute shall go forth and carry off their children,</l>
+                <l>And they shall abandon them, so that their children shall perish through them:</l>
+                <l>Yea, they shall abandon their children (that are still) sucklings, and not return to them,</l>
+                <l>And shall have no pity on their beloved ones.</l>
+
+                <verse canonical="true" osisID="1En.99.6,7"> And again I swear to you, ye sinners, that sin is prepared for a day of unceasing bloodshed. And they who worship stones, and grave images of gold and silver and wood (and stone) and clay, and those who worship impure spirits and demons, and all kinds of idols not according to knowledge, shall get no manner of help from them.</verse>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.99.8">
+              <lg>
+                <l>And they shall become godless by reason of the folly of their hearts,</l>
+                <l>And their eyes shall be blinded through the fear of their hearts</l>
+                <l>And through visions in their dreams.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.99.9">
+              <lg>
+                <l>Through these they shall become godless and fearful;</l>
+                <l>For they shall have wrought all their work in a lie,</l>
+                <l>And shall have worshiped a stone:</l>
+                <l>Therefore in an instant shall they perish.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.99.10">
+              <lg>
+                <l>But in those days blessed are all they who accept the words of wisdom, and understand them,</l>
+                <l>And observe the paths of the Most High, and walk in the path of His righteousness,</l>
+                <l>And become not godless with the godless;</l>
+                <l>For they shall be saved.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.99.11">
+              <lg>
+                <l>Woe to you who spread evil to your neighbours;</l>
+                <l>For you shall be slain in Sheol.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.99.12">
+              <lg>
+                <l>Woe to you who make deceitful and false measures,</l>
+                <l>And (to them) who cause bitterness on the earth;</l>
+                <l>For they shall thereby be utterly consumed.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.99.13">
+              <lg>
+                <l>Woe to you who build your houses through the grievous toil of others,</l>
+                <l>And all their building materials are the bricks and stones of sin;</l>
+                <l>I tell you ye shall have no peace.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.99.14">
+              <lg>
+                <l>Woe to them who reject the measure and eternal heritage of their fathers</l>
+                <l>And whose souls follow after idols;</l>
+                <l>For they shall have no rest.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.99.15">
+              <lg>
+                <l>Woe to them who work unrighteousness and help oppression,</l>
+                <l>And slay their neighbours until the day of the great judgement.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.99.16">
+              <lg>
+                <l>For He shall cast down your glory,</l>
+                <l>And bring affliction on your hearts,</l>
+                <l>And shall arouse His fierce indignation</l>
+                <l>And destroy you all with the sword;</l>
+                <l>And all the holy and righteous shall remember your sins.</l>
+              </lg>
+            </verse>
+          </chapter>
+
+          <chapter osisID="1En.100" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+            <verse canonical="true" osisID="1En.100.1">
+              <lg>
+                <l>And in those days in one place the fathers together with their sons shall be smitten</l>
+                <l>And brothers one with another shall fall in death</l>
+                <l>Till the streams flow with their blood.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.100.2">
+              <lg>
+                <l>For a man shall not withhold his hand from slaying his sons and his sons' sons,</l>
+                <l>And the sinner shall not withhold his hand from his honoured brother:</l>
+                <l>From dawn till sunset they shall slay one another.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.100.3">
+              <lg>
+                <l>And the horse shall walk up to the breast in the blood of sinners,</l>
+                <l>And the chariot shall be submerged to its height.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.100.4">
+              <lg>
+                <l>In those days the angels shall descend into the secret places</l>
+                <l>And gather together into one place all those who brought down sin</l>
+                <l>And the Most High will arise on that day of judgement</l>
+                <l>To execute great judgement amongst sinners.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.100.5">
+              <lg>
+                <l>And over all the righteous and holy He will appoint guardians from amongst the holy angels</l>
+                <l>To guard them as the apple of an eye,</l>
+                <l>Until He makes an end of all wickedness and all sin,</l>
+                <l>And though the righteous sleep a long sleep, they have nought to fear.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.100.6">
+              <lg>
+                <l>And (then) the children of the earth shall see the wise in security,</l>
+                <l>And shall understand all the words of this book,</l>
+                <l>And recognize that their riches shall not be able to save them</l>
+                <l>In the overthrow of their sins.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.100.7">
+              <lg>
+                <l>Woe to you, Sinners, on the day of strong anguish,</l>
+                <l>Ye who afflict the righteous and burn them with fire:</l>
+                <l>Ye shall be requited according to your works.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.100.8">
+              <lg>
+                <l>Woe to you, ye obstinate of heart,</l>
+                <l>Who watch in order to devise wickedness:</l>
+                <l>Therefore shall fear come upon you</l>
+                <l>And there shall be none to help you.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.100.9">
+              <lg>
+                <l>Woe to you, ye sinners, on account of the words of your mouth,</l>
+                <l>And on account of the deeds of your hands which your godlessness as wrought,</l>
+                <l>In blazing flames burning worse than fire shall ye burn.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.100.10"> And now, know ye that from the angels He will inquire as to your deeds in heaven, from the sun and from the moon and from the stars in reference to your sins because upon the earth ye execute </verse>
+            <verse canonical="true" osisID="1En.100.11"> judgement on the righteous. And He will summon to testify against you every cloud and mist and dew and rain; for they shall all be withheld because of you from descending upon you, and they </verse>
+            <verse canonical="true" osisID="1En.100.12"> shall be mindful of your sins. And now give presents to the rain that it be not withheld from descending upon you, nor yet the dew, when it has received gold and silver from you that it may descend. When the hoar-frost and snow with their chilliness, and all the snow-storms with all their plagues fall upon you, in those days ye shall not be able to stand before them.</verse>
+          </chapter>
+
+          <chapter osisID="1En.101" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+            <verse canonical="true" osisID="1En.101.1"> Observe the heaven, ye children of heaven, and every work of the Most High, and fear ye Him </verse>
+            <verse canonical="true" osisID="1En.101.2"> and work no evil in His presence. If He closes the windows of heaven, and withholds the rain and </verse>
+            <verse canonical="true" osisID="1En.101.3"> the dew from descending on the earth on your account, what will ye do then? And if He sends His anger upon you because of your deeds, ye cannot petition Him; for ye spake proud and insolent </verse>
+            <verse canonical="true" osisID="1En.101.4"> words against His righteousness: therefore ye shall have no peace. And see ye not the sailors of the ships, how their ships are tossed to and fro by the waves, and are shaken by the winds, and are </verse>
+            <verse canonical="true" osisID="1En.101.5"> in sore trouble ? And therefore do they fear because all their goodly possessions go upon the sea with them, and they have evil forebodings of heart that the sea will swallow them and they will </verse>
+            <verse canonical="true" osisID="1En.101.6"> perish therein. Are not the entire sea and all its waters, and all its movements, the work of the Most </verse>
+            <verse canonical="true" osisID="1En.101.7"> High, and has He not set limits to its doings, and confined it throughout by the sand ? And at His reproof it is afraid and dries up, and all its fish die and all that is in it; But ye sinners that are </verse>
+            <verse canonical="true" osisID="1En.101.8"> on the earth fear Him not. Has He not made the heaven and the earth, and all that is therein ? Who has given understanding and wisdom to everything that moves on the earth and in the sea. </verse>
+            <verse canonical="true" osisID="1En.101.9"> Do not the sailors of the ships fear the sea ? Yet sinners fear not the Most High.</verse>
+          </chapter>
+
+          <chapter osisID="1En.102" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+            <verse canonical="true" osisID="1En.102.1">
+              <lg>
+                <l>In those days when He hath brought a grievous fire upon you,</l>
+                <l>Whither will ye flee, and where will ye find deliverance ?</l>
+                <l>And when He launches forth His Word against you Will you not be affrighted and fear ?</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.102.2">
+              <lg>
+                <l>And all the luminaries shall be affrighted with great fear,</l>
+                <l>And all the earth shall be affrighted and tremble and be alarmed.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.102.3">
+              <lg>
+                <l>And all the angels shall execute their commandst</l>
+                <l>And shall seek to hide themselves from the presence of the Great Glory,</l>
+                <l>And the children of earth shall tremble and quake;</l>
+                <l>And ye sinners shall be cursed for ever,</l>
+                <l>And ye shall have no peace.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.102.4">
+              <lg>
+                <l>Fear ye not, ye souls of the righteous,</l>
+                <l>And be hopeful ye that have died in righteousness.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.102.5">
+              <lg>
+                <l>And grieve not if your soul into Sheol has descended in grief,</l>
+                <l>And that in your life your body fared not according to your goodness,</l>
+                <l>But wait for the day of the judgement of sinners</l>
+                <l>And for the day of cursing and chastisement.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.102.6">
+              <lg>
+                <l>And yet when ye die the sinners speak over you:</l>
+                <l>" As we die, so die the righteous,</l>
+                <l>And what benefit do they reap for their deeds ?</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.102.7">
+              <lg>
+                <l>Behold, even as we, so do they die in grief and darkness,</l>
+                <l>And what have they more than we ?</l>
+                <l>From henceforth we are equal.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.102.8">
+              <lg>
+                <l>And what will they receive and what will they see for ever ?</l>
+                <l>Behold, they too have died,</l>
+                <l>And henceforth for ever shall they see no light."</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.102.9"> I tell you, ye sinners, ye are content to eat and drink, and rob and sin, and strip men naked, and </verse>
+            <verse canonical="true" osisID="1En.102.10"> acquire wealth and see good days. Have ye seen the righteous how their end falls out, that no manner </verse>
+            <verse canonical="true" osisID="1En.102.11"> of violence is found in them till their death ? " Nevertheless they perished and became as though they had not been, and their spirits descended into Sheol in tribulation."</verse>
+          </chapter>
+
+          <chapter osisID="1En.103" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+
+            <verse canonical="true" osisID="1En.103.1"> Now, therefore, I swear to you, the righteous, by the glory of the Great and Honoured and </verse>
+            <verse canonical="true" osisID="1En.103.2"> Mighty One in dominion, and by His greatness I swear to you.
+              <lb TEIform="milestone"/>
+              <lg>
+                <l>I know a mystery</l>
+                <l>And have read the heavenly tablets,</l>
+                <l>And have seen the holy books,</l>
+                <l>And have found written therein and inscribed regarding them:</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.103.3">
+              <lg>
+                <l>That all goodness and joy and glory are prepared for them,</l>
+                <l>And written down for the spirits of those who have died in righteousness,</l>
+                <l>And that manifold good shall be given to you in recompense for your labours,</l>
+                <l>And that your lot is abundantly beyond the lot of the living.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.103.4">
+              <lg>
+                <l>And the spirits of you who have died in righteousness shall live and rejoice,</l>
+                <l>And their spirits shall not perish, nor their memorial from before the face of the Great One</l>
+                <l>Unto all the generations of the world: wherefore no longer fear their contumely.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.103.5">
+              <lg>
+                <l>Woe to you, ye sinners, when ye have died,</l>
+                <l>If ye die in the wealth of your sins,</l>
+                <l>And those who are like you say regarding you:</l>
+                <l>' Blessed are the sinners: they have seen all their days.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.103.6">
+              <lg>
+                <l>And how they have died in prosperity and in wealth,</l>
+                <l>And have not seen tribulation or murder in their life;</l>
+                <l>And they have died in honour,</l>
+                <l>And judgement has not been executed on them during their life."</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.103.7">
+              <lg>
+                <l>Know ye, that their souls will be made to descend into Sheol</l>
+                <l>And they shall be wretched in their great tribulation.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.103.8">
+              <lg>
+                <l>And into darkness and chains and a burning flame where there is grievous judgement shall your spirits enter;</l>
+                <l>And the great judgement shall be for all the generations of the world.</l>
+                <l>Woe to you, for ye shall have no peace.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.103.9">
+              <lg>
+                <l>Say not in regard to the righteous and good who are in life:</l>
+                <l>" In our troubled days we have toiled laboriously and experienced every trouble,</l>
+                <l>And met with much evil and been consumed,</l>
+                <l>And have become few and our spirit small.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.103.10">
+              <lg>
+                <l>And we have been destroyed and have not found any to help us even with a word:</l>
+                <l>We have been tortured [and destroyed], and not hoped to see life from day to day.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.103.11">
+              <lg>
+                <l>We hoped to be the head and have become the tail:</l>
+                <l>We have toiled laboriously and had no satisfaction in our toil;</l>
+                <l>And we have become the food of the sinners and the unrighteous,</l>
+                <l>And they have laid their yoke heavily upon us.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.103.12">
+              <lg>
+                <l>They have had dominion over us that hated us and smote us;</l>
+                <l>And to those that hated us we have bowed our necks</l>
+                <l>But they pitied us not.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.103.13">
+              <lg>
+                <l>We desired to get away from them that we might escape and be at rest,</l>
+                <l>But found no place whereunto we should flee and be safe from them.</l>
+
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.103.14">
+              <lg>
+                <l>And are complained to the rulers in our tribulation,</l>
+                <l>And cried out against those who devoured us,</l>
+                <l>But they did not attend to our cries</l>
+                <l>And would not hearken to our voice.</l>
+              </lg>
+            </verse>
+            <verse canonical="true" osisID="1En.103.15"> And they helped those who robbed us and devoured us and those who made us few; and they concealed their oppression, and they did not remove from us the yoke of those that devoured us and dispersed us and murdered us, and they concealed their murder, and remembered not that they had lifted up their hands against us.</verse>
+          </chapter>
+
+
+          <chapter osisID="1En.104" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+
+            <verse canonical="true" osisID="1En.104.1"> I swear unto you, that in heaven the angels remember you for good before the glory of the Great </verse>
+            <verse canonical="true" osisID="1En.104.2"> One: and your names are written before the glory of the Great One. Be hopeful; for aforetime ye were put to shame through ill and affliction; but now ye shall shine as the lights of heaven, </verse>
+            <verse canonical="true" osisID="1En.104.3"> ye shall shine and ye shall be seen, and the portals of heaven shall be opened to you. And in your cry, cry for judgement, and it shall appear to you; for all your tribulation shall be visited on the </verse>
+            <verse canonical="true" osisID="1En.104.4"> rulers, and on all who helped those who plundered you. Be hopeful, and cast not away your hopes for ye shall have great joy as the angels of heaven. What shall ye be obliged to do? Ye shall not have to hide on the day of the great judgement and ye shall not be found as sinners, and the eternal </verse>
+            <verse canonical="true" osisID="1En.104.6"> judgement shall be far from you for all the generations of the world. And now fear not, ye righteous, when ye see the sinners growing strong and prospering in their ways: be not companions with them, </verse>
+            <verse canonical="true" osisID="1En.104.7"> but keep afar from their violence; for ye shall become companions of the hosts of heaven. And, although ye sinners say: " All our sins shall not be searched out and be written down," nevertheless </verse>
+            <verse canonical="true" osisID="1En.104.8"> they shall write down all your sins every day. And now I show unto you that light and darkness, </verse>
+            <verse canonical="true" osisID="1En.104.9"> day and night, see all your sins. Be not godless in your hearts, and lie not and alter not the words of uprightness, nor charge with lying the words of the Holy Great One, nor take account of your </verse>
+            <verse canonical="true" osisID="1En.104.10"> idols; for all your lying and all your godlessness issue not in righteousness but in great sin. And now I know this mystery, that sinners will alter and pervert the words of righteousness in many ways, and will speak wicked words, and lie, and practice great deceits, and write books concerning </verse>
+            <verse canonical="true" osisID="1En.104.11"> their words. But when they write down truthfully all my words in their languages, and do not change or minish ought from my words but write them all down truthfully -all that I first testified </verse>
+            <verse canonical="true" osisID="1En.104.12"> concerning them. Then, I know another mystery, that books will be given to the righteous and the </verse>
+            <verse canonical="true" osisID="1En.104.13"> wise to become a cause of joy and uprightness and much wisdom. And to them shall the books be given, and they shall believe in them and rejoice over them, and then shall all the righteous who have learnt therefrom all the paths of uprightness be recompensed.'</verse>
+          </chapter>
+
+
+          <chapter osisID="1En.105" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+            <verse canonical="true" osisID="1En.105.1"> In those days the Lord bade (them) to summon and testify to the children of earth concerning their wisdom: Show (it) unto them; for ye are their guides, and a recompense over the whole earth. </verse>
+            <verse canonical="true" osisID="1En.105.2"> For I and My son will be united with them for ever in the paths of uprightness in their lives; and ye shall have peace: rejoice, ye children of uprightness. Amen.</verse>
+
+          </chapter>
+          <title canonical="false" type="sub" TEIform="title">
+            <pCT canonical="false" TEIform="p">Fragment of the Book of Noah (Chapters 106-108)</pCT>
+          </title>
+
+          <chapter osisID="1En.106" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+            <verse canonical="true" osisID="1En.106.1"> And after some days my son Methuselah took a wife for his son Lamech, and she became </verse>
+            <verse canonical="true" osisID="1En.106.2"> pregnant by him and bore a son. And his body was white as snow and red as the blooming of a rose, and the hair of his head and his long locks were white as wool, and his eyes beautiful. And when he opened his eyes, he lighted up the whole house like the sun, and the whole house </verse>
+            <verse canonical="true" osisID="1En.106.3"> was very bright. And thereupon he arose in the hands of the midwife, opened his mouth, and conversed with the Lord of righteousness. </verse>
+            <verse canonical="true" osisID="1En.106.4"> And his father Lamech was afraid of him and </verse>
+            <verse canonical="true" osisID="1En.106.5"> fled, and came to his father Methuselah. And he said unto him: ' I have begotten a strange son, diverse from and unlike man, and resembling the sons of the God of heaven; and his nature is different and he is not like us, and his eyes are as the rays of the sun, and his </verse>
+            <verse canonical="true" osisID="1En.106.6"> countenance is glorious. And it seems to me that he is not sprung from me but from the angels, and I fear that in his days a wonder may be </verse>
+            <verse canonical="true" osisID="1En.106.7"> wrought on the earth. And now, my father, I am here to petition thee and implore thee that thou mayest go to Enoch, our father, and learn from him the truth, for his dwelling-place is </verse>
+            <verse canonical="true" osisID="1En.106.8"> amongst the angels.' And when Methuselah heard the words of his son, he came to me to the ends of the earth; for he had heard that I was there, and he cried aloud, and I heard his voice and I came to him. And I said unto him: ' Behold, here am I, my son, wherefore hast </verse>
+            <verse canonical="true" osisID="1En.106.9"> thou come to me ? ' And he answered and said: ' Because of a great cause of anxiety have I come to thee, and because of a disturbing vision </verse>
+            <verse canonical="true" osisID="1En.106.10"> have I approached. And now, my father, hear me: unto Lamech my son there hath been born a son, the like of whom there is none, and his nature is not like man's nature, and the colour of his body is whiter than snow and redder than the bloom of a rose, and the hair of his head is whiter than white wool, and his eyes are like the rays of the sun, and he opened his eyes and </verse>
+            <verse canonical="true" osisID="1En.106.11"> thereupon lighted up the whole house. And he arose in the hands of the midwife, and opened </verse>
+            <verse canonical="true" osisID="1En.106.12"> his mouth and blessed the Lord of heaven. And his father Lamech became afraid and fled to me, and did not believe that he was sprung from him, but that he was in the likeness of the angels of heaven; and behold I have come to thee that thou mayest make known to me the truth.' </verse>
+            <verse canonical="true" osisID="1En.106.13"> And I, Enoch, answered and said unto him: 'The Lord will do a new thing on the earth, and this I have already seen in a vision, and make known to thee that in the generation of my father Jared some of the angels of heaven </verse>
+            <verse canonical="true" osisID="1En.106.14"> transgressed the word of the Lord. And behold they commit sin and transgress the law, and have united themselves with women and commit sin with them, and have married some of them, </verse>
+            <verse canonical="true" osisID="1En.106.17"> and have begot children by them. And they shall produce on the earth giants not according to the spirit, but according to the flesh, and there shall be a great punishment on the earth, and the </verse>
+            <verse canonical="true" osisID="1En.106.15"> earth shall be cleansed from all impurity. Yea, there shall come a great destruction over the whole earth, and there shall be a deluge and </verse>
+            <verse canonical="true" osisID="1En.106.16"> a great destruction for one year. And this son who has been born unto you shall be left on the earth, and his three children shall be saved with him: when all mankind that are on the earth </verse>
+            <verse canonical="true" osisID="1En.106.18"> shall die [he and his sons shall be saved]. And now make known to thy son Lamech that he who has been born is in truth his son, and call his name Noah; for he shall be left to you, and he and his sons shall be saved from the destruction, which shall come upon the earth on account of all the sin and all the unrighteousness, which shall be consummated on the earth in his days. </verse>
+            <verse canonical="true" osisID="1En.106.19"> And after that there shall be still more unrighteousness than that which was first consummated on the earth; for I know the mysteries of the holy ones; for He, the Lord, has showed me and informed me, and I have read (them) in the heavenly tablets.</verse>
+          </chapter>
+
+          <chapter osisID="1En.107" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+            <verse canonical="true" osisID="1En.107.1"> And I saw written on them that generation upon generation shall transgress, till a generation of righteousness arises, and transgression is destroyed and sin passes away from the earth, and all </verse>
+            <verse canonical="true" osisID="1En.107.2"> manner of good comes upon it. And now, my son, go and make known to thy son Lamech that this </verse>
+            <verse canonical="true" osisID="1En.107.3"> son, which has been born, is in truth his son, and that (this) is no lie.' And when Methuselah had heard the words of his father Enoch-for he had shown to him everything in secret-he returned and showed (them) to him and called the name of that son Noah; for he will comfort the earth after all the destruction.</verse>
+          </chapter>
+
+          <chapter osisID="1En.108" TEIform="div">
+            <div canonical="false" type="summary" TEIform="div">
+              <p TEIform="p">TODO: CREATE SECTION SUMMARY</p>
+            </div>
+            <verse canonical="true" osisID="1En.108.1"> Another book which Enoch wrote for his son Methuselah and for those who will come after him, </verse>
+            <verse canonical="true" osisID="1En.108.2"> and keep the law in the last days. Ye who have done good shall wait for those days till an end is made of those who work evil; and an end of the might of the transgressors. And wait ye indeed till sin has passed away, for their names shall be blotted out of the book of life and out of the holy books, and their seed shall be destroyed for ever, and their spirits shall be slain, and they shall cry and make lamentation in a place that is a chaotic wilderness, and in the fire shall they burn; for there is no earth there. And I saw there something like an invisible cloud; for by reason of its depth I could not look over, and I saw a flame of fire blazing brightly, and things like shining </verse>
+            <verse canonical="true" osisID="1En.108.5"> mountains circling and sweeping to and fro. And I asked one of the holy angels who was with me and said unto him: ' What is this shining thing? for it is not a heaven but only the flame of a blazing </verse>
+            <verse canonical="true" osisID="1En.108.6"> fire, and the voice of weeping and crying and lamentation and strong pain.' And he said unto me: ' This place which thou seest-here are cast the spirits of sinners and blasphemers, and of those who work wickedness, and of those who pervert everything that the Lord hath spoken through the mouth </verse>
+            <verse canonical="true" osisID="1En.108.7"> of the prophets-(even) the things that shall be. For some of them are written and inscribed above in the heaven, in order that the angels may read them and know that which shall befall the sinners, and the spirits of the humble, and of those who have afflicted their bodies, and been recompensed </verse>
+            <verse canonical="true" osisID="1En.108.8"> by God; and of those who have been put to shame by wicked men: Who love God and loved neither gold nor silver nor any of the good things which are in the world, but gave over their bodies to torture. Who, since they came into being, longed not after earthly food, but regarded everything as a passing breath, and lived accordingly, and the Lord tried them much, and their spirits were </verse>
+            <verse canonical="true" osisID="1En.108.10"> found pure so that they should bless His name. And all the blessings destined for them I have recounted in the books. And he hath assigned them their recompense, because they have been found to be such as loved heaven more than their life in the world, and though they were trodden under foot of wicked men, and experienced abuse and reviling from them and were put to shame, </verse>
+            <verse canonical="true" osisID="1En.108.11"> yet they blessed Me. And now I will summon the spirits of the good who belong to the generation of light, and I will transform those who were born in darkness, who in the flesh were not recompensed </verse>
+            <verse canonical="true" osisID="1En.108.12"> with such honour as their faithfulness deserved. And I will bring forth in shining light those who </verse>
+            <verse canonical="true" osisID="1En.108.13"> have loved My holy name, and I will seat each on the throne of his honour. And they shall be resplendent for times without number; for righteousness is the judgement of God; for to the faithful </verse>
+            <verse canonical="true" osisID="1En.108.14"> He will give faithfulness in the habitation of upright paths. And they shall see those who were , </verse>
+            <verse canonical="true" osisID="1En.108.15"> born in darkness led into darkness, while the righteous shall be resplendent. And the sinners shall cry aloud and see them resplendent, and they indeed will go where days and seasons are prescribed for them.'</verse>
+          </chapter>
 
         </div>
       </div>
