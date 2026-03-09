@@ -111,6 +111,15 @@ class VerseContent:
 
 
 @dataclass
+class FootnoteInfo:
+    """Information about a footnote."""
+    
+    ref_id: str  # e.g., "fn_0"
+    label: str  # e.g., "viii:1" 
+    content: str  # The footnote text
+
+
+@dataclass
 class ChapterInfo:
     """Information about a chapter."""
 
@@ -129,6 +138,7 @@ class SacredTextsParser:
         self.current_div: pyosis.DivCt | None = None
         self.root_div: pyosis.DivCt | None = None
         self.chapters: list[pyosis.DivCt] = []
+        self.footnotes: dict[str, FootnoteInfo] = {}
         self.use_proxies = use_proxies
         
         # Setup cache directory
@@ -144,12 +154,11 @@ class SacredTextsParser:
                 LOGGER.info("Fetching fresh proxies dynamically...")
                 proxies = fetch_free_proxies(limit=500)
                 for proxy in proxies:
-
                     LOGGER.debug(f"Added proxy to pool: {proxy['http']}")
                     try:
                         r = requests.get(
                             "https://httpbin.org/ip",
-                            proxies={"http": proxy, "https": proxy},
+                            proxies=proxy,
                             timeout=5,
                         )
                         if r.ok:
@@ -381,7 +390,30 @@ class SacredTextsParser:
                 elif child.name == 'br':
                     # Skip br tags - handled at poetry level
                     continue
-                elif child.name in ['font', 'span', 'a', 'div']:
+                elif child.name == 'a':
+                    # Check if this is a footnote reference
+                    # Pattern: <A NAME="fr_X"></A><A HREF="#fn_X"><FONT SIZE="1">N</FONT></A>
+                    if child.get('name', '').startswith('fr_'):
+                        # This is a footnote anchor - look for the corresponding link
+                        ref_id = child.get('name').replace('fr_', 'fn_')
+                        # Look ahead to next sibling for the actual link
+                        next_sib = child.find_next_sibling('a')
+                        if next_sib and next_sib.get('href', '') == f'#{ref_id}':
+                            # Found a footnote reference
+                            if ref_id in self.footnotes:
+                                footnote = self.footnotes[ref_id]
+                                # Create note element
+                                note = pyosis.NoteCt(
+                                    type_value="explanation",
+                                    n=footnote.label,
+                                    content=[footnote.content]
+                                )
+                                result.append(note)
+                            # Skip the next <a> tag since we've processed it
+                            continue
+                    # Regular link - passthrough
+                    result.extend(child_content)
+                elif child.name in ['font', 'span', 'div']:
                     # For styling/formatting tags without semantic meaning, just include their content
                     # Note: Green font tags are handled specially above for page markers
                     result.extend(child_content)
@@ -580,6 +612,59 @@ class SacredTextsParser:
         self.current_div.content.append(verse)
         self.current_verse = verse_num
 
+    def extract_footnotes(self, soup: BeautifulSoup) -> None:
+        """Extract footnotes from the page and store them for inline insertion.
+        
+        Footnotes are typically in a section with <H3>Footnotes</H3> heading.
+        Each footnote has the format:
+        <A NAME="fn_X"></A><A HREF="...#fr_X">label</A> content
+        """
+        # Look for "Footnotes" heading
+        for h3 in soup.find_all('h3'):
+            if 'Footnotes' in h3.get_text():
+                # Found footnotes section - extract all paragraphs after it
+                current = h3.find_next_sibling()
+                while current:
+                    if current.name == 'p':
+                        # Parse footnote: <A NAME="fn_X"></A><A HREF="...">label</A> text
+                        anchor = current.find('a', attrs={'name': lambda x: x and x.startswith('fn_')})
+                        if anchor:
+                            ref_id = anchor.get('name')  # e.g., "fn_0"
+                            
+                            # Find the label link
+                            label_link = anchor.find_next_sibling('a')
+                            label = label_link.get_text().strip() if label_link else ""
+                            
+                            # Get the footnote content (everything after the label link)
+                            # Remove the anchors and get text
+                            content_parts = []
+                            for elem in current.children:
+                                if isinstance(elem, NavigableString):
+                                    text = str(elem).strip()
+                                    if text:
+                                        content_parts.append(text)
+                                elif elem.name not in ['a']:  # Skip anchor tags
+                                    text = elem.get_text().strip()
+                                    if text:
+                                        content_parts.append(text)
+                            
+                            # Join and clean up the content
+                            content = ' '.join(content_parts).strip()
+                            
+                            # Store the footnote
+                            if content:
+                                self.footnotes[ref_id] = FootnoteInfo(
+                                    ref_id=ref_id,
+                                    label=label,
+                                    content=content
+                                )
+                                LOGGER.debug(f"Extracted footnote {ref_id}: {label} = {content[:50]}...")
+                    
+                    current = current.find_next_sibling()
+                    # Stop if we hit another heading
+                    if current and current.name in ['h1', 'h2', 'h3', 'h4']:
+                        break
+
     def parse_page(self, html: str, page_num: int = -1) -> None:
         """Parse a single page and extract chapter/verse content or front matter.
         
@@ -588,6 +673,9 @@ class SacredTextsParser:
             page_num: Page number (used to identify front matter pages 0-3)
         """
         soup = BeautifulSoup(html, 'html.parser')
+        
+        # Extract footnotes first (they'll be inserted inline)
+        self.extract_footnotes(soup)
 
         # Handle front matter pages (0-3)
         if page_num in [0, 1, 2, 3]:
@@ -604,6 +692,11 @@ class SacredTextsParser:
             for p in soup.find_all('p'):
                 if p.find_parent(['nav', 'header', 'footer']):
                     continue
+                
+                # Skip footnote paragraphs (they have <a name="fn_X">)
+                if p.find('a', attrs={'name': lambda x: x and x.startswith('fn_')}):
+                    continue
+                
                 text = p.get_text().strip()
                 # Skip navigation and empty paragraphs
                 if (not text or 'Next:' in text or 'Previous:' in text or 
@@ -783,8 +876,8 @@ def main(
     start_page: int = 0,  # Start at 0 to include title page and front matter
     end_page: int = 112,
     delay: float = 1.5,  # Delay between requests in seconds
-    use_proxies: bool = True,  # Use proxy rotation to avoid rate limiting
-    fetch_dynamic_proxies: bool = True,  # Fetch fresh proxies dynamically
+    use_proxies: bool = False,  # Use proxy rotation to avoid rate limiting
+    fetch_dynamic_proxies: bool = False,  # Fetch fresh proxies dynamically
     cache_dir: str = ".cache/html",  # Directory to cache downloaded HTML files
     log_level: str = "INFO"
 ) -> None:
@@ -795,8 +888,8 @@ def main(
         start_page: First page to process (default 0 for title page, use 4 for Chapter I)
         end_page: Last page to process (default 112)
         delay: Delay between requests in seconds (default 1.5 to avoid rate limiting)
-        use_proxies: Use rotating proxy pool to avoid rate limiting (default True)
-        fetch_dynamic_proxies: Fetch fresh proxies dynamically from proxy services (default True)
+        use_proxies: Use rotating proxy pool to avoid rate limiting (default False)
+        fetch_dynamic_proxies: Fetch fresh proxies dynamically from proxy services (default False)
         cache_dir: Directory to cache downloaded HTML files (default ".cache/html", use empty string to disable)
         log_level: Logging level (DEBUG, INFO, WARNING, ERROR)
     """
