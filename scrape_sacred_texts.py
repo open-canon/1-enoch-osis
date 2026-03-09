@@ -757,8 +757,18 @@ class SacredTextsParser:
                 # Parse the verse content preserving inline annotations
                 verse_content = self.parse_verse_text(p)
                 
-                # Remove verse number from the beginning
+                # Remove verse number from the beginning of all content
                 verse_content.text = re.sub(r'^\d+\.\s+', '', verse_content.text)
+                
+                # Remove verse number from content_parts
+                if verse_content.content_parts and isinstance(verse_content.content_parts[0], str):
+                    verse_content.content_parts[0] = re.sub(r'^\d+\.\s+', '', verse_content.content_parts[0])
+                
+                # Remove verse number from poetry lines
+                if verse_content.has_poetry and verse_content.poetry_lines:
+                    first_line = verse_content.poetry_lines[0]
+                    if first_line and isinstance(first_line[0], str):
+                        first_line[0] = re.sub(r'^\d+\.\s+', '', first_line[0])
                 
                 self.add_verse(verse_num, verse_content)
                 LOGGER.debug(f"Added verse {self.current_chapter}.{verse_num}")
