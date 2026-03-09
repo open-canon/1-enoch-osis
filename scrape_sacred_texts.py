@@ -344,6 +344,9 @@ class SacredTextsParser:
         
         result: list[str | pyosis.HiCt | pyosis.MilestoneCt] = []
         
+        # Track elements to skip (footnote number links)
+        skip_elements = set()
+        
         # Process all children of the element
         for child in element.children:
             if isinstance(child, NavigableString):
@@ -351,6 +354,10 @@ class SacredTextsParser:
                 child_result = self.parse_inline_annotations(child, is_green_font=is_green_font)
                 result.extend(child_result)
             elif isinstance(child, Tag):
+                # Skip if this element was marked for skipping
+                if child in skip_elements:
+                    continue
+                
                 # Skip navigation elements
                 if child.get('class') and any(cls in str(child.get('class')) for cls in ['navigation', 'next', 'prev']):
                     continue
@@ -359,6 +366,27 @@ class SacredTextsParser:
                 is_child_green_font = (child.name == 'font' and 
                                       child.get('color', '').lower() == 'green')
                     
+                # Handle footnote references specially before recursing
+                if child.name == 'a' and child.get('name', '').startswith('fr_'):
+                    # This is a footnote anchor - look for the corresponding link
+                    ref_id = child.get('name').replace('fr_', 'fn_')
+                    # Look ahead to next sibling for the actual link
+                    next_sib = child.find_next_sibling('a')
+                    if next_sib and next_sib.get('href', '') == f'#{ref_id}':
+                        # Found a footnote reference
+                        if ref_id in self.footnotes:
+                            footnote = self.footnotes[ref_id]
+                            # Create note element
+                            note = pyosis.NoteCt(
+                                type_value="explanation",
+                                n=footnote.label,
+                                content=[footnote.content]
+                            )
+                            result.append(note)
+                        # Mark the footnote number link to skip
+                        skip_elements.add(next_sib)
+                        continue
+                
                 # Recursively parse the child's content
                 child_content = self.parse_inline_annotations(child, is_green_font=is_child_green_font)
                 
@@ -391,26 +419,6 @@ class SacredTextsParser:
                     # Skip br tags - handled at poetry level
                     continue
                 elif child.name == 'a':
-                    # Check if this is a footnote reference
-                    # Pattern: <A NAME="fr_X"></A><A HREF="#fn_X"><FONT SIZE="1">N</FONT></A>
-                    if child.get('name', '').startswith('fr_'):
-                        # This is a footnote anchor - look for the corresponding link
-                        ref_id = child.get('name').replace('fr_', 'fn_')
-                        # Look ahead to next sibling for the actual link
-                        next_sib = child.find_next_sibling('a')
-                        if next_sib and next_sib.get('href', '') == f'#{ref_id}':
-                            # Found a footnote reference
-                            if ref_id in self.footnotes:
-                                footnote = self.footnotes[ref_id]
-                                # Create note element
-                                note = pyosis.NoteCt(
-                                    type_value="explanation",
-                                    n=footnote.label,
-                                    content=[footnote.content]
-                                )
-                                result.append(note)
-                            # Skip the next <a> tag since we've processed it
-                            continue
                     # Regular link - passthrough
                     result.extend(child_content)
                 elif child.name in ['font', 'span', 'div']:
