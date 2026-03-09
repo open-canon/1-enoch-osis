@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="1En" osisRefWork="Bible" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.03.09T09:08:12</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.03.09T09:10:12</date>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
         <date event="edition" type="ISO" xml:lang="en" TEIform="date">1913</date>

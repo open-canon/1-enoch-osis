@@ -890,7 +890,7 @@ class SacredTextsParser:
 
 
 def main(
-    output: str = "1-enoch-new.xml",
+    output: str = "1-enoch.xml",
     start_page: int = 0,  # Start at 0 to include title page and front matter
     end_page: int = 112,
     delay: float = 1.5,  # Delay between requests in seconds
