@@ -525,7 +525,7 @@ class SacredTextsParser:
         """Initialize the OSIS book structure."""
         self.root_div = pyosis.DivCt(
             type_value=pyosis.OsisDivs.BOOK,
-            osis_id=["1En"],
+            osis_id=["1-enoch"],
             canonical=True,
             content=[pyosis.HeadCt(content=["The Book of Enoch"])]
         )
@@ -564,7 +564,7 @@ class SacredTextsParser:
             pass
 
         self.current_chapter = chapter_num
-        chapter_osis_id = f"1En.{chapter_num}"
+        chapter_osis_id = f"1-enoch.{chapter_num}"
 
         chapter_content = []
         if title:
@@ -591,7 +591,7 @@ class SacredTextsParser:
             LOGGER.warning(f"No chapter started for verse {verse_num}")
             return
 
-        verse_osis_id = f"1En.{self.current_chapter}.{verse_num}"
+        verse_osis_id = f"1-enoch.{self.current_chapter}.{verse_num}"
 
         if content.has_poetry and content.poetry_lines:
             # Create line group for poetry
@@ -791,7 +791,7 @@ class SacredTextsParser:
                         lang="en",
                         content=[current_date]
                     ),
-                    content=[
+                    p=[
                         pyosis.PCt(content=[
                             "Scraped from https://sacred-texts.com/bib/boe/, and converted to OSIS by Andrew P. Sansom."
                         ])
@@ -805,7 +805,7 @@ class SacredTextsParser:
                         lang="en",
                         content=["1913"]
                     ),
-                    content=[
+                    p=[
                         pyosis.PCt(content=[
                             "The Apocrypha and Pseudepigrapha of the Old Testament in English : with introductions and critical and explanatory notes to the several books, Robert Henry Charles."
                         ])
@@ -814,7 +814,7 @@ class SacredTextsParser:
             ],
             work=[
                 pyosis.WorkCt(
-                    osis_work="1En",
+                    osis_work="1-enoch",
                     lang="en",
                     title=[
                         pyosis.TitleCt(
@@ -824,9 +824,7 @@ class SacredTextsParser:
                     ],
                     description=[
                         pyosis.DescriptionCt(
-                            content=[
-                                'Excerpt from "The Apocrypha and Pseudepigrapha of the Old Testament in English : with introductions and critical and explanatory notes to the several books" by Robert Henry Charles, 1913. Transcribed by Joshua Williams, Northwest Nazarene College, 1995. Converted to OSIS by Andrew P. Sansom, 2026.'
-                            ]
+                            value='Excerpt from "The Apocrypha and Pseudepigrapha of the Old Testament in English : with introductions and critical and explanatory notes to the several books" by Robert Henry Charles, 1913. Transcribed by Joshua Williams, Northwest Nazarene College, 1995. Converted to OSIS by Andrew P. Sansom, 2026.'
                         )
                     ],
                     type_value=[
@@ -838,7 +836,7 @@ class SacredTextsParser:
                     creator=[
                         pyosis.CreatorCt(
                             role=pyosis.OsisRoles.TRL,
-                            content=["Robert Henry (R.H.) Charles"]
+                            value="Robert Henry (R.H.) Charles"
                         )
                     ],
                     publisher=[
@@ -857,7 +855,8 @@ class SacredTextsParser:
 
         osis_text = pyosis.OsisTextCt(
             lang="en",
-            osis_idwork="1En",
+            osis_idwork="1-enoch",
+            osis_ref_work="1 Enoch",
             canonical=True,
             header=header,
             div=divs,
