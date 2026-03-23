@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="1En" osisRefWork="1 Enoch" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.03.22T21:49:41</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.03.22T22:02:23</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/boe/, and converted to OSIS by Andrew P. Sansom.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -21,16 +21,7 @@
     <div canonical="true" type="book" osisID="1En" TEIform="div">
       <headCT TEIform="head">The Book of Enoch</headCT>
       <div canonical="false" type="front" TEIform="div">
-        <headCT TEIform="head">THE</headCT>
-        <p TEIform="p">
-          <hi type="italic" TEIform="hi">The Book of Enoch</hi>, by R.H. Charles, [1917], at sacred-texts.com
-        </p>
-      </div>
-      <div canonical="false" type="front" TEIform="div">
         <headCT TEIform="head">EDITORS' PREFACE</headCT>
-        <p TEIform="p">
-          <hi type="italic" TEIform="hi">The Book of Enoch</hi>, by R.H. Charles, [1917], at sacred-texts.com
-        </p>
         <milestone type="page" n="vi" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">THE object of this series of translations is primarily to furnish students with short, cheap, and handy text-books, which, it is hoped, will facilitate the study of the particular texts in class under competent teachers. But it is also hoped that the volumes will be acceptable to the general reader who may be interested in the subjects with which they deal. It has been thought advisable, as a general rule, to restrict the notes and comments to a small compass; more especially as, in most cases, excellent works of a more elaborate character are available. Indeed, it is much to be desired that these translations may have the effect of inducing readers to study the larger works.</p>
         <p TEIform="p">Our principal aim, in a word, is to make some difficult texts, important for the study of Christian origins, more generally accessible in faithful and scholarly translations.</p>
@@ -40,9 +31,6 @@
       </div>
       <div canonical="false" type="front" TEIform="div">
         <headCT TEIform="head">INTRODUCTION</headCT>
-        <p TEIform="p">
-          <hi type="italic" TEIform="hi">The Book of Enoch</hi>, by R.H. Charles, [1917], at sacred-texts.com
-        </p>
         <milestone type="page" n="vii" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">As the Book of Enoch is, in some respects, the most notable extant apocalyptic work outside the canonical Scriptures, it will not be inappropriate to offer a few remarks here on the Apocalyptic Literature generally. In writing about the books which belong to this literature, Prof. Burkitt says very pointedly that "they are the most characteristic survival of what I will venture to call, with all its narrowness and its incoherence, the heroic age of Jewish history, the age when the nation attempted to realize in action the part of the peculiar people of God. It ended in catastrophe, but the nation left two successors, the Christian Church and the Rabbinical Schools, each of which carried on some of the old national aims. And of the two it was the Christian Church that was most faithful to the ideas enshrined in the Apocalypses, and it did consider itself, not without some reason, the fulfilment of those ideas. What is wanted, therefore, in studying the Apocalypses is, above all, sympathy with the ideas that underlie them, and especially with the belief in the New Age. And those who believe that in Christianity a new Era really did dawn for us ought, I think, to have that sympathy. . . . We study the Apocalypses to learn how our spiritual ancestors hoped again that God would make all right in the end; and that we, their children, are here to-day studying them is an indication</p>
         <milestone type="page" n="viii" marker="DEFAULT" TEIform="milestone"/>
@@ -232,9 +220,6 @@
       </div>
       <div canonical="false" type="front" TEIform="div">
         <headCT TEIform="head">Abbreviations, Brackets and Symbols</headCT>
-        <p TEIform="p">
-          <hi type="italic" TEIform="hi">The Book of Enoch</hi>, by R.H. Charles, [1917], at sacred-texts.com
-        </p>
         <milestone type="page" n="xxx" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">E denotes the Ethiopic Version.</p>
         <p TEIform="p">G

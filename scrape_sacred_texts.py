@@ -33,6 +33,10 @@ BOOK_OSIS_ID: Final[str] = "1En"
 BOOK_SHORT_NAME: Final[str] = "1 Enoch"
 # Files range from boe000.htm (title page) to boe112.htm (appendix)
 FILE_RANGE: Final[tuple[int, int]] = (0, 112)
+SCRAPED_CHROME_SNIPPETS: Final[tuple[str, ...]] = (
+    "the book of enoch, by r.h. charles, [1917], at sacred-texts.com",
+    "scanned at sacred-texts.com",
+)
 VERSE_MARKER_RE: Final[re.Pattern[str]] = re.compile(
     r"(\d{1,3})\.?\s+(?=(?:<[^>]+>\s*)*[A-Z\"'\(\[\u2308\u3008])",
     re.IGNORECASE,
@@ -600,6 +604,12 @@ class SacredTextsParser:
         )
         self.root_div.content.append(front_matter_div)
 
+    @staticmethod
+    def is_scraped_chrome_text(text: str) -> bool:
+        """Return whether text is sacred-texts page chrome rather than document content."""
+        normalized = " ".join(text.lower().split())
+        return any(snippet in normalized for snippet in SCRAPED_CHROME_SNIPPETS)
+
     def start_chapter(self, chapter_num: int, title: str = "") -> None:
         """Start a new chapter."""
         if self.current_div and self.current_chapter:
@@ -902,6 +912,7 @@ class SacredTextsParser:
                     or "Index" in text
                     or "«" in text
                     or "»" in text
+                    or self.is_scraped_chrome_text(text)
                 ):
                     continue
                 content_paragraphs.append(p)  # Pass the Tag object, not plain text
@@ -927,7 +938,7 @@ class SacredTextsParser:
             p
             for p in paragraphs
             if not p.find_parent(["nav", "header", "footer"])
-            and "at sacred-texts.com" not in p.get_text()
+            and not self.is_scraped_chrome_text(p.get_text())
         ]
         page_has_explicit_verses = any(
             self.is_valid_verse_marker(fragment_html, match.start())
@@ -951,7 +962,7 @@ class SacredTextsParser:
                 continue
             if text.startswith("p.") and len(text) < 10:
                 continue
-            if "at sacred-texts.com" in text:
+            if self.is_scraped_chrome_text(text):
                 continue
             if (
                 (text.startswith("[") and not has_continuation_note)

@@ -28,6 +28,7 @@ The `scrape_sacred_texts.py` script downloads each chapter page from https://sac
 - Preserves inline annotations marked with ⌈⌉ brackets (editorial additions/textual variants)
 - **Inline footnotes** - converts footnotes from separate section to inline `<note>` elements
 - **Page number milestones** - converts page markers (e.g. "p. xvii") to OSIS milestone elements
+- Filters repeated sacred-texts.com page chrome so site header text is not emitted as document content
 - Detects and converts poetry to OSIS line groups
 - Handles rate limiting with exponential backoff retry logic
 - Generates valid OSIS XML output with proper metadata
