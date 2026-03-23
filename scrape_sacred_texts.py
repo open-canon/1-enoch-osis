@@ -30,6 +30,7 @@ LOGGER = logging.getLogger(__name__)
 
 BASE_URL: Final[str] = "https://sacred-texts.com/bib/boe/"
 BOOK_OSIS_ID: Final[str] = "1En"
+BOOK_SHORT_NAME: Final[str] = "1 Enoch"
 # Files range from boe000.htm (title page) to boe112.htm (appendix)
 FILE_RANGE: Final[tuple[int, int]] = (0, 112)
 VERSE_MARKER_RE: Final[re.Pattern[str]] = re.compile(
@@ -1028,7 +1029,7 @@ class SacredTextsParser:
             ],
             work=[
                 pyosis.WorkCt(
-                    osis_work=BOOK_OSIS_ID,
+                    osis_work=BOOK_SHORT_NAME,
                     lang="en",
                     title=[
                         pyosis.TitleCt(canonical=True, content=["The Book of Enoch"]),

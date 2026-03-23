@@ -3,14 +3,14 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="1En" osisRefWork="1 Enoch" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.03.22T21:46:48</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.03.22T21:49:41</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/boe/, and converted to OSIS by Andrew P. Sansom.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
         <date event="edition" type="ISO" xml:lang="en" TEIform="date">1913</date>
         <p TEIform="p">The Apocrypha and Pseudepigrapha of the Old Testament in English : with introductions and critical and explanatory notes to the several books, Robert Henry Charles.</p>
       </revisionDesc>
-      <work osisWork="1En" xml:lang="en">
+      <work osisWork="1 Enoch" xml:lang="en">
         <title canonical="true" TEIform="title">The Book of Enoch</title>
         <creator role="trl">Robert Henry (R.H.) Charles</creator>
         <description>Excerpt from "The Apocrypha and Pseudepigrapha of the Old Testament in English : with introductions and critical and explanatory notes to the several books" by Robert Henry Charles, 1913. Transcribed by Joshua Williams, Northwest Nazarene College, 1995. Converted to OSIS by Andrew P. Sansom, 2026.</description>
