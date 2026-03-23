@@ -29,8 +29,13 @@ from tqdm import tqdm
 LOGGER = logging.getLogger(__name__)
 
 BASE_URL: Final[str] = "https://sacred-texts.com/bib/boe/"
+BOOK_OSIS_ID: Final[str] = "1En"
 # Files range from boe000.htm (title page) to boe112.htm (appendix)
 FILE_RANGE: Final[tuple[int, int]] = (0, 112)
+VERSE_MARKER_RE: Final[re.Pattern[str]] = re.compile(
+    r"(\d{1,3})\.?\s+(?=(?:<[^>]+>\s*)*[A-Z\"'\(\[\u2308\u3008])",
+    re.IGNORECASE,
+)
 
 
 def fetch_free_proxies(limit: int = 50) -> list[dict[str, str]]:
@@ -563,7 +568,7 @@ class SacredTextsParser:
         """Initialize the OSIS book structure."""
         self.root_div = pyosis.DivCt(
             type_value=pyosis.OsisDivs.BOOK,
-            osis_id=["1-enoch"],
+            osis_id=[BOOK_OSIS_ID],
             canonical=True,
             content=[pyosis.HeadCt(content=["The Book of Enoch"])],
         )
@@ -601,7 +606,8 @@ class SacredTextsParser:
             pass
 
         self.current_chapter = chapter_num
-        chapter_osis_id = f"1-enoch.{chapter_num}"
+        self.current_verse = None
+        chapter_osis_id = f"{BOOK_OSIS_ID}.{chapter_num}"
 
         chapter_content = []
         if title:
@@ -625,7 +631,7 @@ class SacredTextsParser:
             LOGGER.warning(f"No chapter started for verse {verse_num}")
             return
 
-        verse_osis_id = f"1-enoch.{self.current_chapter}.{verse_num}"
+        verse_osis_id = f"{BOOK_OSIS_ID}.{self.current_chapter}.{verse_num}"
 
         if content.has_poetry and content.poetry_lines:
             # Create line group for poetry
@@ -651,6 +657,148 @@ class SacredTextsParser:
 
         self.current_div.content.append(verse)
         self.current_verse = verse_num
+
+    def append_to_current_verse(self, content: VerseContent) -> None:
+        """Append paragraph content to the current verse.
+
+        sacred-texts sometimes continues a verse in a new paragraph or starts a
+        short chapter without an explicit verse number.
+        """
+        if not self.current_div or not self.current_div.content:
+            LOGGER.warning("No current verse available for paragraph continuation")
+            return
+
+        last_item = self.current_div.content[-1]
+        if not isinstance(last_item, pyosis.VerseCt):
+            LOGGER.warning(
+                "Last chapter item is not a verse; cannot append continuation"
+            )
+            return
+
+        if content.has_poetry and content.poetry_lines:
+            continuation_items: list[
+                str | pyosis.HiCt | pyosis.MilestoneCt | pyosis.LgCt
+            ] = [
+                pyosis.LgCt(
+                    l=[
+                        pyosis.LCt(content=line_parts)
+                        for line_parts in content.poetry_lines
+                    ]
+                )
+            ]
+        else:
+            continuation_items = (
+                content.content_parts if content.content_parts else [content.text]
+            )
+
+        if not continuation_items:
+            return
+
+        existing_content = list(last_item.content or [])
+        if (
+            existing_content
+            and isinstance(existing_content[-1], str)
+            and isinstance(continuation_items[0], str)
+        ):
+            needs_space = not existing_content[-1].endswith(
+                (" ", "\n")
+            ) and not continuation_items[0].startswith(
+                (" ", "\n", ",", ".", ";", ":", "!", "?")
+            )
+            existing_content[-1] += (" " if needs_space else "") + continuation_items[0]
+            existing_content.extend(continuation_items[1:])
+        else:
+            existing_content.extend(continuation_items)
+
+        last_item.content = self.consolidate_strings(existing_content)
+
+    @staticmethod
+    def build_paragraph_tag(fragment_html: str) -> Tag:
+        """Wrap an HTML fragment in a paragraph for re-parsing."""
+        fragment_soup = BeautifulSoup(f"<p>{fragment_html}</p>", "html.parser")
+        paragraph = fragment_soup.find("p")
+        if paragraph is None:
+            raise ValueError("Failed to build paragraph tag from fragment")
+        return paragraph
+
+    @staticmethod
+    def is_valid_verse_marker(fragment_html: str, start: int) -> bool:
+        """Check whether a numeric marker sits at a plausible verse boundary."""
+        previous_index = start - 1
+        while previous_index >= 0 and fragment_html[previous_index].isspace():
+            previous_index -= 1
+
+        if previous_index < 0:
+            return True
+
+        return fragment_html[previous_index] in {
+            ".",
+            ",",
+            ";",
+            ":",
+            "?",
+            "!",
+            "'",
+            '"',
+            ")",
+            ">",
+        }
+
+    def extract_paragraph_verses(
+        self, paragraph: Tag, *, infer_first_verse: bool
+    ) -> list[tuple[int | None, VerseContent]]:
+        """Split a paragraph into verse entries.
+
+        Returns `(verse_number, content)` pairs. A `None` verse number means the
+        parsed content should be appended to the current verse.
+        """
+        paragraph_soup = BeautifulSoup(str(paragraph), "html.parser")
+        paragraph_copy = paragraph_soup.find("p")
+        if paragraph_copy is None:
+            return []
+
+        for continuation_note in paragraph_copy.select(".contnote"):
+            continuation_note.decompose()
+
+        fragment_html = paragraph_copy.decode_contents().strip()
+        if not fragment_html:
+            return []
+
+        matches = [
+            match
+            for match in VERSE_MARKER_RE.finditer(fragment_html)
+            if self.is_valid_verse_marker(fragment_html, match.start())
+        ]
+        if not matches:
+            content = self.parse_verse_text(paragraph_copy)
+            if not content.text.strip() and not content.content_parts:
+                return []
+            if infer_first_verse:
+                return [(1, content)]
+            if self.current_verse is not None:
+                return [(None, content)]
+            return []
+
+        verse_entries = []
+        for index, match in enumerate(matches):
+            verse_num = int(match.group(1))
+            segment_start = match.end()
+            segment_end = (
+                matches[index + 1].start()
+                if index + 1 < len(matches)
+                else len(fragment_html)
+            )
+            segment_html = fragment_html[segment_start:segment_end].strip()
+            if not segment_html:
+                continue
+
+            verse_paragraph = self.build_paragraph_tag(segment_html)
+            content = self.parse_verse_text(verse_paragraph)
+            if not content.text.strip() and not content.content_parts:
+                continue
+            verse_entries.append((verse_num, content))
+
+        return verse_entries
 
     def extract_footnotes(self, soup: BeautifulSoup) -> None:
         """Extract footnotes from the page and store them for inline insertion.
@@ -774,6 +922,20 @@ class SacredTextsParser:
 
         # Now process paragraphs for verses
         paragraphs = soup.find_all("p")
+        content_paragraphs = [
+            p
+            for p in paragraphs
+            if not p.find_parent(["nav", "header", "footer"])
+            and "at sacred-texts.com" not in p.get_text()
+        ]
+        page_has_explicit_verses = any(
+            self.is_valid_verse_marker(fragment_html, match.start())
+            for p in content_paragraphs
+            for fragment_html in [
+                BeautifulSoup(str(p), "html.parser").find("p").decode_contents().strip()
+            ]
+            for match in VERSE_MARKER_RE.finditer(fragment_html)
+        )
 
         for p in paragraphs:
             # Skip if paragraph is within navigation/header elements
@@ -781,43 +943,41 @@ class SacredTextsParser:
                 continue
 
             text = p.get_text().strip()
+            has_continuation_note = p.select_one(".contnote") is not None
 
             # Skip empty paragraphs, navigation links, and page numbers
             if not text:
                 continue
             if text.startswith("p.") and len(text) < 10:
                 continue
-            if text.startswith("[") or "Next:" in text or "Previous:" in text:
+            if "at sacred-texts.com" in text:
+                continue
+            if (
+                (text.startswith("[") and not has_continuation_note)
+                or "Next:" in text
+                or "Previous:" in text
+            ):
                 continue
             if "Sacred Texts" in text or "Index" in text or "«" in text or "»" in text:
                 continue
             if text.startswith("⌈") and text.endswith("⌉") and len(text) < 20:
                 continue  # Skip standalone bracketed notes
 
-            # Check if text starts with a verse number
-            verse_match = re.match(r"^(\d+)\.\s+", text)
-            if verse_match and self.current_chapter:
-                verse_num = int(verse_match.group(1))
+            if not self.current_chapter:
+                continue
 
-                # Parse the verse content preserving inline annotations
-                verse_content = self.parse_verse_text(p)
-
-                # Remove verse number from the beginning of all content
-                verse_content.text = re.sub(r"^\d+\.\s+", "", verse_content.text)
-
-                # Remove verse number from content_parts
-                if verse_content.content_parts and isinstance(
-                    verse_content.content_parts[0], str
-                ):
-                    verse_content.content_parts[0] = re.sub(
-                        r"^\d+\.\s+", "", verse_content.content_parts[0]
+            verse_entries = self.extract_paragraph_verses(
+                p,
+                infer_first_verse=self.current_verse is None
+                and not page_has_explicit_verses,
+            )
+            for verse_num, verse_content in verse_entries:
+                if verse_num is None:
+                    self.append_to_current_verse(verse_content)
+                    LOGGER.debug(
+                        f"Appended continuation to {self.current_chapter}.{self.current_verse}"
                     )
-
-                # Remove verse number from poetry lines
-                if verse_content.has_poetry and verse_content.poetry_lines:
-                    first_line = verse_content.poetry_lines[0]
-                    if first_line and isinstance(first_line[0], str):
-                        first_line[0] = re.sub(r"^\d+\.\s+", "", first_line[0])
+                    continue
 
                 self.add_verse(verse_num, verse_content)
                 LOGGER.debug(f"Added verse {self.current_chapter}.{verse_num}")
@@ -868,7 +1028,7 @@ class SacredTextsParser:
             ],
             work=[
                 pyosis.WorkCt(
-                    osis_work="1-enoch",
+                    osis_work=BOOK_OSIS_ID,
                     lang="en",
                     title=[
                         pyosis.TitleCt(canonical=True, content=["The Book of Enoch"]),
@@ -897,7 +1057,7 @@ class SacredTextsParser:
 
         osis_text = pyosis.OsisTextCt(
             lang="en",
-            osis_idwork="1-enoch",
+            osis_idwork=BOOK_OSIS_ID,
             osis_ref_work="1 Enoch",
             canonical=True,
             header=header,
