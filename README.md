@@ -9,7 +9,7 @@ This repository contains OSIS XML documents of the Book of Enoch (1 Enoch), tran
 ## Files
 
 - `1-enoch.xml` - OSIS document scraped from sacred-texts.com using the `scrape_sacred_texts.py` script, with formatting preserved but without inline annotations
-- `scrape_fbe.py` - Forgotten Books of Eden scraper that preserves intro-page heading structure and secondary titles from the source pages, while using canonical OSIS IDs such as `2En` for 2 Enoch and keeping source headings as intro subtitles where needed
+- `scrape_fbe.py` - Forgotten Books of Eden scraper that uses canonical OSIS IDs such as `2En`, normalizes simple intro pages to an `Introduction` title plus source-heading subtitle, and preserves more complex source title blocks where needed
 - `scrape_sacred_texts.py` - Python script to download and parse from sacred-texts.com
 - `pdf.py` - Previous pyosis compiler example (for reference)
 

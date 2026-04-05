@@ -63,6 +63,7 @@ class WorkDef:
     output_stem: str | None = None
     intro_title: str | None = None
     intro_subtitle: str | None = None
+    intro_headings_as_subtitles: bool = False
 
 
 @dataclass
@@ -109,6 +110,8 @@ WORKS: Final[list[WorkDef]] = [
         short="Psalms of Solomon",
         intro_pages=[176],
         chapter_pages=list(range(177, 195)),  # 18 psalms
+        intro_title="Introduction",
+        intro_headings_as_subtitles=True,
     ),
     WorkDef(
         osis_id="odes-of-solomon",
@@ -116,6 +119,8 @@ WORKS: Final[list[WorkDef]] = [
         short="Odes of Solomon",
         intro_pages=[195],
         chapter_pages=list(range(196, 237)),  # 41 odes (Ode 6 absent from this edition)
+        intro_title="Introduction",
+        intro_headings_as_subtitles=True,
     ),
     WorkDef(
         osis_id="letter-of-aristeas",
@@ -123,13 +128,18 @@ WORKS: Final[list[WorkDef]] = [
         short="Letter of Aristeas",
         intro_pages=[237],
         chapter_pages=list(range(238, 249)),  # 11 chapters
+        intro_title="Introduction",
+        intro_headings_as_subtitles=True,
     ),
     WorkDef(
         osis_id="4Macc",
         title="Fourth Book of Maccabees",
         short="4 Maccabees",
+        output_stem="4-maccabees",
         intro_pages=[249],
         chapter_pages=list(range(250, 258)),  # 8 chapters
+        intro_title="Introduction",
+        intro_headings_as_subtitles=True,
     ),
     WorkDef(
         osis_id="story-of-ahikar",
@@ -137,6 +147,8 @@ WORKS: Final[list[WorkDef]] = [
         short="Story of Ahikar",
         intro_pages=[258],
         chapter_pages=list(range(259, 266)),  # 7 chapters
+        intro_title="Introduction",
+        intro_headings_as_subtitles=True,
     ),
 ]
 
@@ -606,6 +618,7 @@ class FBEParser:
         *,
         title_override: str | None = None,
         subtitle_override: str | None = None,
+        headings_as_subtitles: bool = False,
         include_headings: bool = True,
     ) -> list[pyosis.TitleCt | pyosis.PCt | pyosis.HeadCt | pyosis.MilestoneCt]:
         """Parse an intro / front-matter page into OSIS paragraph elements."""
@@ -613,6 +626,7 @@ class FBEParser:
         elements: list[
             pyosis.TitleCt | pyosis.PCt | pyosis.HeadCt | pyosis.MilestoneCt
         ] = []
+        intro_headings = self._extract_intro_headings(html)
 
         if title_override:
             elements.append(
@@ -632,8 +646,18 @@ class FBEParser:
                 )
             )
 
+        if headings_as_subtitles:
+            for heading_text in intro_headings:
+                elements.append(
+                    pyosis.TitleCt(
+                        type_value=pyosis.OsisTitles.SUB,
+                        canonical=False,
+                        content=[heading_text],
+                    )
+                )
+
         if include_headings:
-            for heading_text in self._extract_intro_headings(html):
+            for heading_text in intro_headings:
                 elements.append(pyosis.HeadCt(content=[heading_text]))
 
         for p in soup.find_all("p"):
@@ -1027,6 +1051,7 @@ class FBEParser:
         *,
         title_override: str | None = None,
         subtitle_override: str | None = None,
+        headings_as_subtitles: bool = False,
         include_headings: bool = True,
     ) -> pyosis.DivCt:
         """Build a non-canonical introduction div from an intro page."""
@@ -1034,6 +1059,7 @@ class FBEParser:
             html,
             title_override=title_override,
             subtitle_override=subtitle_override,
+            headings_as_subtitles=headings_as_subtitles,
             include_headings=include_headings,
         )
         return pyosis.DivCt(
@@ -1076,6 +1102,7 @@ class FBEParser:
                     html,
                     title_override=work.intro_title,
                     subtitle_override=work.intro_subtitle,
+                    headings_as_subtitles=work.intro_headings_as_subtitles,
                     include_headings=work.intro_title is None,
                 )
             )
@@ -1154,7 +1181,14 @@ class FBEParser:
         # Collection-level introduction
         for pg in TESTAMENTS_INTRO_PAGES:
             html = page_html[pg]
-            parent_content.append(self._build_intro_div(html))
+            parent_content.append(
+                self._build_intro_div(
+                    html,
+                    title_override="Introduction",
+                    headings_as_subtitles=True,
+                    include_headings=False,
+                )
+            )
 
         # Individual testaments as sub-books
         for t in TESTAMENTS:
