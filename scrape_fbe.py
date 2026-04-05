@@ -60,6 +60,9 @@ class WorkDef:
     short: str
     intro_pages: list[int]
     chapter_pages: list[int]  # In order; chapter_pages[0] = chapter 1, etc.
+    output_stem: str | None = None
+    intro_title: str | None = None
+    intro_subtitle: str | None = None
 
 
 @dataclass
@@ -91,11 +94,14 @@ WORKS: Final[list[WorkDef]] = [
         chapter_pages=list(range(85, 107)),  # 22 chapters
     ),
     WorkDef(
-        osis_id="2 En",
+        osis_id="2En",
         title="The Book of the Secrets of Enoch",
         short="2 Enoch",
         intro_pages=[107],
         chapter_pages=list(range(108, 176)),  # 68 chapters
+        output_stem="2-enoch",
+        intro_title="Introduction",
+        intro_subtitle="THE BOOK OF THE SECRETS OF ENOCH.",
     ),
     WorkDef(
         osis_id="psalms-of-solomon",
@@ -595,14 +601,40 @@ class FBEParser:
         return None
 
     def _parse_intro_page(
-        self, html: str
-    ) -> list[pyosis.PCt | pyosis.HeadCt | pyosis.MilestoneCt]:
+        self,
+        html: str,
+        *,
+        title_override: str | None = None,
+        subtitle_override: str | None = None,
+        include_headings: bool = True,
+    ) -> list[pyosis.TitleCt | pyosis.PCt | pyosis.HeadCt | pyosis.MilestoneCt]:
         """Parse an intro / front-matter page into OSIS paragraph elements."""
         soup = BeautifulSoup(html, "html.parser")
-        elements: list[pyosis.PCt | pyosis.HeadCt | pyosis.MilestoneCt] = []
+        elements: list[
+            pyosis.TitleCt | pyosis.PCt | pyosis.HeadCt | pyosis.MilestoneCt
+        ] = []
 
-        for heading_text in self._extract_intro_headings(html):
-            elements.append(pyosis.HeadCt(content=[heading_text]))
+        if title_override:
+            elements.append(
+                pyosis.TitleCt(
+                    type_value=pyosis.OsisTitles.MAIN,
+                    canonical=False,
+                    content=[title_override],
+                )
+            )
+
+        if subtitle_override:
+            elements.append(
+                pyosis.TitleCt(
+                    type_value=pyosis.OsisTitles.SUB,
+                    canonical=False,
+                    content=[subtitle_override],
+                )
+            )
+
+        if include_headings:
+            for heading_text in self._extract_intro_headings(html):
+                elements.append(pyosis.HeadCt(content=[heading_text]))
 
         for p in soup.find_all("p"):
             if self._skip_paragraph(p):
@@ -989,9 +1021,21 @@ class FBEParser:
     # Building OSIS book divs
     # ------------------------------------------------------------------
 
-    def _build_intro_div(self, html: str) -> pyosis.DivCt:
+    def _build_intro_div(
+        self,
+        html: str,
+        *,
+        title_override: str | None = None,
+        subtitle_override: str | None = None,
+        include_headings: bool = True,
+    ) -> pyosis.DivCt:
         """Build a non-canonical introduction div from an intro page."""
-        elements = self._parse_intro_page(html)
+        elements = self._parse_intro_page(
+            html,
+            title_override=title_override,
+            subtitle_override=subtitle_override,
+            include_headings=include_headings,
+        )
         return pyosis.DivCt(
             type_value=pyosis.OsisDivs.INTRODUCTION,
             canonical=False,
@@ -1027,7 +1071,14 @@ class FBEParser:
         # Intro pages
         for pg in work.intro_pages:
             html = page_html[pg]
-            book_content.append(self._build_intro_div(html))
+            book_content.append(
+                self._build_intro_div(
+                    html,
+                    title_override=work.intro_title,
+                    subtitle_override=work.intro_subtitle,
+                    include_headings=work.intro_title is None,
+                )
+            )
 
         # Chapter pages
         is_psalms = work.osis_id == "psalms-of-solomon"
@@ -1304,16 +1355,15 @@ class FBEParser:
             if missing:
                 LOGGER.warning("Skipping %s: missing pages %s", work.osis_id, missing)
                 continue
-            LOGGER.info("Generating %s.xml", work.osis_id)
+            output_stem = work.output_stem or work.osis_id
+            LOGGER.info("Generating %s.xml", output_stem)
             try:
                 osis_doc = self.build_osis_for_work(work, page_html)
-                xml_path = out_path / f"{work.osis_id}.xml"
+                xml_path = out_path / f"{output_stem}.xml"
                 xml_path.write_text(osis_doc.to_xml(), encoding="utf-8")
                 LOGGER.info("Wrote %s", xml_path)
             except Exception as exc:
-                LOGGER.error(
-                    "Error generating %s: %s", work.osis_id, exc, exc_info=True
-                )
+                LOGGER.error("Error generating %s: %s", output_stem, exc, exc_info=True)
 
         # Testaments
         t_pages = TESTAMENTS_INTRO_PAGES + [
