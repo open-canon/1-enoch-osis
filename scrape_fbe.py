@@ -142,7 +142,10 @@ TESTAMENTS: Final[list[TestamentDef]] = [
         "T12Patr.TSim", "The Testament of Simeon", "Test. Simeon", [269, 270, 271]
     ),
     TestamentDef(
-        "T12Patr.TLevi", "The Testament of Levi", "Test. Levi", [272, 273, 274, 275, 276]
+        "T12Patr.TLevi",
+        "The Testament of Levi",
+        "Test. Levi",
+        [272, 273, 274, 275, 276],
     ),
     TestamentDef(
         "T12Patr.TJud", "The Testament of Judah", "Test. Judah", [277, 278, 279, 280]
