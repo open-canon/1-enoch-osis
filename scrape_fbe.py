@@ -119,7 +119,7 @@ WORKS: Final[list[WorkDef]] = [
         chapter_pages=list(range(238, 249)),  # 11 chapters
     ),
     WorkDef(
-        osis_id="4-maccabees",
+        osis_id="4Macc",
         title="Fourth Book of Maccabees",
         short="4 Maccabees",
         intro_pages=[249],
