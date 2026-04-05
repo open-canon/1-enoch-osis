@@ -28,8 +28,8 @@ from __future__ import annotations
 import logging
 import re
 import time
-from collections.abc import Iterator
-from dataclasses import dataclass, field
+from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 from typing import Final
 
@@ -438,19 +438,25 @@ class FBEParser:
     def _strip_leading_whitespace(
         content: list[str | pyosis.HiCt | pyosis.MilestoneCt],
     ) -> list[str | pyosis.HiCt | pyosis.MilestoneCt]:
-        """Strip leading whitespace/newlines from the first text element."""
-        if content and isinstance(content[0], str):
-            content[0] = content[0].lstrip()
-        return content
+        """Return a copy of content with leading whitespace removed from the first text element."""
+        if not content:
+            return content
+        result = list(content)
+        if isinstance(result[0], str):
+            result[0] = result[0].lstrip()
+        return result
 
     @staticmethod
     def _strip_verse_number(
         content: list[str | pyosis.HiCt | pyosis.MilestoneCt],
     ) -> list[str | pyosis.HiCt | pyosis.MilestoneCt]:
-        """Remove a leading verse number ('N ' or 'N. ') from content list."""
-        if content and isinstance(content[0], str):
-            content[0] = re.sub(r"^\d+\.?\s+", "", content[0])
-        return content
+        """Return a copy of content with a leading verse number ('N ' or 'N. ') removed."""
+        if not content:
+            return content
+        result = list(content)
+        if isinstance(result[0], str):
+            result[0] = re.sub(r"^\d+\.?\s+", "", result[0])
+        return result
 
     def _build_verse(
         self,
@@ -1025,9 +1031,7 @@ class FBEParser:
         title: str,
         description: str,
     ) -> pyosis.HeaderCt:
-        from datetime import datetime
-
-        current_date = datetime.now().strftime("%Y.%m.%dT%H:%M:%S")
+        current_datetime = datetime.now().strftime("%Y.%m.%dT%H:%M:%S")
 
         return pyosis.HeaderCt(
             canonical=False,
@@ -1037,7 +1041,7 @@ class FBEParser:
                         event=pyosis.OsisEvents.EVERSION,
                         type_value="ISO",
                         lang="en",
-                        content=[current_date],
+                        content=[current_datetime],
                     ),
                     p=[
                         pyosis.PCt(
