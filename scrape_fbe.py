@@ -440,7 +440,7 @@ class FBEParser:
     ) -> list[str | pyosis.HiCt | pyosis.MilestoneCt]:
         """Return a copy of content with leading whitespace removed from the first text element."""
         if not content:
-            return content
+            return []
         result = list(content)
         if isinstance(result[0], str):
             result[0] = result[0].lstrip()
@@ -452,7 +452,7 @@ class FBEParser:
     ) -> list[str | pyosis.HiCt | pyosis.MilestoneCt]:
         """Return a copy of content with a leading verse number ('N ' or 'N. ') removed."""
         if not content:
-            return content
+            return []
         result = list(content)
         if isinstance(result[0], str):
             result[0] = re.sub(r"^\d+\.?\s+", "", result[0])
