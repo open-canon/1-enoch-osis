@@ -137,31 +137,31 @@ WORKS: Final[list[WorkDef]] = [
 TESTAMENTS_INTRO_PAGES: Final[list[int]] = [266]
 
 TESTAMENTS: Final[list[TestamentDef]] = [
-    TestamentDef("test-reuben", "The Testament of Reuben", "Test. Reuben", [267, 268]),
+    TestamentDef("T12Patr.TReu", "The Testament of Reuben", "Test. Reuben", [267, 268]),
     TestamentDef(
-        "test-simeon", "The Testament of Simeon", "Test. Simeon", [269, 270, 271]
+        "T12Patr.TSim", "The Testament of Simeon", "Test. Simeon", [269, 270, 271]
     ),
     TestamentDef(
-        "test-levi", "The Testament of Levi", "Test. Levi", [272, 273, 274, 275, 276]
+        "T12Patr.TLevi", "The Testament of Levi", "Test. Levi", [272, 273, 274, 275, 276]
     ),
     TestamentDef(
-        "test-judah", "The Testament of Judah", "Test. Judah", [277, 278, 279, 280]
+        "T12Patr.TJud", "The Testament of Judah", "Test. Judah", [277, 278, 279, 280]
     ),
     TestamentDef(
-        "test-issachar", "The Testament of Issachar", "Test. Issachar", [281, 282]
+        "T12Patr.TIss", "The Testament of Issachar", "Test. Issachar", [281, 282]
     ),
     TestamentDef(
-        "test-zebulun", "The Testament of Zebulun", "Test. Zebulun", [283, 284]
+        "T12Patr.TZeb", "The Testament of Zebulun", "Test. Zebulun", [283, 284]
     ),
-    TestamentDef("test-dan", "The Testament of Dan", "Test. Dan", [285, 286]),
+    TestamentDef("T12Patr.TDan", "The Testament of Dan", "Test. Dan", [285, 286]),
     TestamentDef(
-        "test-naphtali", "The Testament of Naphtali", "Test. Naphtali", [287, 288]
+        "T12Patr.TNaph", "The Testament of Naphtali", "Test. Naphtali", [287, 288]
     ),
-    TestamentDef("test-gad", "The Testament of Gad", "Test. Gad", [289, 290]),
-    TestamentDef("test-asher", "The Testament of Asher", "Test. Asher", [291]),
-    TestamentDef("test-joseph", "The Testament of Joseph", "Test. Joseph", [292, 293]),
+    TestamentDef("T12Patr.TGad", "The Testament of Gad", "Test. Gad", [289, 290]),
+    TestamentDef("T12Patr.TAsh", "The Testament of Asher", "Test. Asher", [291]),
+    TestamentDef("T12Patr.TJos", "The Testament of Joseph", "Test. Joseph", [292, 293]),
     TestamentDef(
-        "test-benjamin", "The Testament of Benjamin", "Test. Benjamin", [294, 295]
+        "T12Patr.TBenj", "The Testament of Benjamin", "Test. Benjamin", [294, 295]
     ),
 ]
 
@@ -1140,7 +1140,7 @@ class FBEParser:
 
         return pyosis.DivCt(
             type_value=pyosis.OsisDivs.BOOK,
-            osis_id=["testaments-twelve-patriarchs"],
+            osis_id=["T12Patr"],
             canonical=True,
             content=parent_content,
         )
@@ -1244,7 +1244,7 @@ class FBEParser:
         page_html: dict[int, str],
     ) -> pyosis.OsisXML:
         """Generate a complete OSIS document for the Testaments of the Twelve Patriarchs."""
-        osis_id = "testaments-twelve-patriarchs"
+        osis_id = "T12Patr"
         header = self._build_header(
             osis_work_id=osis_id,
             title="The Testaments of the Twelve Patriarchs",
