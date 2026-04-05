@@ -527,7 +527,11 @@ class SacredTextsParser:
             type_value=pyosis.OsisDivs.BOOK,
             osis_id=["1-enoch"],
             canonical=True,
-            content=[pyosis.HeadCt(content=["The Book of Enoch"])]
+            content=[pyosis.TitleCt(
+                type_value=pyosis.OsisTitles.MAIN,
+                short="1 Enoch",
+                content=["The Book of Enoch"]
+            )]
         )
 
     def add_front_matter(self, title: str, content_paragraphs: list[Tag]) -> None:
