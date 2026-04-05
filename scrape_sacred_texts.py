@@ -31,6 +31,19 @@ LOGGER = logging.getLogger(__name__)
 BASE_URL: Final[str] = "https://sacred-texts.com/bib/boe/"
 # Files range from boe000.htm (title page) to boe112.htm (appendix)
 FILE_RANGE: Final[tuple[int, int]] = (0, 112)
+OSIS_BOOK_ID: Final[str] = "1En"
+BOOK_TITLE: Final[str] = "The Book of Enoch"
+BOOK_SHORT_TITLE: Final[str] = "1 Enoch"
+FRONT_MATTER_TITLES: Final[dict[int, str]] = {
+    0: "Title Page",
+    1: "Editors' Preface",
+    2: "Introduction",
+    3: "Abbreviations, Brackets and Symbols",
+}
+FRONT_MATTER_BOILERPLATE: Final[set[str]] = {
+    "The Book of Enoch, by R.H. Charles, [1917], at sacred-texts.com",
+    "Scanned at sacred-texts.com, June 2004. Proofed and formatted by John Bruno Hare. This text is in the public domain in the United States because it was published prior to 1923.",
+}
 
 
 def fetch_free_proxies(limit: int = 50) -> list[dict[str, str]]:
@@ -563,24 +576,106 @@ class SacredTextsParser:
         """Initialize the OSIS book structure."""
         self.root_div = pyosis.DivCt(
             type_value=pyosis.OsisDivs.BOOK,
-            osis_id=["1-enoch"],
+            osis_id=[OSIS_BOOK_ID],
             canonical=True,
             content=[
                 pyosis.TitleCt(
                     type_value=pyosis.OsisTitles.MAIN,
-                    short="1 Enoch",
-                    content=["The Book of Enoch"],
+                    short=BOOK_SHORT_TITLE,
+                    content=[BOOK_TITLE],
                 )
             ],
         )
 
-    def add_front_matter(self, title: str, content_paragraphs: list[Tag]) -> None:
+    @staticmethod
+    def normalize_whitespace(text: str) -> str:
+        """Collapse internal whitespace so scraped headings compare consistently."""
+        return re.sub(r"\s+", " ", text).strip()
+
+    @staticmethod
+    def is_navigation_text(text: str) -> bool:
+        """Return True if text is site navigation or other sacred-texts chrome."""
+        nav_phrases = [
+            "Next:",
+            "Previous:",
+            "Sacred Texts",
+            "Buy this Book",
+            "Index",
+            "«",
+            "»",
+            "sacred-texts.com",
+        ]
+        return any(phrase in text for phrase in nav_phrases)
+
+    def should_skip_front_matter_paragraph(self, p_tag: Tag) -> bool:
+        """Return True if a front-matter paragraph is site chrome or metadata."""
+        if p_tag.find_parent(["nav", "header", "footer"]):
+            return True
+
+        if p_tag.find("a", attrs={"name": lambda x: x and x.startswith("fn_")}):
+            return True
+
+        text = self.normalize_whitespace(p_tag.get_text(" ", strip=True))
+        if not text:
+            return True
+
+        if text in FRONT_MATTER_BOILERPLATE:
+            return True
+
+        return self.is_navigation_text(text)
+
+    def extract_front_matter_lead_lines(
+        self, soup: BeautifulSoup, title: str
+    ) -> list[str]:
+        """Extract heading lines that belong to the front-matter page itself.
+
+        This preserves the title-page block on boe000 and leading subheadings like
+        the introduction's opening section, while avoiding duplicated section titles.
+        """
+        root = soup.body if soup.body else soup
+        lead_lines = []
+        seen = {title.casefold()}
+
+        for element in root.find_all(["h1", "h2", "h3", "h4", "h5", "h6", "p"]):
+            if element.name == "p":
+                if self.should_skip_front_matter_paragraph(element):
+                    continue
+                break
+
+            line = self.normalize_whitespace(element.get_text(" ", strip=True))
+            if not line or line in FRONT_MATTER_BOILERPLATE:
+                continue
+            if self.is_navigation_text(line):
+                continue
+            if line.casefold() in seen:
+                continue
+
+            seen.add(line.casefold())
+            lead_lines.append(line)
+
+        return lead_lines
+
+    def add_front_matter(
+        self,
+        title: str,
+        content_paragraphs: list[Tag],
+        lead_lines: list[str] | None = None,
+    ) -> None:
         """Add front matter sections like preface, introduction, etc."""
         if not self.root_div:
             self.start_book()
 
-        # Parse each paragraph to preserve formatting
-        p_elements = []
+        front_content: list[pyosis.TitleCt | pyosis.PCt | pyosis.MilestoneCt] = [
+            pyosis.TitleCt(
+                type_value=pyosis.OsisTitles.MAIN,
+                canonical=False,
+                content=[title],
+            )
+        ]
+
+        for line in lead_lines or []:
+            front_content.append(pyosis.PCt(content=[line]))
+
         for p_tag in content_paragraphs:
             parsed_content = self.parse_inline_annotations(p_tag)
             if parsed_content:
@@ -588,15 +683,15 @@ class SacredTextsParser:
                 if len(parsed_content) == 1 and isinstance(
                     parsed_content[0], pyosis.MilestoneCt
                 ):
-                    p_elements.append(parsed_content[0])
+                    front_content.append(parsed_content[0])
                 else:
                     # Regular paragraph with text/formatting
-                    p_elements.append(pyosis.PCt(content=parsed_content))
+                    front_content.append(pyosis.PCt(content=parsed_content))
 
         front_matter_div = pyosis.DivCt(
             type_value=pyosis.OsisDivs.FRONT,
             canonical=False,
-            content=[pyosis.HeadCt(content=[title]), *p_elements],
+            content=front_content,
         )
         self.root_div.content.append(front_matter_div)
 
@@ -607,7 +702,7 @@ class SacredTextsParser:
             pass
 
         self.current_chapter = chapter_num
-        chapter_osis_id = f"1-enoch.{chapter_num}"
+        chapter_osis_id = f"{OSIS_BOOK_ID}.{chapter_num}"
 
         chapter_content = []
         if title:
@@ -631,7 +726,7 @@ class SacredTextsParser:
             LOGGER.warning(f"No chapter started for verse {verse_num}")
             return
 
-        verse_osis_id = f"1-enoch.{self.current_chapter}.{verse_num}"
+        verse_osis_id = f"{OSIS_BOOK_ID}.{self.current_chapter}.{verse_num}"
 
         if content.has_poetry and content.poetry_lines:
             # Create line group for poetry
@@ -727,44 +822,18 @@ class SacredTextsParser:
 
         # Handle front matter pages (0-3)
         if page_num in [0, 1, 2, 3]:
-            # Extract main title from h1 or h2
-            title_tag = soup.find("h1") or soup.find("h2")
-            if title_tag:
-                title = title_tag.get_text().strip()
-            else:
-                title = [
-                    "Title Page",
-                    "Editors' Preface",
-                    "Introduction",
-                    "Abbreviations, Brackets and Symbols",
-                ][page_num]
+            title = FRONT_MATTER_TITLES[page_num]
+            lead_lines = self.extract_front_matter_lead_lines(soup, title)
 
             # Extract all paragraphs that are actual content
             content_paragraphs = []
             for p in soup.find_all("p"):
-                if p.find_parent(["nav", "header", "footer"]):
-                    continue
-
-                # Skip footnote paragraphs (they have <a name="fn_X">)
-                if p.find("a", attrs={"name": lambda x: x and x.startswith("fn_")}):
-                    continue
-
-                text = p.get_text().strip()
-                # Skip navigation and empty paragraphs
-                if (
-                    not text
-                    or "Next:" in text
-                    or "Previous:" in text
-                    or "Sacred Texts" in text
-                    or "Index" in text
-                    or "«" in text
-                    or "»" in text
-                ):
+                if self.should_skip_front_matter_paragraph(p):
                     continue
                 content_paragraphs.append(p)  # Pass the Tag object, not plain text
 
-            if content_paragraphs:
-                self.add_front_matter(title, content_paragraphs)
+            if lead_lines or content_paragraphs:
+                self.add_front_matter(title, content_paragraphs, lead_lines)
                 LOGGER.debug(f"Added front matter: {title}")
             return
 
@@ -874,10 +943,10 @@ class SacredTextsParser:
             ],
             work=[
                 pyosis.WorkCt(
-                    osis_work="1-enoch",
+                    osis_work=OSIS_BOOK_ID,
                     lang="en",
                     title=[
-                        pyosis.TitleCt(canonical=True, content=["The Book of Enoch"]),
+                        pyosis.TitleCt(canonical=True, content=[BOOK_TITLE]),
                     ],
                     description=[
                         pyosis.DescriptionCt(
@@ -903,8 +972,8 @@ class SacredTextsParser:
 
         osis_text = pyosis.OsisTextCt(
             lang="en",
-            osis_idwork="1-enoch",
-            osis_ref_work="1 Enoch",
+            osis_idwork=OSIS_BOOK_ID,
+            osis_ref_work=BOOK_SHORT_TITLE,
             canonical=True,
             header=header,
             div=divs,

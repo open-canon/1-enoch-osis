@@ -123,6 +123,7 @@ The generated OSIS XML includes:
   - Multiple revisionDesc entries (2026 scrape, 1913 original edition)
   - Work metadata (title, description, creator, publisher)
 - **Front matter divisions**: Title Page, Editors' Preface, Introduction, Abbreviations
+- **Normalized front matter titles** using OSIS `<title>` elements, with sacred-texts site boilerplate removed from the body text
 - **Book structure** with proper osisID (`1En`)
 - **Chapter divisions** (`1En.1`, `1En.2`, etc.) for chapters I-CVIII
 - **Verse markers** with canonical IDs (`1En.1.1`, `1En.1.2`, etc.)
