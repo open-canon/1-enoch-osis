@@ -91,7 +91,7 @@ WORKS: Final[list[WorkDef]] = [
         chapter_pages=list(range(85, 107)),  # 22 chapters
     ),
     WorkDef(
-        osis_id="2-enoch",
+        osis_id="2 En",
         title="The Book of the Secrets of Enoch",
         short="2 Enoch",
         intro_pages=[107],
