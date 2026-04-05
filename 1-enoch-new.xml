@@ -19,7 +19,7 @@
       </work>
     </header>
     <div canonical="true" type="book" osisID="1-enoch" TEIform="div">
-      <headCT TEIform="head">The Book of Enoch</headCT>
+      <title type="main" short="1 Enoch" TEIform="title">The Book of Enoch</title>
       <div canonical="true" type="chapter" osisID="1-enoch.1" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER I.</title>
         <verse canonical="true" osisID="1-enoch.1.1">The words of the blessing of Enoch, wherewith he blessed the elect ⌈⌈and⌉⌉ righteous, who will be living in the day of tribulation, when all the wicked ⌈⌈and godless⌉⌉ are to be removed. 2. And he took up his parable and said--Enoch a righteous man, whose eyes were opened by God, saw the vision of the Holy One in the heavens, ⌈which⌉ the angels showed me, and from them I heard everything, and from them I understood as I saw, but not for this generation, but for a remote one which is for to come. 3. Concerning the elect I said, and took up my parable concerning them:</verse>
