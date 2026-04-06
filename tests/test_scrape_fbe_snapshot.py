@@ -13,7 +13,8 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 SRC_ROOT = REPO_ROOT / "src"
 DOCUMENTS_DIR = REPO_ROOT / "documents"
 PACKAGE_SCRAPE_FBE_MODULE = "1_enoch_osis.scrape_fbe"
-SOURCE_CACHE_DIR = REPO_ROOT / ".cache" / "fbe-html"
+SOURCE_CACHE_DIR = REPO_ROOT / ".cache" / "html"
+SOURCE_CACHE_TREE = SOURCE_CACHE_DIR / "sacred-texts.com" / "bib" / "fbe"
 SNAPSHOT_FILES = (
     "adam-and-eve.xml",
     "2-enoch.xml",
@@ -47,8 +48,8 @@ def load_scrape_fbe_main() -> Any:
 
 @pytest.fixture(scope="session")
 def generated_fbe_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
-    if not SOURCE_CACHE_DIR.exists():
-        pytest.skip(f"Missing local FBE HTML cache at {SOURCE_CACHE_DIR}")
+    if not SOURCE_CACHE_TREE.exists():
+        pytest.fail(f"Missing local FBE HTML cache tree at {SOURCE_CACHE_TREE}")
 
     output_dir = tmp_path_factory.mktemp("scrape-fbe-output")
     scrape_fbe_main = load_scrape_fbe_main()

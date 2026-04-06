@@ -1399,7 +1399,7 @@ def main(
     start_page: int = FILE_RANGE[0],
     end_page: int = FILE_RANGE[1],
     delay: float = 1.5,
-    cache_dir: str = ".cache/fbe-html",
+    cache_dir: str = ".cache/html",
     log_level: str = "INFO",
 ) -> None:
     """Download and convert The Forgotten Books of Eden to OSIS XML.
@@ -1409,7 +1409,7 @@ def main(
         start_page: First page number to fetch (default: 0)
         end_page: Last page number to fetch (default: 295)
         delay: Delay in seconds between HTTP requests (default: 1.5)
-        cache_dir: Directory for caching downloaded HTML ('' to disable)
+        cache_dir: Directory for caching downloaded HTML (default: .cache/html, '' to disable)
         log_level: Logging level: DEBUG, INFO, WARNING, ERROR
     """
     logging.basicConfig(

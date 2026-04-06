@@ -24,9 +24,9 @@ The test is intentionally narrow:
 
 - It treats the committed OSIS XML files as the snapshots.
 - It normalizes the generated scrape timestamp before comparison.
-- It uses the local `.cache/fbe-html/` and `.cache/html/` directories as scraper input sources so the tests can run offline.
+- It uses the local `.cache/html/` directory as the shared scraper input source so the tests can run offline.
 
-The cache layout now mirrors the source URLs under each cache directory. For example, a page from `https://sacred-texts.com/bib/boe/boe012.htm` is cached at `.cache/html/sacred-texts.com/bib/boe/boe012.htm`.
+The cache layout mirrors the source URLs under the shared cache directory. For example, pages from `https://sacred-texts.com/bib/boe/boe012.htm` and `https://sacred-texts.com/bib/fbe/fbe014.htm` are cached at `.cache/html/sacred-texts.com/bib/boe/boe012.htm` and `.cache/html/sacred-texts.com/bib/fbe/fbe014.htm`.
 
 Run it with:
 
@@ -34,7 +34,7 @@ Run it with:
 pytest tests
 ```
 
-If `.cache/fbe-html/` or `.cache/html/` is missing, the relevant test will skip. In that case, populate the cache by running the corresponding scraper once before relying on the snapshot tests. Generated XML documents now live under `documents/` by default.
+If the relevant source subtree under `.cache/html/` is missing, the matching test will skip. In that case, populate the cache by running the corresponding scraper once before relying on the snapshot tests. Generated XML documents now live under `documents/` by default.
 
 ## Scraping from sacred-texts.com
 
