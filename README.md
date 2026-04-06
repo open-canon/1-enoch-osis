@@ -8,8 +8,8 @@ This repository contains OSIS XML documents for 1 Enoch and related works from T
 
 ## Files
 
-- `1-enoch.xml` - OSIS document scraped from sacred-texts.com using the `1_enoch_osis.scrape_sacred_texts` module, with formatting preserved but without inline annotations
-- `adam-and-eve.xml` - Combined OSIS document containing the First and Second Books of Adam and Eve as separate OSIS book divs
+- `documents/1-enoch.xml` - OSIS document scraped from sacred-texts.com using the `1_enoch_osis.scrape_sacred_texts` module, with formatting preserved but without inline annotations
+- `documents/adam-and-eve.xml` - Combined OSIS document containing the First and Second Books of Adam and Eve as separate OSIS book divs
 - `src/1_enoch_osis/scrape_fbe.py` - Forgotten Books of Eden scraper that combines the Adam and Eve books into one document, uses canonical OSIS IDs such as `2En`, normalizes simple intro pages to an `Introduction` title plus source-heading subtitle, and preserves more complex source title blocks where needed
 - `src/1_enoch_osis/scrape_sacred_texts.py` - Python module to download and parse from sacred-texts.com
 - `pdf.py` - Previous pyosis compiler example (for reference)
@@ -18,7 +18,7 @@ This repository contains OSIS XML documents for 1 Enoch and related works from T
 
 ## Regression Testing
 
-The repository includes snapshot tests for `1_enoch_osis.scrape_fbe` and `1_enoch_osis.scrape_sacred_texts`. They regenerate the OSIS XML documents and compare them against the committed XML files in the repository root.
+The repository includes snapshot tests for `1_enoch_osis.scrape_fbe` and `1_enoch_osis.scrape_sacred_texts`. They regenerate the OSIS XML documents and compare them against the committed XML files in `documents/`.
 
 The test is intentionally narrow:
 
@@ -34,7 +34,7 @@ Run it with:
 pytest tests
 ```
 
-If `.cache/fbe-html/` or `.cache/html/` is missing, the relevant test will skip. In that case, populate the cache by running the corresponding scraper once before relying on the snapshot tests.
+If `.cache/fbe-html/` or `.cache/html/` is missing, the relevant test will skip. In that case, populate the cache by running the corresponding scraper once before relying on the snapshot tests. Generated XML documents now live under `documents/` by default.
 
 ## Scraping from sacred-texts.com
 
@@ -63,7 +63,7 @@ uv run python -m 1_enoch_osis.scrape_sacred_texts
 uv run python -m 1_enoch_osis.scrape_sacred_texts \
   --start_page=0 \
   --end_page=112 \
-  --output=1-enoch-new.xml \
+  --output=documents/1-enoch-new.xml \
   --delay=1.5 \
   --cache_dir=.cache/html \
   --log_level=INFO
@@ -75,7 +75,7 @@ uv run python -m 1_enoch_osis.scrape_sacred_texts \
 
 ### Parameters
 
-- `--output`: Output XML filename (default: `1-enoch-new.xml`)
+- `--output`: Output XML filename (default: `documents/1-enoch.xml`)
 - `--start_page`: First page to process (default: 0 for Title Page, use 4 to skip front matter)
 - `--end_page`: Last page to process (default: 112 for final appendix)
 - `--delay`: Delay between requests in seconds (default: 1.5)

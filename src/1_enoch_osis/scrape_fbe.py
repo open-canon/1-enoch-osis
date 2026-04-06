@@ -53,6 +53,7 @@ LOGGER = logging.getLogger(__name__)
 BASE_URL: Final[str] = "https://sacred-texts.com/bib/fbe/"
 FILE_PREFIX: Final[str] = "fbe"
 FILE_RANGE: Final[tuple[int, int]] = (0, 295)
+DEFAULT_OUTPUT_DIR: Final[str] = "documents"
 
 
 # ---------------------------------------------------------------------------
@@ -1394,7 +1395,7 @@ class FBEParser:
 
 
 def main(
-    output_dir: str = ".",
+    output_dir: str = DEFAULT_OUTPUT_DIR,
     start_page: int = FILE_RANGE[0],
     end_page: int = FILE_RANGE[1],
     delay: float = 1.5,
@@ -1404,7 +1405,7 @@ def main(
     """Download and convert The Forgotten Books of Eden to OSIS XML.
 
     Args:
-        output_dir: Directory to write output XML files (default: current directory)
+        output_dir: Directory to write output XML files (default: documents)
         start_page: First page number to fetch (default: 0)
         end_page: Last page number to fetch (default: 295)
         delay: Delay in seconds between HTTP requests (default: 1.5)

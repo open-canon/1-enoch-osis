@@ -11,6 +11,7 @@ import pytest
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SRC_ROOT = REPO_ROOT / "src"
+DOCUMENTS_DIR = REPO_ROOT / "documents"
 PACKAGE_SACRED_TEXTS_MODULE = "1_enoch_osis.scrape_sacred_texts"
 SOURCE_CACHE_DIR = REPO_ROOT / ".cache" / "html"
 SNAPSHOT_FILE = "1-enoch.xml"
@@ -56,7 +57,7 @@ def generated_1_enoch_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
 
 
 def test_scrape_sacred_texts_matches_snapshot(generated_1_enoch_output: Path) -> None:
-    expected_path = REPO_ROOT / SNAPSHOT_FILE
+    expected_path = DOCUMENTS_DIR / SNAPSHOT_FILE
 
     assert generated_1_enoch_output.exists(), "Missing generated 1 Enoch snapshot"
     assert expected_path.exists(), f"Missing committed snapshot: {SNAPSHOT_FILE}"

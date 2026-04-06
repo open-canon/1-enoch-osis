@@ -43,6 +43,7 @@ LOGGER = logging.getLogger(__name__)
 BASE_URL: Final[str] = "https://sacred-texts.com/bib/boe/"
 # Files range from boe000.htm (title page) to boe112.htm (appendix)
 FILE_RANGE: Final[tuple[int, int]] = (0, 112)
+DEFAULT_OUTPUT: Final[str] = str(Path("documents") / "1-enoch.xml")
 OSIS_BOOK_ID: Final[str] = "1En"
 BOOK_TITLE: Final[str] = "The Book of Enoch"
 BOOK_SHORT_TITLE: Final[str] = "1 Enoch"
@@ -762,7 +763,7 @@ class SacredTextsParser:
 
 
 def main(
-    output: str = "1-enoch.xml",
+    output: str = DEFAULT_OUTPUT,
     start_page: int = 0,  # Start at 0 to include title page and front matter
     end_page: int = 112,
     delay: float = 1.5,  # Delay between requests in seconds
@@ -772,7 +773,7 @@ def main(
     """Download and convert Book of Enoch to OSIS XML.
 
     Args:
-        output: Output XML filename
+        output: Output XML filename (default: documents/1-enoch.xml)
         start_page: First page to process (default 0 for title page, use 4 for Chapter I)
         end_page: Last page to process (default 112)
         delay: Delay between requests in seconds (default 1.5 to avoid rate limiting)
@@ -793,9 +794,11 @@ def main(
         LOGGER.info("Generating OSIS XML")
         osis_doc = parser.generate_osis()
 
+        output_path = Path(output)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
         LOGGER.info(f"Writing to {output}")
-        with open(output, "w", encoding="utf-8") as f:
-            f.write(osis_doc.to_xml())
+        output_path.write_text(osis_doc.to_xml(), encoding="utf-8")
 
         LOGGER.info("Done!")
     finally:

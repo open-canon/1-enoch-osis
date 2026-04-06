@@ -11,6 +11,7 @@ import pytest
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SRC_ROOT = REPO_ROOT / "src"
+DOCUMENTS_DIR = REPO_ROOT / "documents"
 PACKAGE_SCRAPE_FBE_MODULE = "1_enoch_osis.scrape_fbe"
 SOURCE_CACHE_DIR = REPO_ROOT / ".cache" / "fbe-html"
 SNAPSHOT_FILES = (
@@ -67,7 +68,7 @@ def test_scrape_fbe_matches_snapshots(
     snapshot_name: str,
 ) -> None:
     actual_path = generated_fbe_output / snapshot_name
-    expected_path = REPO_ROOT / snapshot_name
+    expected_path = DOCUMENTS_DIR / snapshot_name
 
     assert actual_path.exists(), f"Missing generated snapshot: {snapshot_name}"
     assert expected_path.exists(), f"Missing committed snapshot: {snapshot_name}"
