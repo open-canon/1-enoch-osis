@@ -44,6 +44,7 @@ class CachedHttpFetcher:
         self._client.close()
 
     def fetch_text(self, *, url: str, retry_count: int = 3) -> str:
+        time.sleep(self.delay)
         cache_path = self._cache_path(url)
         if cache_path and cache_path.exists():
             self.logger.debug("Loading %s from cache", cache_path)

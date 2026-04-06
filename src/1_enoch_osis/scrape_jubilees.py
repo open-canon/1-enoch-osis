@@ -1,9 +1,11 @@
 # /// script
 # requires-python = ">=3.13"
 # dependencies = [
+#     "beautifulsoup4",
 #     "fire",
 #     "httpx",
 #     "pyosis",
+#     "tqdm",
 # ]
 # ///
 """Download and parse Jubilees to OSIS XML."""
@@ -20,6 +22,8 @@ from typing import Final
 
 import fire
 import pyosis
+from bs4 import BeautifulSoup
+from tqdm import tqdm
 
 from .http_client import CachedHttpFetcher
 from .osis_parsing import normalize_whitespace, roman_to_int
@@ -27,7 +31,6 @@ from .osis_parsing import normalize_whitespace, roman_to_int
 LOGGER = logging.getLogger(__name__)
 
 BASE_URL: Final[str] = "https://sacred-texts.com/bib/jub/"
-MIRROR_PREFIX: Final[str] = "https://r.jina.ai/http://"
 PAGE_RANGE: Final[tuple[int, int]] = (0, 87)
 FRONT_MATTER_END_PAGE: Final[int] = 11
 CONTENT_START_PAGE: Final[int] = 12
@@ -117,37 +120,46 @@ class Chapter:
 
 
 class JubileesParser:
-    def __init__(self, cache_dir: str | None = None, delay: float = 1.0) -> None:
+    def __init__(self, cache_dir: str | None = None, delay: float = 3.0) -> None:
+        self.delay = delay
         self.http = CachedHttpFetcher(cache_dir=cache_dir, delay=delay, logger=LOGGER)
-        self.mirror_http = CachedHttpFetcher(
-            cache_dir=None,
-            delay=delay,
-            logger=LOGGER,
-        )
 
     def close(self) -> None:
         self.http.close()
-        self.mirror_http.close()
 
-    def fetch_page(self, page_number: int) -> str:
+    def fetch_page(
+        self,
+        page_number: int,
+        retry_count: int = 3,
+        delay: float | None = None,
+    ) -> str:
         url = self.page_url(page_number)
         cache_path = self.http.cache_path_for(url)
+
+        if delay is not None and delay != self.http.delay:
+            self.delay = delay
+            self.http.delay = delay
 
         if cache_path and cache_path.exists():
             cached = cache_path.read_text(encoding="utf-8")
             if self.is_valid_page(cached):
                 return cached
+
+            LOGGER.warning(
+                "Discarding invalid cached Jubilees source at %s", cache_path
+            )
             cache_path.unlink()
 
-        mirror_text = self.mirror_http.fetch_text(url=f"{MIRROR_PREFIX}{url}")
-        if not self.is_valid_page(mirror_text):
-            raise RuntimeError(f"Could not retrieve readable Jubilees source for {url}")
+        fetched = self.http.fetch_text(url=url, retry_count=retry_count)
+        if self.is_valid_page(fetched):
+            return fetched
 
-        if cache_path:
-            cache_path.parent.mkdir(parents=True, exist_ok=True)
-            cache_path.write_text(mirror_text, encoding="utf-8")
+        if cache_path and cache_path.exists():
+            cache_path.unlink()
 
-        return mirror_text
+        raise RuntimeError(
+            "Source page did not contain a usable Jubilees witness; direct access to sacred-texts.com may be blocked in this environment"
+        )
 
     @staticmethod
     def page_url(page_number: int) -> str:
@@ -155,7 +167,12 @@ class JubileesParser:
 
     @staticmethod
     def is_valid_page(text: str) -> bool:
-        return "Just a moment" not in text and "Book of Jubilees" in text
+        return (
+            "Book of Jubilees" in text
+            and "Just a moment" not in text
+            and "Markdown Content:" not in text
+            and "<html" in text.lower()
+        )
 
     @staticmethod
     def clean_line(line: str) -> str:
@@ -172,43 +189,37 @@ class JubileesParser:
         return normalize_whitespace(cleaned)
 
     def extract_page_components(self, raw_text: str) -> tuple[list[str], list[str]]:
-        body = raw_text.split("Markdown Content:", 1)[1] if "Markdown Content:" in raw_text else raw_text
+        if not self.is_valid_page(raw_text):
+            raise RuntimeError(
+                "Jubilees scraper expects original sacred-texts HTML, not mirror-derived markdown or interstitial pages"
+            )
+
+        soup = BeautifulSoup(raw_text, "html.parser")
+        body = soup.body if soup.body else soup
 
         headings: list[str] = []
         content_lines: list[str] = []
         in_footnotes = False
 
-        for raw_line in body.splitlines():
-            stripped = raw_line.strip()
+        for element in body.find_all(["h1", "h2", "h3", "h4", "h5", "h6", "p"]):
+            stripped = element.get_text(" ", strip=True)
             if not stripped:
-                continue
-
-            if "![Image" in stripped:
-                continue
-
-            if stripped == "* * *":
-                continue
-
-            if stripped.startswith("!["):
-                continue
-
-            if stripped.startswith("[Next:") or stripped.startswith("[« Previous:"):
-                continue
-
-            if stripped.startswith("[Sacred Texts") or stripped.startswith("[Bible"):
                 continue
 
             cleaned = self.clean_line(stripped)
             if not cleaned:
                 continue
 
-            if cleaned.startswith("![Image"):
-                continue
-
             if cleaned.endswith("Internet Sacred Text Archive"):
                 continue
 
             if cleaned in {"Contents", "Start Reading", "Index", "Previous", "Next"}:
+                continue
+
+            if cleaned.startswith("["):
+                continue
+
+            if "Sacred Texts" in cleaned and element.name == "p":
                 continue
 
             if cleaned == "Footnotes":
@@ -221,11 +232,8 @@ class JubileesParser:
             if cleaned.startswith("p. "):
                 continue
 
-            if stripped.startswith("#"):
+            if element.name.startswith("h"):
                 headings.append(cleaned)
-                continue
-
-            if cleaned.startswith("Sacred Texts"):
                 continue
 
             content_lines.append(cleaned)
@@ -256,7 +264,9 @@ class JubileesParser:
 
         return paragraphs
 
-    def parse_front_matter_page(self, page_number: int, raw_text: str) -> FrontMatterSection:
+    def parse_front_matter_page(
+        self, page_number: int, raw_text: str
+    ) -> FrontMatterSection:
         headings, content_lines = self.extract_page_components(raw_text)
         title = FRONT_MATTER_TITLES[page_number]
 
@@ -272,8 +282,14 @@ class JubileesParser:
                 duplicate_lines.add(normalized_part)
                 duplicate_lines.add(normalized_part.upper())
 
-        paragraphs = [line for line in self.build_paragraphs(body_lines) if line not in duplicate_lines]
-        return FrontMatterSection(page_number=page_number, title=title, paragraphs=paragraphs)
+        paragraphs = [
+            line
+            for line in self.build_paragraphs(body_lines)
+            if line not in duplicate_lines
+        ]
+        return FrontMatterSection(
+            page_number=page_number, title=title, paragraphs=paragraphs
+        )
 
     def extract_chapter_number(self, title: str, content_lines: list[str]) -> int:
         title_match = HEADING_CHAPTER_RE.search(title)
@@ -289,7 +305,9 @@ class JubileesParser:
             if chapter_match:
                 return roman_to_int(chapter_match.group("chapter"))
 
-        raise RuntimeError(f"Could not determine Jubilees chapter from section title: {title}")
+        raise RuntimeError(
+            f"Could not determine Jubilees chapter from section title: {title}"
+        )
 
     def parse_verses(
         self,
@@ -305,7 +323,8 @@ class JubileesParser:
             " ".join(
                 line
                 for line in lines
-                if line != "Herewith is completed the account of the division of the days."
+                if line
+                != "Herewith is completed the account of the division of the days."
             )
         )
 
@@ -320,13 +339,19 @@ class JubileesParser:
 
         verse_matches = list(INLINE_VERSE_RE.finditer(text))
         if not verse_matches:
-            raise RuntimeError(f"No verse markers parsed for Jubilees page {page_number}")
+            raise RuntimeError(
+                f"No verse markers parsed for Jubilees page {page_number}"
+            )
 
         verses: list[VerseBlock] = []
         for index, match in enumerate(verse_matches):
             verse_number = int(match.group("verse"))
             start = match.end()
-            end = verse_matches[index + 1].start() if index + 1 < len(verse_matches) else len(text)
+            end = (
+                verse_matches[index + 1].start()
+                if index + 1 < len(verse_matches)
+                else len(text)
+            )
             verse_text = normalize_whitespace(text[start:end])
             verses.append(VerseBlock(verse_numbers=[verse_number], text=verse_text))
 
@@ -338,7 +363,9 @@ class JubileesParser:
     def parse_section_page(self, page_number: int, raw_text: str) -> Section:
         headings, content_lines = self.extract_page_components(raw_text)
         if not headings:
-            raise RuntimeError(f"Missing section heading for Jubilees page {page_number}")
+            raise RuntimeError(
+                f"Missing section heading for Jubilees page {page_number}"
+            )
 
         title = headings[0]
         chapter_number = self.extract_chapter_number(title, content_lines)
@@ -507,11 +534,19 @@ class JubileesParser:
     def process(self) -> pyosis.OsisXML:
         front_matter = [
             self.parse_front_matter_page(page_number, self.fetch_page(page_number))
-            for page_number in range(PAGE_RANGE[0], FRONT_MATTER_END_PAGE + 1)
+            for page_number in tqdm(
+                range(PAGE_RANGE[0], FRONT_MATTER_END_PAGE + 1),
+                desc="Front matter",
+                unit="page",
+            )
         ]
 
         chapters_by_number: dict[int, Chapter] = {}
-        for page_number in range(CONTENT_START_PAGE, PAGE_RANGE[1] + 1):
+        for page_number in tqdm(
+            range(CONTENT_START_PAGE, PAGE_RANGE[1] + 1),
+            desc="Chapters",
+            unit="page",
+        ):
             section = self.parse_section_page(page_number, self.fetch_page(page_number))
             chapter = chapters_by_number.setdefault(
                 section.chapter_number,

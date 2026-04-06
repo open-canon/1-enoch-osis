@@ -92,8 +92,6 @@ uv run python -m 1_enoch_osis.scrape_jubilees \
 
 The sacred-texts edition splits the main body across many section pages instead of one page per chapter. The scraper keeps canonical OSIS chapter divs, then nests each source page as an OSIS section div inside the relevant chapter.
 
-Headless requests to sacred-texts are blocked intermittently in this environment. To keep the scraper repeatable, the implementation hydrates the local sacred-texts cache from a readable mirror when necessary and then parses those cached page representations on subsequent runs.
-
 ### Features
 
 - Downloads and parses HTML pages from sacred-texts.com

@@ -14,7 +14,9 @@ SRC_ROOT = REPO_ROOT / "src"
 DOCUMENTS_DIR = REPO_ROOT / "documents"
 PACKAGE_JUBILEES_MODULE = "1_enoch_osis.scrape_jubilees"
 SOURCE_CACHE_DIR = REPO_ROOT / ".cache" / "html"
-JUBILEES_CACHE_FILE = SOURCE_CACHE_DIR / "sacred-texts.com" / "bib" / "jub" / "jub00.htm"
+JUBILEES_CACHE_FILE = (
+    SOURCE_CACHE_DIR / "sacred-texts.com" / "bib" / "jub" / "jub00.htm"
+)
 SNAPSHOT_FILE = "jubilees.xml"
 EVERSION_DATE_PATTERN = re.compile(
     r'(<date event="eversion" type="ISO" xml:lang="en" TEIform="date">)'
@@ -39,8 +41,36 @@ def load_scrape_jubilees_main() -> Any:
 
 @pytest.fixture(scope="session")
 def generated_jubilees_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
-    if not JUBILEES_CACHE_FILE.exists():
-        pytest.skip(f"Missing local Jubilees cache at {JUBILEES_CACHE_FILE}")
+    module = importlib.import_module(PACKAGE_JUBILEES_MODULE)
+    missing_cache_files = []
+    invalid_cache_files = []
+    for page_number in range(module.PAGE_RANGE[0], module.PAGE_RANGE[1] + 1):
+        cache_file = (
+            SOURCE_CACHE_DIR
+            / "sacred-texts.com"
+            / "bib"
+            / "jub"
+            / f"jub{page_number:02d}.htm"
+        )
+        if not cache_file.exists():
+            missing_cache_files.append(cache_file)
+            continue
+
+        cached_source = cache_file.read_text(encoding="utf-8")
+        if not module.JubileesParser.is_valid_page(cached_source):
+            invalid_cache_files.append(cache_file)
+
+    if missing_cache_files:
+        pytest.skip(
+            "Missing complete local Jubilees cache; first missing file: "
+            f"{missing_cache_files[0]}"
+        )
+
+    if invalid_cache_files:
+        pytest.skip(
+            "Missing valid original-site Jubilees cache; first invalid file: "
+            f"{invalid_cache_files[0]}"
+        )
 
     output_dir = tmp_path_factory.mktemp("scrape-jubilees-output")
     output_path = output_dir / SNAPSHOT_FILE
