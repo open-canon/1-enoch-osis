@@ -49,8 +49,6 @@ def generated_1_enoch_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
         start_page=0,
         end_page=112,
         delay=0,
-        use_proxies=False,
-        fetch_dynamic_proxies=False,
         cache_dir=str(SOURCE_CACHE_DIR),
         log_level="WARNING",
     )

@@ -10,8 +10,8 @@ requires-python = ">=3.13"
 dependencies = [
     "beautifulsoup4>=4.14.3",
     "fire",
+    "httpx>=0.28.1",
     "pyosis>=0.2.1",
-    "requests>=2.33.1",
     "tqdm>=4.67.3",
 ]
 

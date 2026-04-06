@@ -26,6 +26,8 @@ The test is intentionally narrow:
 - It normalizes the generated scrape timestamp before comparison.
 - It uses the local `.cache/fbe-html/` and `.cache/html/` directories as scraper input sources so the tests can run offline.
 
+The cache layout now mirrors the source URLs under each cache directory. For example, a page from `https://sacred-texts.com/bib/boe/boe012.htm` is cached at `.cache/html/sacred-texts.com/bib/boe/boe012.htm`.
+
 Run it with:
 
 ```bash
@@ -36,14 +38,12 @@ If `.cache/fbe-html/` or `.cache/html/` is missing, the relevant test will skip.
 
 ## Scraping from sacred-texts.com
 
-The `1_enoch_osis.scrape_sacred_texts` module downloads each chapter page from https://sacred-texts.com/bib/boe/ and converts it to OSIS XML format using pyosis.
+The `1_enoch_osis.scrape_sacred_texts` module downloads each chapter page from <https://sacred-texts.com/bib/boe/> and converts it to OSIS XML format using pyosis.
 
 ### Features
 
 - Downloads and parses HTML pages from sacred-texts.com
-- **HTML caching** - saves downloaded pages to avoid re-downloading on subsequent runs
-- **Dynamic proxy fetching** - automatically fetches fresh free proxies from proxy list services
-- **Rotating proxy pool** to avoid rate limiting (can be disabled)
+- **HTML caching** - saves downloaded pages to avoid re-downloading on subsequent runs, using a cache path derived from the source URL
 - Includes front matter (Title Page, Editors' Preface, Introduction, Abbreviations)
 - **Formatting preservation** - preserves italics, bold, superscripts, subscripts from original HTML
 - Preserves inline annotations marked with ⌈⌉ brackets (editorial additions/textual variants)
@@ -56,24 +56,17 @@ The `1_enoch_osis.scrape_sacred_texts` module downloads each chapter page from h
 ### Usage
 
 ```bash
-# Basic usage (without proxies by default, fastest when cached)
+# Basic usage (fastest when cached)
 uv run python -m 1_enoch_osis.scrape_sacred_texts
 
-# Custom options with proxies enabled
+# Custom options
 uv run python -m 1_enoch_osis.scrape_sacred_texts \
   --start_page=0 \
   --end_page=112 \
   --output=1-enoch-new.xml \
   --delay=1.5 \
-  --use_proxies=True \
-  --fetch_dynamic_proxies=True \
   --cache_dir=.cache/html \
   --log_level=INFO
-
-# Use dynamic proxy fetching for fresh proxies
-uv run python -m 1_enoch_osis.scrape_sacred_texts \
-  --use_proxies=True \
-  --fetch_dynamic_proxies=True
 
 # Skip front matter and start at Chapter I
 uv run python -m 1_enoch_osis.scrape_sacred_texts \
@@ -86,43 +79,33 @@ uv run python -m 1_enoch_osis.scrape_sacred_texts \
 - `--start_page`: First page to process (default: 0 for Title Page, use 4 to skip front matter)
 - `--end_page`: Last page to process (default: 112 for final appendix)
 - `--delay`: Delay between requests in seconds (default: 1.5)
-- `--use_proxies`: Use rotating proxy pool to avoid rate limiting (default: False)
-- `--fetch_dynamic_proxies`: Fetch fresh proxies from proxy services (default: False)
 - `--cache_dir`: Directory to cache downloaded HTML files (default: `.cache/html`, use empty string `""` to disable caching)
 - `--log_level`: Logging level - DEBUG, INFO, WARNING, ERROR (default: INFO)
 
 ### Important Notes
 
-**HTML Caching**: By default, the script caches downloaded HTML pages in `.cache/html/`. On subsequent runs, it will use the cached pages instead of downloading them again. This speeds up re-runs significantly and reduces load on the server. To disable caching, use `--cache_dir=""`.
-
-**Dynamic Proxy Fetching**: By default, the script fetches fresh free proxies from proxy list services (proxy-list.download and geonode.com) before starting. It fetches up to 50 of the most recently checked proxies from a pool of 500, which helps avoid rate limiting by using different IPs. If dynamic fetching fails, it falls back to a hardcoded proxy list.
-
-**Proxy Pool**: The script rotates through proxies to distribute requests and avoid rate limiting. If a proxy fails, it automatically tries a direct connection as fallback.
+**HTML Caching**: By default, the script caches downloaded HTML pages in `.cache/html/`, using a directory structure that mirrors the source URLs. On subsequent runs, it will use the cached pages instead of downloading them again. This speeds up re-runs significantly and reduces load on the server. To disable caching, use `--cache_dir=""`.
 
 **Rate Limiting**: The sacred-texts.com website implements rate limiting. The script includes:
-- Dynamic proxy fetching for fresh, working proxies (50 from 500 most recent)
-- Rotating proxy pool (automatically fetches 50 proxies)
+
 - Automatic retry logic with exponential backoff
-- Direct connection fallback if proxy fails
 - Configurable delay between requests
 
 If you still encounter 429 errors:
+
 - Increase the `--delay` parameter (try 3.0 or higher)
 - Wait several hours before retrying if temporarily blocked
-- Enable proxy fetching to distribute requests across IPs (`--use_proxies=True --fetch_dynamic_proxies=True`)
 
 **Recommended Approach**:
-```bash
-# Use cached pages (fastest, default - no proxies needed if already cached)
-uv run python -m 1_enoch_osis.scrape_sacred_texts
 
-# Or with dynamic proxy fetching for fresh downloads
-uv run python -m 1_enoch_osis.scrape_sacred_texts --use_proxies=True --fetch_dynamic_proxies=True --log_level=INFO
+```bash
+# Use cached pages when available
+uv run python -m 1_enoch_osis.scrape_sacred_texts
 ```
 
 ### How It Works
 
-1. **Fetching**: Downloads HTML pages with proper User-Agent headers, rotating through a proxy pool, with configurable delay between requests
+1. **Fetching**: Downloads HTML pages with proper User-Agent headers, URL-derived disk caching, retry logic, and configurable delay between requests
 2. **Front Matter**: Processes pages 0-3 (Title Page, Editors' Preface, Introduction, Abbreviations) as separate front matter divisions
 3. **Footnote Extraction**: Extracts footnotes from the "Footnotes" section and stores them for inline insertion
 4. **Parsing**: Uses BeautifulSoup to extract chapter headings, verses, and content from pages 4-112
@@ -140,6 +123,7 @@ uv run python -m 1_enoch_osis.scrape_sacred_texts --use_proxies=True --fetch_dyn
 ## OSIS Structure
 
 The generated OSIS XML includes:
+
 - **Header with proper metadata**:
   - Multiple revisionDesc entries (2026 scrape, 1913 original edition)
   - Work metadata (title, description, creator, publisher)
@@ -157,7 +141,8 @@ The generated OSIS XML includes:
 ## Source
 
 The Book of Enoch text is sourced from:
-- **URL**: https://sacred-texts.com/bib/boe/
+
+- **URL**: <https://sacred-texts.com/bib/boe/>
 - **Translation**: R.H. Charles (1917)
 - **Original Publisher**: Oxford University Press
 

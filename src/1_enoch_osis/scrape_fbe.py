@@ -3,8 +3,8 @@
 # dependencies = [
 #     "beautifulsoup4",
 #     "fire",
+#     "httpx",
 #     "pyosis",
-#     "requests",
 #     "tqdm",
 # ]
 # ///
@@ -26,7 +26,6 @@ from __future__ import annotations
 
 import logging
 import re
-import time
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -34,9 +33,10 @@ from typing import Final
 
 import fire
 import pyosis
-import requests
 from bs4 import BeautifulSoup, NavigableString, Tag
 from tqdm import tqdm
+
+from .http_client import CachedHttpFetcher
 
 LOGGER = logging.getLogger(__name__)
 
@@ -221,10 +221,9 @@ class FBEParser:
         cache_dir: str | None = None,
         delay: float = 1.5,
     ) -> None:
-        self.delay = delay
+        self.http = CachedHttpFetcher(cache_dir=cache_dir, delay=delay, logger=LOGGER)
         self.cache_dir = Path(cache_dir) if cache_dir else None
         if self.cache_dir:
-            self.cache_dir.mkdir(parents=True, exist_ok=True)
             LOGGER.info("Using cache directory: %s", self.cache_dir)
 
     # ------------------------------------------------------------------
@@ -232,56 +231,12 @@ class FBEParser:
     # ------------------------------------------------------------------
 
     def fetch_page(self, page_num: int, retry_count: int = 3) -> str:
-        """Fetch a single FBE page (with caching and retry logic)."""
-        filename = f"{FILE_PREFIX}{page_num:03d}.html"
-
-        if self.cache_dir:
-            cache_file = self.cache_dir / filename
-            if cache_file.exists():
-                LOGGER.debug("Loading page %d from cache", page_num)
-                return cache_file.read_text(encoding="utf-8")
-
+        """Fetch a single FBE page."""
         url = f"{BASE_URL}{FILE_PREFIX}{page_num:03d}.htm"
-        headers = {
-            "User-Agent": (
-                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                "AppleWebKit/537.36 (KHTML, like Gecko) "
-                "Chrome/91.0.4472.124 Safari/537.36"
-            )
-        }
+        return self.http.fetch_text(url=url, retry_count=retry_count)
 
-        last_exc: Exception | None = None
-        for attempt in range(retry_count):
-            try:
-                LOGGER.debug(
-                    "Fetching %s (attempt %d/%d)", url, attempt + 1, retry_count
-                )
-                response = requests.get(url, headers=headers, timeout=30)
-                response.raise_for_status()
-                html = response.text
-
-                if self.cache_dir:
-                    cache_file = self.cache_dir / filename
-                    cache_file.write_text(html, encoding="utf-8")
-
-                time.sleep(self.delay)
-                return html
-            except requests.exceptions.HTTPError as exc:
-                if exc.response.status_code == 429:
-                    wait = self.delay * (2**attempt)
-                    LOGGER.warning("Rate limited on %s; waiting %.1fs", url, wait)
-                    time.sleep(wait)
-                else:
-                    raise
-                last_exc = exc
-            except Exception as exc:
-                last_exc = exc
-                LOGGER.warning("Error fetching %s: %s. Retrying…", url, exc)
-                time.sleep(self.delay)
-
-        raise RuntimeError(
-            f"Failed to fetch {url} after {retry_count} attempts"
-        ) from last_exc
+    def close(self) -> None:
+        self.http.close()
 
     # ------------------------------------------------------------------
     # Text / annotation helpers
@@ -1505,14 +1460,20 @@ def main(
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     )
 
-    parser = FBEParser(
-        cache_dir=cache_dir if cache_dir else None,
-        delay=delay,
-    )
+    parser = FBEParser(cache_dir=cache_dir if cache_dir else None, delay=delay)
 
-    LOGGER.info("Processing pages %d–%d with %.1fs delay", start_page, end_page, delay)
-    parser.process_all(output_dir=output_dir, start_page=start_page, end_page=end_page)
-    LOGGER.info("Done!")
+    try:
+        LOGGER.info(
+            "Processing pages %d–%d with %.1fs delay", start_page, end_page, delay
+        )
+        parser.process_all(
+            output_dir=output_dir,
+            start_page=start_page,
+            end_page=end_page,
+        )
+        LOGGER.info("Done!")
+    finally:
+        parser.close()
 
 
 if __name__ == "__main__":

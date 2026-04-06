@@ -3,8 +3,8 @@
 # dependencies = [
 #     "beautifulsoup4",
 #     "fire",
+#     "httpx",
 #     "pyosis",
-#     "requests",
 #     "tqdm",
 # ]
 # ///
@@ -13,18 +13,17 @@
 from __future__ import annotations
 
 import logging
-import random
 import re
-import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Final
 
 import fire
 import pyosis
-import requests
 from bs4 import BeautifulSoup, NavigableString, Tag
 from tqdm import tqdm
+
+from .http_client import CachedHttpFetcher
 
 LOGGER = logging.getLogger(__name__)
 
@@ -44,67 +43,6 @@ FRONT_MATTER_BOILERPLATE: Final[set[str]] = {
     "The Book of Enoch, by R.H. Charles, [1917], at sacred-texts.com",
     "Scanned at sacred-texts.com, June 2004. Proofed and formatted by John Bruno Hare. This text is in the public domain in the United States because it was published prior to 1923.",
 }
-
-
-def fetch_free_proxies(limit: int = 50) -> list[dict[str, str]]:
-    """Fetch fresh free proxies from proxy list services.
-
-    Args:
-        limit: Maximum number of proxies to fetch (default: 50)
-
-    Returns:
-        List of proxy dictionaries in requests format
-    """
-    proxies = []
-
-    try:
-        response = requests.get(
-            "https://advanced.name/freeproxy/69ae3e144bf53?type=https"
-        )
-        if not response.ok:
-            LOGGER.warning(
-                f"Failed to fetch proxies from advanced.name: {response.status_code}"
-            )
-            raise ValueError("Failed to fetch proxies from advanced.name")
-        proxy_list = response.text.strip().splitlines()
-        for proxy in proxy_list:
-            if ":" not in proxy:
-                continue
-            ip, port = proxy.split(":")
-            proxy_url = f"http://{ip}:{port}"
-            proxies.append({"http": proxy_url, "https": proxy_url})
-            if len(proxies) >= limit:
-                break
-        LOGGER.info(f"Successfully fetched {len(proxies)} proxies from advanced.name")
-        return proxies
-
-    except Exception as e:
-        LOGGER.warning(f"Error fetching proxies from advanced.name: {e}")
-
-    LOGGER.info("Trying proxy source (geonode.com)...")
-    response = requests.get(
-        "https://proxylist.geonode.com/api/proxy-list?limit=500&page=1&sort_by=lastChecked&sort_type=desc",
-        timeout=10,
-    )
-
-    if response.status_code == 200:
-        data = response.json()
-        if "data" not in data:
-            LOGGER.warning(
-                "Unexpected response format from geonode: 'data' key not found"
-            )
-            return proxies
-        for proxy_data in data["data"]:
-            if "http" not in proxy_data.get("protocols", []):
-                continue  # Skip proxies that don't support HTTP
-            ip = proxy_data.get("ip")
-            port = proxy_data.get("port")
-            if ip and port:
-                proxy_url = f"http://{ip}:{port}"
-                proxies.append({"http": proxy_url, "https": proxy_url})
-
-        LOGGER.info(f"Successfully fetched {len(proxies)} proxies from geonode")
-        return proxies
 
 
 @dataclass
@@ -146,9 +84,8 @@ class SacredTextsParser:
 
     def __init__(
         self,
-        use_proxies: bool = True,
-        fetch_dynamic_proxies: bool = True,
         cache_dir: str | None = None,
+        delay: float = 1.0,
     ) -> None:
         self.current_chapter: int | None = None
         self.current_verse: int | None = None
@@ -156,144 +93,31 @@ class SacredTextsParser:
         self.root_div: pyosis.DivCt | None = None
         self.chapters: list[pyosis.DivCt] = []
         self.footnotes: dict[str, FootnoteInfo] = {}
-        self.use_proxies = use_proxies
+        self.http = CachedHttpFetcher(cache_dir=cache_dir, delay=delay, logger=LOGGER)
 
-        # Setup cache directory
         self.cache_dir = Path(cache_dir) if cache_dir else None
         if self.cache_dir:
             self.cache_dir.mkdir(parents=True, exist_ok=True)
             LOGGER.info(f"Using cache directory: {self.cache_dir}")
 
-        # Initialize proxy pool
-        self.proxy_pool = []
-        if use_proxies:
-            if fetch_dynamic_proxies:
-                LOGGER.info("Fetching fresh proxies dynamically...")
-                proxies = fetch_free_proxies(limit=500)
-                for proxy in proxies:
-                    LOGGER.debug(f"Added proxy to pool: {proxy['http']}")
-                    try:
-                        r = requests.get(
-                            "https://httpbin.org/ip",
-                            proxies=proxy,
-                            timeout=5,
-                        )
-                        if r.ok:
-                            LOGGER.debug(f"Proxy {proxy['http']} is working")
-                            self.proxy_pool.append(proxy)
-                        else:
-                            LOGGER.debug(
-                                f"Proxy {proxy['http']} failed with status code {r.status_code}"
-                            )
-                    except Exception as e:
-                        LOGGER.debug(f"Proxy {proxy['http']} failed with error: {e}")
-                LOGGER.info(
-                    f"Proxy pool initialized with {len(self.proxy_pool)} working proxies from dynamic fetching"
-                )
-
-            LOGGER.info(f"Proxy pool initialized with {len(self.proxy_pool)} proxies")
-
     def fetch_page(
         self, page_num: int, retry_count: int = 3, delay: float = 1.0
     ) -> str:
-        """Fetch a single page from sacred-texts.com with retry logic and proxy rotation.
-
-        Checks cache first, then fetches from web if not cached.
+        """Fetch a single page from sacred-texts.com.
 
         Args:
             page_num: Page number to fetch
             retry_count: Number of retries for failed requests
             delay: Base delay between requests in seconds
         """
-        # Check cache first
-        if self.cache_dir:
-            cache_file = self.cache_dir / f"boe{page_num:03d}.html"
-            if cache_file.exists():
-                LOGGER.debug(f"Loading page {page_num} from cache")
-                return cache_file.read_text(encoding="utf-8")
+        if delay != self.http.delay:
+            self.http.delay = delay
 
         url = f"{BASE_URL}boe{page_num:03d}.htm"
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-        }
+        return self.http.fetch_text(url=url, retry_count=retry_count)
 
-        for attempt in range(retry_count):
-            # Select a random proxy from the pool if enabled
-            proxy = None
-            if self.use_proxies and self.proxy_pool:
-                proxy = random.choice(self.proxy_pool)
-                LOGGER.debug(f"Using proxy: {proxy['http']}")
-
-            try:
-                LOGGER.debug(
-                    f"Fetching {url} (attempt {attempt + 1}/{retry_count}){'with proxy' if proxy else ''}"
-                )
-                response = requests.get(url, headers=headers, proxies=proxy, timeout=30)
-                response.raise_for_status()
-                html_content = response.text
-
-                # Cache the HTML if caching is enabled
-                if self.cache_dir:
-                    cache_file = self.cache_dir / f"boe{page_num:03d}.html"
-                    cache_file.write_text(html_content, encoding="utf-8")
-                    LOGGER.debug(f"Cached page {page_num} to {cache_file}")
-
-                # Add delay after successful request to avoid rate limiting
-                time.sleep(delay)
-                return html_content
-            except requests.exceptions.ProxyError as e:
-                LOGGER.warning(
-                    f"Proxy error for {url}: {e}. Retrying with a different proxy..."
-                )
-                if attempt == retry_count - 1:
-                    raise
-                time.sleep(delay)
-            except (
-                requests.exceptions.ConnectionError,
-                requests.exceptions.Timeout,
-            ) as e:
-                # Proxy failed, try without proxy on next attempt
-                if proxy:
-                    LOGGER.warning(
-                        f"Proxy failed for {url}: {e}. Trying direct connection..."
-                    )
-                    # Try direct connection immediately
-                    try:
-                        response = requests.get(url, headers=headers, timeout=30)
-                        response.raise_for_status()
-                        html_content = response.text
-
-                        # Cache the HTML if caching is enabled
-                        if self.cache_dir:
-                            cache_file = self.cache_dir / f"boe{page_num:03d}.html"
-                            cache_file.write_text(html_content, encoding="utf-8")
-                            LOGGER.debug(f"Cached page {page_num} to {cache_file}")
-
-                        time.sleep(delay)
-                        return html_content
-                    except Exception as direct_error:
-                        LOGGER.warning(f"Direct connection also failed: {direct_error}")
-                if attempt == retry_count - 1:
-                    raise
-                time.sleep(delay)
-            except requests.exceptions.HTTPError as e:
-                if e.response.status_code == 429:  # Too Many Requests
-                    wait_time = delay * (2**attempt)  # Exponential backoff
-                    LOGGER.warning(
-                        f"Rate limited on {url}. Waiting {wait_time}s before retry..."
-                    )
-                    time.sleep(wait_time)
-                    if attempt == retry_count - 1:
-                        raise
-                else:
-                    raise
-            except Exception as e:
-                if attempt == retry_count - 1:
-                    raise
-                LOGGER.warning(f"Error fetching {url}: {e}. Retrying...")
-                time.sleep(delay)
-
-        raise Exception(f"Failed to fetch {url} after {retry_count} attempts")
+    def close(self) -> None:
+        self.http.close()
 
     def consolidate_strings(
         self, content: list[str | pyosis.HiCt | pyosis.MilestoneCt]
@@ -1010,8 +834,6 @@ def main(
     start_page: int = 0,  # Start at 0 to include title page and front matter
     end_page: int = 112,
     delay: float = 1.5,  # Delay between requests in seconds
-    use_proxies: bool = False,  # Use proxy rotation to avoid rate limiting
-    fetch_dynamic_proxies: bool = False,  # Fetch fresh proxies dynamically
     cache_dir: str = ".cache/html",  # Directory to cache downloaded HTML files
     log_level: str = "INFO",
 ) -> None:
@@ -1022,8 +844,6 @@ def main(
         start_page: First page to process (default 0 for title page, use 4 for Chapter I)
         end_page: Last page to process (default 112)
         delay: Delay between requests in seconds (default 1.5 to avoid rate limiting)
-        use_proxies: Use rotating proxy pool to avoid rate limiting (default False)
-        fetch_dynamic_proxies: Fetch fresh proxies dynamically from proxy services (default False)
         cache_dir: Directory to cache downloaded HTML files (default ".cache/html", use empty string to disable)
         log_level: Logging level (DEBUG, INFO, WARNING, ERROR)
     """
@@ -1032,23 +852,22 @@ def main(
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     )
 
-    parser = SacredTextsParser(
-        use_proxies=use_proxies,
-        fetch_dynamic_proxies=fetch_dynamic_proxies,
-        cache_dir=cache_dir if cache_dir else None,
-    )
+    parser = SacredTextsParser(cache_dir=cache_dir if cache_dir else None, delay=delay)
 
-    LOGGER.info(f"Processing pages {start_page} to {end_page} with {delay}s delay")
-    parser.process_all_pages(start_page, end_page, delay=delay)
+    try:
+        LOGGER.info(f"Processing pages {start_page} to {end_page} with {delay}s delay")
+        parser.process_all_pages(start_page, end_page, delay=delay)
 
-    LOGGER.info("Generating OSIS XML")
-    osis_doc = parser.generate_osis()
+        LOGGER.info("Generating OSIS XML")
+        osis_doc = parser.generate_osis()
 
-    LOGGER.info(f"Writing to {output}")
-    with open(output, "w", encoding="utf-8") as f:
-        f.write(osis_doc.to_xml())
+        LOGGER.info(f"Writing to {output}")
+        with open(output, "w", encoding="utf-8") as f:
+            f.write(osis_doc.to_xml())
 
-    LOGGER.info("Done!")
+        LOGGER.info("Done!")
+    finally:
+        parser.close()
 
 
 if __name__ == "__main__":
