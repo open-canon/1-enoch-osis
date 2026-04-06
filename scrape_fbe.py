@@ -1338,9 +1338,7 @@ class FBEParser:
         page_html: dict[int, str],
     ) -> pyosis.OsisXML:
         """Generate a combined OSIS document for 1 and 2 Adam and Eve."""
-        adam_eve_works = [
-            work for work in WORKS if work.osis_id in ADAM_EVE_WORK_IDS
-        ]
+        adam_eve_works = [work for work in WORKS if work.osis_id in ADAM_EVE_WORK_IDS]
         header = self._build_header(
             osis_work_id=ADAM_EVE_OSIS_ID,
             title=ADAM_EVE_TITLE,
@@ -1416,9 +1414,7 @@ class FBEParser:
         # Generate the combined Adam and Eve document
         adam_eve_works = [work for work in WORKS if work.osis_id in ADAM_EVE_WORK_IDS]
         adam_eve_pages = [
-            p
-            for work in adam_eve_works
-            for p in work.intro_pages + work.chapter_pages
+            p for work in adam_eve_works for p in work.intro_pages + work.chapter_pages
         ]
         missing_adam_eve = [p for p in adam_eve_pages if p not in page_html]
         if missing_adam_eve:

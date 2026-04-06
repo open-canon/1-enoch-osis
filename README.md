@@ -13,6 +13,26 @@ This repository contains OSIS XML documents for 1 Enoch and related works from T
 - `scrape_fbe.py` - Forgotten Books of Eden scraper that combines the Adam and Eve books into one document, uses canonical OSIS IDs such as `2En`, normalizes simple intro pages to an `Introduction` title plus source-heading subtitle, and preserves more complex source title blocks where needed
 - `scrape_sacred_texts.py` - Python script to download and parse from sacred-texts.com
 - `pdf.py` - Previous pyosis compiler example (for reference)
+- `tests/test_scrape_fbe_snapshot.py` - Snapshot regression test that regenerates FBE XML from the local HTML cache and compares it against the committed OSIS XML files
+- `tests/test_scrape_sacred_texts_snapshot.py` - Snapshot regression test that regenerates the 1 Enoch XML from the local HTML cache and compares it against the committed OSIS XML file
+
+## Regression Testing
+
+The repository includes snapshot tests for `scrape_fbe.py` and `scrape_sacred_texts.py`. They regenerate the OSIS XML documents and compare them against the committed XML files in the repository root.
+
+The test is intentionally narrow:
+
+- It treats the committed OSIS XML files as the snapshots.
+- It normalizes the generated scrape timestamp before comparison.
+- It uses the local `.cache/fbe-html/` and `.cache/html/` directories as scraper input sources so the tests can run offline.
+
+Run it with:
+
+```bash
+pytest tests
+```
+
+If `.cache/fbe-html/` or `.cache/html/` is missing, the relevant test will skip. In that case, populate the cache by running the corresponding scraper once before relying on the snapshot tests.
 
 ## Scraping from sacred-texts.com
 
