@@ -10,10 +10,9 @@
 # ///
 """Download and parse The Forgotten Books of Eden from sacred-texts.com to OSIS XML.
 
-Scrapes https://sacred-texts.com/bib/fbe/ and produces OSIS XML files for each
-of the following works:
-  - The First Book of Adam and Eve (1 Adam and Eve)
-  - The Second Book of Adam and Eve (2 Adam and Eve)
+Scrapes https://sacred-texts.com/bib/fbe/ and produces OSIS XML files for the
+following works:
+    - The First and Second Books of Adam and Eve (in one document with two books)
   - The Book of the Secrets of Enoch (2 Enoch)
   - The Psalms of Solomon
   - The Odes of Solomon
@@ -86,6 +85,7 @@ WORKS: Final[list[WorkDef]] = [
         short="1 Adam and Eve",
         intro_pages=[5],
         chapter_pages=list(range(6, 85)),  # 79 chapters
+        intro_title="Introduction",
     ),
     WorkDef(
         osis_id="2-adam-and-eve",
@@ -185,6 +185,12 @@ TESTAMENTS: Final[list[TestamentDef]] = [
         "T12Patr.TBenj", "The Testament of Benjamin", "Test. Benjamin", [294, 295]
     ),
 ]
+
+ADAM_EVE_WORK_IDS: Final[tuple[str, str]] = ("1-adam-and-eve", "2-adam-and-eve")
+ADAM_EVE_OSIS_ID: Final[str] = "adam-and-eve"
+ADAM_EVE_OUTPUT_STEM: Final[str] = "adam-and-eve"
+ADAM_EVE_TITLE: Final[str] = "The First and Second Books of Adam and Eve"
+ADAM_EVE_REF_WORK: Final[str] = "Adam and Eve"
 
 
 # ---------------------------------------------------------------------------
@@ -1327,6 +1333,32 @@ class FBEParser:
         )
         return pyosis.OsisXML(pyosis.Osis(osis_text=osis_text))
 
+    def build_osis_for_adam_and_eve(
+        self,
+        page_html: dict[int, str],
+    ) -> pyosis.OsisXML:
+        """Generate a combined OSIS document for 1 and 2 Adam and Eve."""
+        adam_eve_works = [
+            work for work in WORKS if work.osis_id in ADAM_EVE_WORK_IDS
+        ]
+        header = self._build_header(
+            osis_work_id=ADAM_EVE_OSIS_ID,
+            title=ADAM_EVE_TITLE,
+            description=(
+                'Texts from "The Forgotten Books of Eden," edited by Rutherford H. Platt, Jr., 1926. '
+                "Includes the First and Second Books of Adam and Eve, scraped from sacred-texts.com and converted to OSIS."
+            ),
+        )
+        osis_text = pyosis.OsisTextCt(
+            lang="en",
+            osis_idwork=ADAM_EVE_OSIS_ID,
+            osis_ref_work=ADAM_EVE_REF_WORK,
+            canonical=True,
+            header=header,
+            div=[self._build_book_div(work, page_html) for work in adam_eve_works],
+        )
+        return pyosis.OsisXML(pyosis.Osis(osis_text=osis_text))
+
     def build_osis_for_testaments(
         self,
         page_html: dict[int, str],
@@ -1381,8 +1413,40 @@ class FBEParser:
             except Exception as exc:
                 LOGGER.error("Failed to fetch page %d: %s", pg, exc)
 
-        # Generate XML for each work
-        for work in tqdm(WORKS, desc="Generating XML files"):
+        # Generate the combined Adam and Eve document
+        adam_eve_works = [work for work in WORKS if work.osis_id in ADAM_EVE_WORK_IDS]
+        adam_eve_pages = [
+            p
+            for work in adam_eve_works
+            for p in work.intro_pages + work.chapter_pages
+        ]
+        missing_adam_eve = [p for p in adam_eve_pages if p not in page_html]
+        if missing_adam_eve:
+            LOGGER.warning(
+                "Skipping %s: missing pages %s",
+                ADAM_EVE_OUTPUT_STEM,
+                missing_adam_eve,
+            )
+        else:
+            LOGGER.info("Generating %s.xml", ADAM_EVE_OUTPUT_STEM)
+            try:
+                osis_doc = self.build_osis_for_adam_and_eve(page_html)
+                xml_path = out_path / f"{ADAM_EVE_OUTPUT_STEM}.xml"
+                xml_path.write_text(osis_doc.to_xml(), encoding="utf-8")
+                LOGGER.info("Wrote %s", xml_path)
+            except Exception as exc:
+                LOGGER.error(
+                    "Error generating %s: %s",
+                    ADAM_EVE_OUTPUT_STEM,
+                    exc,
+                    exc_info=True,
+                )
+
+        # Generate XML for each standalone work
+        standalone_works = [
+            work for work in WORKS if work.osis_id not in ADAM_EVE_WORK_IDS
+        ]
+        for work in tqdm(standalone_works, desc="Generating XML files"):
             missing = [
                 p for p in work.intro_pages + work.chapter_pages if p not in page_html
             ]

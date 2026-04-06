@@ -4,12 +4,13 @@ Text of R. H. Charles's translation of 1 Enoch, in OSIS XML format.
 
 ## Overview
 
-This repository contains OSIS XML documents of the Book of Enoch (1 Enoch), translated by R.H. Charles (1917).
+This repository contains OSIS XML documents for 1 Enoch and related works from The Forgotten Books of Eden.
 
 ## Files
 
 - `1-enoch.xml` - OSIS document scraped from sacred-texts.com using the `scrape_sacred_texts.py` script, with formatting preserved but without inline annotations
-- `scrape_fbe.py` - Forgotten Books of Eden scraper that uses canonical OSIS IDs such as `2En`, normalizes simple intro pages to an `Introduction` title plus source-heading subtitle, and preserves more complex source title blocks where needed
+- `adam-and-eve.xml` - Combined OSIS document containing the First and Second Books of Adam and Eve as separate OSIS book divs
+- `scrape_fbe.py` - Forgotten Books of Eden scraper that combines the Adam and Eve books into one document, uses canonical OSIS IDs such as `2En`, normalizes simple intro pages to an `Introduction` title plus source-heading subtitle, and preserves more complex source title blocks where needed
 - `scrape_sacred_texts.py` - Python script to download and parse from sacred-texts.com
 - `pdf.py` - Previous pyosis compiler example (for reference)
 
