@@ -8,17 +8,17 @@ This repository contains OSIS XML documents for 1 Enoch and related works from T
 
 ## Files
 
-- `1-enoch.xml` - OSIS document scraped from sacred-texts.com using the `scrape_sacred_texts.py` script, with formatting preserved but without inline annotations
+- `1-enoch.xml` - OSIS document scraped from sacred-texts.com using the `1_enoch_osis.scrape_sacred_texts` module, with formatting preserved but without inline annotations
 - `adam-and-eve.xml` - Combined OSIS document containing the First and Second Books of Adam and Eve as separate OSIS book divs
-- `scrape_fbe.py` - Forgotten Books of Eden scraper that combines the Adam and Eve books into one document, uses canonical OSIS IDs such as `2En`, normalizes simple intro pages to an `Introduction` title plus source-heading subtitle, and preserves more complex source title blocks where needed
-- `scrape_sacred_texts.py` - Python script to download and parse from sacred-texts.com
+- `src/1_enoch_osis/scrape_fbe.py` - Forgotten Books of Eden scraper that combines the Adam and Eve books into one document, uses canonical OSIS IDs such as `2En`, normalizes simple intro pages to an `Introduction` title plus source-heading subtitle, and preserves more complex source title blocks where needed
+- `src/1_enoch_osis/scrape_sacred_texts.py` - Python module to download and parse from sacred-texts.com
 - `pdf.py` - Previous pyosis compiler example (for reference)
 - `tests/test_scrape_fbe_snapshot.py` - Snapshot regression test that regenerates FBE XML from the local HTML cache and compares it against the committed OSIS XML files
 - `tests/test_scrape_sacred_texts_snapshot.py` - Snapshot regression test that regenerates the 1 Enoch XML from the local HTML cache and compares it against the committed OSIS XML file
 
 ## Regression Testing
 
-The repository includes snapshot tests for `scrape_fbe.py` and `scrape_sacred_texts.py`. They regenerate the OSIS XML documents and compare them against the committed XML files in the repository root.
+The repository includes snapshot tests for `1_enoch_osis.scrape_fbe` and `1_enoch_osis.scrape_sacred_texts`. They regenerate the OSIS XML documents and compare them against the committed XML files in the repository root.
 
 The test is intentionally narrow:
 
@@ -36,7 +36,7 @@ If `.cache/fbe-html/` or `.cache/html/` is missing, the relevant test will skip.
 
 ## Scraping from sacred-texts.com
 
-The `scrape_sacred_texts.py` script downloads each chapter page from https://sacred-texts.com/bib/boe/ and converts it to OSIS XML format using pyosis.
+The `1_enoch_osis.scrape_sacred_texts` module downloads each chapter page from https://sacred-texts.com/bib/boe/ and converts it to OSIS XML format using pyosis.
 
 ### Features
 
@@ -57,10 +57,10 @@ The `scrape_sacred_texts.py` script downloads each chapter page from https://sac
 
 ```bash
 # Basic usage (without proxies by default, fastest when cached)
-uv run scrape_sacred_texts.py
+uv run python -m 1_enoch_osis.scrape_sacred_texts
 
 # Custom options with proxies enabled
-uv run scrape_sacred_texts.py \
+uv run python -m 1_enoch_osis.scrape_sacred_texts \
   --start_page=0 \
   --end_page=112 \
   --output=1-enoch-new.xml \
@@ -71,12 +71,12 @@ uv run scrape_sacred_texts.py \
   --log_level=INFO
 
 # Use dynamic proxy fetching for fresh proxies
-uv run scrape_sacred_texts.py \
+uv run python -m 1_enoch_osis.scrape_sacred_texts \
   --use_proxies=True \
   --fetch_dynamic_proxies=True
 
 # Skip front matter and start at Chapter I
-uv run scrape_sacred_texts.py \
+uv run python -m 1_enoch_osis.scrape_sacred_texts \
   --start_page=4
 ```
 
@@ -114,10 +114,10 @@ If you still encounter 429 errors:
 **Recommended Approach**:
 ```bash
 # Use cached pages (fastest, default - no proxies needed if already cached)
-uv run scrape_sacred_texts.py
+uv run python -m 1_enoch_osis.scrape_sacred_texts
 
 # Or with dynamic proxy fetching for fresh downloads
-uv run scrape_sacred_texts.py --use_proxies=True --fetch_dynamic_proxies=True --log_level=INFO
+uv run python -m 1_enoch_osis.scrape_sacred_texts --use_proxies=True --fetch_dynamic_proxies=True --log_level=INFO
 ```
 
 ### How It Works

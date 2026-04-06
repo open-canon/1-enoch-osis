@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import importlib.util
+import importlib
 import re
 import sys
 from functools import lru_cache
@@ -10,7 +10,8 @@ from typing import Any
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-SCRAPE_SACRED_TEXTS_PATH = REPO_ROOT / "scrape_sacred_texts.py"
+SRC_ROOT = REPO_ROOT / "src"
+PACKAGE_SACRED_TEXTS_MODULE = "1_enoch_osis.scrape_sacred_texts"
 SOURCE_CACHE_DIR = REPO_ROOT / ".cache" / "html"
 SNAPSHOT_FILE = "1-enoch.xml"
 EVERSION_DATE_PATTERN = re.compile(
@@ -27,18 +28,10 @@ def normalize_osis_snapshot(xml: str) -> str:
 
 @lru_cache(maxsize=1)
 def load_scrape_sacred_texts_main() -> Any:
-    spec = importlib.util.spec_from_file_location(
-        "scrape_sacred_texts",
-        SCRAPE_SACRED_TEXTS_PATH,
-    )
-    if spec is None or spec.loader is None:
-        raise ImportError(
-            f"Unable to load scrape_sacred_texts module from {SCRAPE_SACRED_TEXTS_PATH}"
-        )
+    if str(SRC_ROOT) not in sys.path:
+        sys.path.insert(0, str(SRC_ROOT))
 
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
+    module = importlib.import_module(PACKAGE_SACRED_TEXTS_MODULE)
     return module.main
 
 

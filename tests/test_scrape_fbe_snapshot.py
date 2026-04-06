@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import importlib.util
+import importlib
 import re
 import sys
 from functools import lru_cache
@@ -10,7 +10,8 @@ from typing import Any
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-SCRAPE_FBE_PATH = REPO_ROOT / "scrape_fbe.py"
+SRC_ROOT = REPO_ROOT / "src"
+PACKAGE_SCRAPE_FBE_MODULE = "1_enoch_osis.scrape_fbe"
 SOURCE_CACHE_DIR = REPO_ROOT / ".cache" / "fbe-html"
 SNAPSHOT_FILES = (
     "adam-and-eve.xml",
@@ -36,13 +37,10 @@ def normalize_osis_snapshot(xml: str) -> str:
 
 @lru_cache(maxsize=1)
 def load_scrape_fbe_main() -> Any:
-    spec = importlib.util.spec_from_file_location("scrape_fbe", SCRAPE_FBE_PATH)
-    if spec is None or spec.loader is None:
-        raise ImportError(f"Unable to load scrape_fbe module from {SCRAPE_FBE_PATH}")
+    if str(SRC_ROOT) not in sys.path:
+        sys.path.insert(0, str(SRC_ROOT))
 
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
+    module = importlib.import_module(PACKAGE_SCRAPE_FBE_MODULE)
     return module.main
 
 
