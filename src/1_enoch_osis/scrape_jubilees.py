@@ -22,11 +22,16 @@ from typing import Final
 
 import fire
 import pyosis
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString, Tag
 from tqdm import tqdm
 
 from .http_client import CachedHttpFetcher
-from .osis_parsing import normalize_whitespace, roman_to_int
+from .osis_parsing import (
+    InlinePart,
+    consolidate_inline_strings,
+    normalize_whitespace,
+    roman_to_int,
+)
 
 LOGGER = logging.getLogger(__name__)
 
@@ -53,9 +58,6 @@ FRONT_MATTER_TITLES: Final[dict[int, str]] = {
     11: "Prologue",
 }
 
-FOOTNOTE_LINK_RE: Final[re.Pattern[str]] = re.compile(
-    r"\[\]\([^)]*\)\[\d+\]\([^)]*\)|\[\d+\]\([^)]*\)"
-)
 MARKDOWN_LINK_RE: Final[re.Pattern[str]] = re.compile(r"\[([^\]]*)\]\([^)]*\)")
 MARKDOWN_HEADING_RE: Final[re.Pattern[str]] = re.compile(r"^#+\s+")
 HEADING_CHAPTER_RE: Final[re.Pattern[str]] = re.compile(
@@ -95,14 +97,27 @@ JOIN_WITH_PREVIOUS_PREFIXES: Final[tuple[str, ...]] = (
 @dataclass
 class VerseBlock:
     verse_numbers: list[int]
+    content_parts: list[InlinePart]
+
+
+@dataclass
+class FootnoteInfo:
+    ref_id: str
+    label: str
+    content_parts: list[InlinePart]
+
+
+@dataclass
+class PageParagraph:
     text: str
+    content_parts: list[InlinePart]
 
 
 @dataclass
 class FrontMatterSection:
     page_number: int
     title: str
-    paragraphs: list[str]
+    paragraphs: list[PageParagraph]
 
 
 @dataclass
@@ -178,7 +193,6 @@ class JubileesParser:
     def clean_line(line: str) -> str:
         cleaned = line.strip()
         cleaned = MARKDOWN_HEADING_RE.sub("", cleaned)
-        cleaned = FOOTNOTE_LINK_RE.sub("", cleaned)
         cleaned = MARKDOWN_LINK_RE.sub(r"\1", cleaned)
         cleaned = cleaned.replace("[paragraph continues]", "")
         cleaned = cleaned.replace("**", "")
@@ -188,7 +202,172 @@ class JubileesParser:
         cleaned = html.unescape(cleaned)
         return normalize_whitespace(cleaned)
 
-    def extract_page_components(self, raw_text: str) -> tuple[list[str], list[str]]:
+    def consolidate_parts(self, content: list[InlinePart]) -> list[InlinePart]:
+        return consolidate_inline_strings(content)
+
+    def trim_parts(self, content: list[InlinePart]) -> list[InlinePart]:
+        parts = self.consolidate_parts(content)
+
+        while parts and isinstance(parts[0], str) and not parts[0].strip():
+            parts.pop(0)
+        while parts and isinstance(parts[-1], str) and not parts[-1].strip():
+            parts.pop()
+
+        if parts and isinstance(parts[0], str):
+            parts[0] = parts[0].lstrip()
+        if parts and isinstance(parts[-1], str):
+            parts[-1] = parts[-1].rstrip()
+
+        return [
+            part
+            for part in self.consolidate_parts(parts)
+            if not (isinstance(part, str) and part == "")
+        ]
+
+    def extract_text_without_notes(self, parts: list[InlinePart]) -> str:
+        text = ""
+        for part in parts:
+            if isinstance(part, str):
+                text += part
+                continue
+
+            if isinstance(part, pyosis.NoteCt):
+                continue
+
+            if hasattr(part, "content"):
+                text += self.extract_text_without_notes(part.content)
+
+        return text
+
+    def parse_inline_content(
+        self,
+        element: Tag | NavigableString,
+        footnotes: dict[str, FootnoteInfo],
+    ) -> list[InlinePart]:
+        if isinstance(element, NavigableString):
+            text = html.unescape(str(element))
+            return [text] if text else []
+
+        result: list[InlinePart] = []
+        skip_elements: set[Tag] = set()
+
+        for child in element.children:
+            if isinstance(child, NavigableString):
+                result.extend(self.parse_inline_content(child, footnotes))
+                continue
+
+            if child in skip_elements:
+                continue
+
+            if child.name in {"table", "tbody", "tr", "td"}:
+                continue
+
+            if child.name == "a" and child.get("name", "").startswith("fr_"):
+                ref_id = child.get("name", "").replace("fr_", "fn_")
+                next_sibling = child.find_next_sibling("a")
+                if next_sibling and next_sibling.get("href", "").endswith(f"#{ref_id}"):
+                    footnote = footnotes.get(ref_id)
+                    if footnote:
+                        result.append(
+                            pyosis.NoteCt(
+                                type_value="explanation",
+                                n=footnote.label,
+                                content=footnote.content_parts,
+                            )
+                        )
+                    skip_elements.add(next_sibling)
+                    continue
+
+            child_content = self.parse_inline_content(child, footnotes)
+            if child.name in ["i", "em"]:
+                if child_content:
+                    result.append(
+                        pyosis.HiCt(
+                            type_value=pyosis.OsisHi.ITALIC,
+                            content=child_content,
+                        )
+                    )
+            elif child.name in ["b", "strong"]:
+                if child_content:
+                    result.append(
+                        pyosis.HiCt(
+                            type_value=pyosis.OsisHi.BOLD,
+                            content=child_content,
+                        )
+                    )
+            elif child.name == "sup":
+                if child_content:
+                    result.append(
+                        pyosis.HiCt(
+                            type_value=pyosis.OsisHi.SUPER,
+                            content=child_content,
+                        )
+                    )
+            elif child.name == "sub":
+                if child_content:
+                    result.append(
+                        pyosis.HiCt(
+                            type_value=pyosis.OsisHi.SUB,
+                            content=child_content,
+                        )
+                    )
+            elif child.name == "br":
+                result.append(" ")
+            else:
+                result.extend(child_content)
+
+        return self.consolidate_parts(result)
+
+    def make_paragraph(self, content_parts: list[InlinePart]) -> PageParagraph | None:
+        trimmed_parts = self.trim_parts(content_parts)
+        text = normalize_whitespace(self.extract_text_without_notes(trimmed_parts))
+        if not text:
+            return None
+
+        return PageParagraph(text=text, content_parts=trimmed_parts)
+
+    def extract_footnotes(self, body: Tag) -> dict[str, FootnoteInfo]:
+        footnotes: dict[str, FootnoteInfo] = {}
+        in_footnotes = False
+
+        for element in body.find_all(["h1", "h2", "h3", "h4", "h5", "h6", "p"]):
+            cleaned = self.clean_line(element.get_text(" ", strip=True))
+            if not cleaned:
+                continue
+
+            if cleaned == "Footnotes":
+                in_footnotes = True
+                continue
+
+            if not in_footnotes or element.name != "p":
+                continue
+
+            footnote_anchor = element.find("a", attrs={"name": re.compile(r"^fn_")})
+            if footnote_anchor is None:
+                continue
+
+            label_anchor = footnote_anchor.find_next_sibling("a")
+            label = ""
+            if label_anchor is not None:
+                label = normalize_whitespace(label_anchor.get_text(" ", strip=True))
+
+            content_parts: list[InlinePart] = []
+            for child in element.children:
+                if child == footnote_anchor or child == label_anchor:
+                    continue
+                content_parts.extend(self.parse_inline_content(child, {}))
+
+            footnotes[footnote_anchor["name"]] = FootnoteInfo(
+                ref_id=footnote_anchor["name"],
+                label=label,
+                content_parts=self.trim_parts(content_parts),
+            )
+
+        return footnotes
+
+    def extract_page_components(
+        self, raw_text: str
+    ) -> tuple[list[str], list[PageParagraph]]:
         if not self.is_valid_page(raw_text):
             raise RuntimeError(
                 "Jubilees scraper expects original sacred-texts HTML, not mirror-derived markdown or interstitial pages"
@@ -196,10 +375,10 @@ class JubileesParser:
 
         soup = BeautifulSoup(raw_text, "html.parser")
         body = soup.body if soup.body else soup
+        footnotes = self.extract_footnotes(body)
 
         headings: list[str] = []
-        content_lines: list[str] = []
-        in_footnotes = False
+        paragraphs: list[PageParagraph] = []
 
         for element in body.find_all(["h1", "h2", "h3", "h4", "h5", "h6", "p"]):
             stripped = element.get_text(" ", strip=True)
@@ -223,22 +402,24 @@ class JubileesParser:
                 continue
 
             if cleaned == "Footnotes":
-                in_footnotes = True
-                continue
-
-            if in_footnotes:
-                continue
-
-            if cleaned.startswith("p. "):
-                continue
+                break
 
             if element.name.startswith("h"):
                 headings.append(cleaned)
                 continue
 
-            content_lines.append(cleaned)
+            paragraph = self.make_paragraph(
+                self.parse_inline_content(element, footnotes)
+            )
+            if paragraph is None:
+                continue
 
-        return headings, content_lines
+            if paragraph.text.startswith("p. "):
+                continue
+
+            paragraphs.append(paragraph)
+
+        return headings, paragraphs
 
     @staticmethod
     def should_join_with_previous(paragraph: str, previous: str) -> bool:
@@ -249,15 +430,20 @@ class JubileesParser:
             or previous.endswith(("and", "or", "of", "the", "a"))
         )
 
-    def build_paragraphs(self, lines: list[str]) -> list[str]:
-        paragraphs: list[str] = []
+    def build_paragraphs(self, lines: list[PageParagraph]) -> list[PageParagraph]:
+        paragraphs: list[PageParagraph] = []
         for line in lines:
             if not paragraphs:
                 paragraphs.append(line)
                 continue
 
-            if self.should_join_with_previous(line, paragraphs[-1]):
-                paragraphs[-1] = normalize_whitespace(f"{paragraphs[-1]} {line}")
+            if self.should_join_with_previous(line.text, paragraphs[-1].text):
+                paragraphs[-1].text = normalize_whitespace(
+                    f"{paragraphs[-1].text} {line.text}"
+                )
+                paragraphs[-1].content_parts = self.consolidate_parts(
+                    paragraphs[-1].content_parts + [" "] + line.content_parts
+                )
                 continue
 
             paragraphs.append(line)
@@ -271,7 +457,11 @@ class JubileesParser:
         title = FRONT_MATTER_TITLES[page_number]
 
         if page_number == 0:
-            body_lines = [heading for heading in headings if heading] + content_lines
+            body_lines = [
+                PageParagraph(text=heading, content_parts=[heading])
+                for heading in headings
+                if heading
+            ] + content_lines
         else:
             body_lines = content_lines
 
@@ -285,23 +475,25 @@ class JubileesParser:
         paragraphs = [
             line
             for line in self.build_paragraphs(body_lines)
-            if line not in duplicate_lines
+            if line.text not in duplicate_lines
         ]
         return FrontMatterSection(
             page_number=page_number, title=title, paragraphs=paragraphs
         )
 
-    def extract_chapter_number(self, title: str, content_lines: list[str]) -> int:
+    def extract_chapter_number(
+        self, title: str, content_lines: list[PageParagraph]
+    ) -> int:
         title_match = HEADING_CHAPTER_RE.search(title)
         if title_match:
             return roman_to_int(title_match.group("chapter"))
 
         if content_lines:
-            range_match = RANGE_LINE_RE.match(content_lines[0])
+            range_match = RANGE_LINE_RE.match(content_lines[0].text)
             if range_match:
                 return roman_to_int(range_match.group("chapter"))
 
-            chapter_match = CHAPTER_LINE_RE.match(content_lines[0])
+            chapter_match = CHAPTER_LINE_RE.match(content_lines[0].text)
             if chapter_match:
                 return roman_to_int(chapter_match.group("chapter"))
 
@@ -313,47 +505,115 @@ class JubileesParser:
         self,
         page_number: int,
         chapter_number: int,
-        content_lines: list[str],
+        content_lines: list[PageParagraph],
     ) -> list[VerseBlock]:
         lines = content_lines[:]
-        if lines and RANGE_LINE_RE.match(lines[0]):
+        if lines and RANGE_LINE_RE.match(lines[0].text):
             lines = lines[1:]
 
-        text = normalize_whitespace(
-            " ".join(
-                line
-                for line in lines
-                if line
-                != "Herewith is completed the account of the division of the days."
-            )
-        )
+        lines = [
+            line
+            for line in lines
+            if line.text
+            != "Herewith is completed the account of the division of the days."
+        ]
 
-        chapter_match = CHAPTER_LINE_RE.match(text)
+        if not lines:
+            raise RuntimeError(
+                f"No Jubilees content paragraphs remained on page {page_number}"
+            )
+
+        chapter_match = CHAPTER_LINE_RE.match(lines[0].text)
         if chapter_match:
             line_chapter_number = roman_to_int(chapter_match.group("chapter"))
             if line_chapter_number != chapter_number:
                 raise RuntimeError(
                     f"Unexpected Jubilees chapter marker on page {page_number}: expected {chapter_number}, got {line_chapter_number}"
                 )
-            text = f"1. {chapter_match.group('text')}"
 
-        verse_matches = list(INLINE_VERSE_RE.finditer(text))
-        if not verse_matches:
-            raise RuntimeError(
-                f"No verse markers parsed for Jubilees page {page_number}"
+            rewritten_parts: list[InlinePart] = []
+            replaced = False
+            for part in lines[0].content_parts:
+                if not replaced and isinstance(part, str):
+                    new_part, count = re.subn(
+                        r"^\s*[IVXLCDM]+\.\s+", "1. ", part, count=1
+                    )
+                    if count:
+                        rewritten_parts.append(new_part)
+                        replaced = True
+                        continue
+
+                rewritten_parts.append(part)
+
+            if not replaced:
+                raise RuntimeError(
+                    f"Could not rewrite initial Jubilees chapter marker on page {page_number}"
+                )
+
+            lines[0] = PageParagraph(
+                text=f"1. {chapter_match.group('text')}",
+                content_parts=self.consolidate_parts(rewritten_parts),
             )
+
+        all_parts: list[InlinePart] = []
+        for index, line in enumerate(lines):
+            if index > 0:
+                all_parts.append(" ")
+            all_parts.extend(line.content_parts)
 
         verses: list[VerseBlock] = []
-        for index, match in enumerate(verse_matches):
-            verse_number = int(match.group("verse"))
-            start = match.end()
-            end = (
-                verse_matches[index + 1].start()
-                if index + 1 < len(verse_matches)
-                else len(text)
+        current_verse_number: int | None = None
+        current_parts: list[InlinePart] = []
+        pending_parts: list[InlinePart] = []
+
+        def flush_current() -> None:
+            nonlocal current_verse_number, current_parts
+            if current_verse_number is None:
+                return
+
+            verses.append(
+                VerseBlock(
+                    verse_numbers=[current_verse_number],
+                    content_parts=self.trim_parts(current_parts),
+                )
             )
-            verse_text = normalize_whitespace(text[start:end])
-            verses.append(VerseBlock(verse_numbers=[verse_number], text=verse_text))
+            current_verse_number = None
+            current_parts = []
+
+        for part in self.consolidate_parts(all_parts):
+            if isinstance(part, str):
+                last_end = 0
+                for match in INLINE_VERSE_RE.finditer(part):
+                    prefix = part[last_end : match.start()]
+                    if current_verse_number is None:
+                        if prefix:
+                            pending_parts.append(prefix)
+                    elif prefix:
+                        current_parts.append(prefix)
+
+                    flush_current()
+                    current_verse_number = int(match.group("verse"))
+                    current_parts = pending_parts
+                    pending_parts = []
+                    last_end = match.end()
+
+                suffix = part[last_end:]
+                if current_verse_number is None:
+                    if suffix:
+                        pending_parts.append(suffix)
+                    continue
+
+                if suffix:
+                    current_parts.append(suffix)
+                continue
+
+            if current_verse_number is None:
+                pending_parts.append(part)
+                continue
+
+            current_parts.append(part)
+
+        flush_current()
 
         if not verses:
             raise RuntimeError(f"No verses parsed for Jubilees page {page_number}")
@@ -414,7 +674,7 @@ class JubileesParser:
                             content=[section.title],
                         ),
                         *[
-                            pyosis.PCt(content=[paragraph])
+                            pyosis.PCt(content=paragraph.content_parts)
                             for paragraph in section.paragraphs
                         ],
                     ],
@@ -452,7 +712,7 @@ class JubileesParser:
                         pyosis.VerseCt(
                             osis_id=verse_ids,
                             canonical=True,
-                            content=[verse.text],
+                            content=verse.content_parts,
                         )
                     )
 

@@ -103,3 +103,24 @@ def test_scrape_jubilees_generates_expected_file(
     generated_jubilees_output: Path,
 ) -> None:
     assert generated_jubilees_output.name == SNAPSHOT_FILE
+
+
+def test_scrape_jubilees_preserves_inline_footnotes(
+    generated_jubilees_output: Path,
+) -> None:
+    xml = generated_jubilees_output.read_text(encoding="utf-8")
+
+    assert "<note" in xml
+    assert 'n="35:5"' in xml
+
+
+def test_scrape_jubilees_omits_sidebar_am_dates(
+    generated_jubilees_output: Path,
+) -> None:
+    xml = generated_jubilees_output.read_text(encoding="utf-8")
+
+    assert "64-70 A.M." not in xml
+    assert "71-77 A.M." not in xml
+    assert "78-84 A.M." not in xml
+    assert "309-315 A.M." not in xml
+    assert "2450 A.M." not in xml

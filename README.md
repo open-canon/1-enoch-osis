@@ -13,7 +13,7 @@ This repository contains OSIS XML documents for 1 Enoch and related works from T
 - `documents/jubilees.xml` - OSIS document for Charles's `The Book of Jubilees`, scraped from sacred-texts.com with page-level sections nested inside chapter divs
 - `documents/vita-adae-et-evae.xml` - OSIS document for Charles's `Vita Adae et Evae`, scraped from sacred-texts.com
 - `src/1_enoch_osis/scrape_fbe.py` - Forgotten Books of Eden scraper that combines the Adam and Eve books into one document, uses canonical OSIS IDs such as `2En`, normalizes simple intro pages to an `Introduction` title plus source-heading subtitle, and preserves more complex source title blocks where needed
-- `src/1_enoch_osis/scrape_jubilees.py` - Python module to download and parse `The Book of Jubilees` from sacred-texts.com while preserving the source's section-per-page structure inside canonical chapters
+- `src/1_enoch_osis/scrape_jubilees.py` - Python module to download and parse `The Book of Jubilees` from sacred-texts.com while preserving the source's section-per-page structure and inline footnotes inside canonical chapters
 - `src/1_enoch_osis/scrape_sacred_texts.py` - Python module to download and parse from sacred-texts.com
 - `src/1_enoch_osis/scrape_vita_adae_et_evae.py` - Python module to download and parse `Vita Adae et Evae` from sacred-texts.com as a single-page work with inline chapter and verse markers
 - `pdf.py` - Previous pyosis compiler example (for reference)
@@ -91,6 +91,8 @@ uv run python -m 1_enoch_osis.scrape_jubilees \
 ### Jubilees Notes
 
 The sacred-texts edition splits the main body across many section pages instead of one page per chapter. The scraper keeps canonical OSIS chapter divs, then nests each source page as an OSIS section div inside the relevant chapter.
+
+Inline footnote callouts are now preserved as OSIS `<note>` elements with the sacred-texts footnote labels, rather than being dropped from the text stream.
 
 ### Features
 
