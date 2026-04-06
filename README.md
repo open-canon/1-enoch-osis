@@ -10,18 +10,21 @@ This repository contains OSIS XML documents for 1 Enoch and related works from T
 
 - `documents/1-enoch.xml` - OSIS document scraped from sacred-texts.com using the `1_enoch_osis.scrape_sacred_texts` module, with formatting preserved but without inline annotations
 - `documents/adam-and-eve.xml` - Combined OSIS document containing the First and Second Books of Adam and Eve as separate OSIS book divs
+- `documents/jubilees.xml` - OSIS document for Charles's `The Book of Jubilees`, scraped from sacred-texts.com with page-level sections nested inside chapter divs
 - `documents/vita-adae-et-evae.xml` - OSIS document for Charles's `Vita Adae et Evae`, scraped from sacred-texts.com
 - `src/1_enoch_osis/scrape_fbe.py` - Forgotten Books of Eden scraper that combines the Adam and Eve books into one document, uses canonical OSIS IDs such as `2En`, normalizes simple intro pages to an `Introduction` title plus source-heading subtitle, and preserves more complex source title blocks where needed
+- `src/1_enoch_osis/scrape_jubilees.py` - Python module to download and parse `The Book of Jubilees` from sacred-texts.com while preserving the source's section-per-page structure inside canonical chapters
 - `src/1_enoch_osis/scrape_sacred_texts.py` - Python module to download and parse from sacred-texts.com
 - `src/1_enoch_osis/scrape_vita_adae_et_evae.py` - Python module to download and parse `Vita Adae et Evae` from sacred-texts.com as a single-page work with inline chapter and verse markers
 - `pdf.py` - Previous pyosis compiler example (for reference)
 - `tests/test_scrape_fbe_snapshot.py` - Snapshot regression test that regenerates FBE XML from the local HTML cache and compares it against the committed OSIS XML files
+- `tests/test_scrape_jubilees_snapshot.py` - Snapshot regression test that regenerates the Jubilees XML from the local cache and compares it against the committed OSIS XML file
 - `tests/test_scrape_sacred_texts_snapshot.py` - Snapshot regression test that regenerates the 1 Enoch XML from the local HTML cache and compares it against the committed OSIS XML file
 - `tests/test_scrape_vita_adae_et_evae_snapshot.py` - Snapshot regression test that regenerates the Vita Adae et Evae XML from the local cache and compares it against the committed OSIS XML file
 
 ## Regression Testing
 
-The repository includes snapshot tests for `1_enoch_osis.scrape_fbe`, `1_enoch_osis.scrape_sacred_texts`, and `1_enoch_osis.scrape_vita_adae_et_evae`. They regenerate the OSIS XML documents and compare them against the committed XML files in `documents/`.
+The repository includes snapshot tests for `1_enoch_osis.scrape_fbe`, `1_enoch_osis.scrape_jubilees`, `1_enoch_osis.scrape_sacred_texts`, and `1_enoch_osis.scrape_vita_adae_et_evae`. They regenerate the OSIS XML documents and compare them against the committed XML files in `documents/`.
 
 The test is intentionally narrow:
 
@@ -32,6 +35,8 @@ The test is intentionally narrow:
 The cache layout mirrors the source URLs under the shared cache directory. For example, pages from `https://sacred-texts.com/bib/boe/boe012.htm` and `https://sacred-texts.com/bib/fbe/fbe014.htm` are cached at `.cache/html/sacred-texts.com/bib/boe/boe012.htm` and `.cache/html/sacred-texts.com/bib/fbe/fbe014.htm`.
 
 For `Vita Adae et Evae`, the scraper reads and writes the cache entry at `.cache/html/www.sacred-texts.com/chr/apo/adamnev.htm`.
+
+For `Jubilees`, the scraper reads and writes cache entries under `.cache/html/sacred-texts.com/bib/jub/`, for example `.cache/html/sacred-texts.com/bib/jub/jub14.htm`.
 
 Run it with:
 
@@ -66,6 +71,28 @@ uv run python -m 1_enoch_osis.scrape_vita_adae_et_evae \
 The source page is a single document with inline Roman-numeral chapter markers and verse numbers. The scraper normalizes that stream into chapter and verse OSIS elements.
 
 The sacred-texts page for this work may return a Cloudflare interstitial to headless clients. When that happens, the scraper now fails rather than using an alternate source, so the practical workaround is to rely on an already-populated local cache for repeatable runs in this environment.
+
+## Scraping Jubilees
+
+The `1_enoch_osis.scrape_jubilees` module downloads Charles's `The Book of Jubilees` witness from <https://sacred-texts.com/bib/jub/> and converts it to OSIS XML.
+
+### Jubilees Usage
+
+```bash
+uv run python -m 1_enoch_osis.scrape_jubilees
+
+uv run python -m 1_enoch_osis.scrape_jubilees \
+  --output=documents/jubilees.xml \
+  --delay=1.5 \
+  --cache_dir=.cache/html \
+  --log_level=INFO
+```
+
+### Jubilees Notes
+
+The sacred-texts edition splits the main body across many section pages instead of one page per chapter. The scraper keeps canonical OSIS chapter divs, then nests each source page as an OSIS section div inside the relevant chapter.
+
+Headless requests to sacred-texts are blocked intermittently in this environment. To keep the scraper repeatable, the implementation hydrates the local sacred-texts cache from a readable mirror when necessary and then parses those cached page representations on subsequent runs.
 
 ### Features
 
