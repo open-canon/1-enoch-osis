@@ -37,6 +37,16 @@ from bs4 import BeautifulSoup, NavigableString, Tag
 from tqdm import tqdm
 
 from .http_client import CachedHttpFetcher
+from .osis_parsing import (
+    InlinePart,
+    consolidate_inline_strings,
+    extract_plain_text,
+    is_navigation_text,
+    parse_page_marker_text,
+)
+from .osis_parsing import (
+    roman_to_int as shared_roman_to_int,
+)
 
 LOGGER = logging.getLogger(__name__)
 
@@ -245,17 +255,7 @@ class FBEParser:
     @staticmethod
     def _is_nav_text(text: str) -> bool:
         """Return True if the text is a navigation snippet to be skipped."""
-        nav_phrases = [
-            "Next:",
-            "Previous:",
-            "Sacred Texts",
-            "Buy this Book",
-            "Index",
-            "«",
-            "»",
-            "sacred-texts.com",
-        ]
-        return any(ph in text for ph in nav_phrases)
+        return is_navigation_text(text)
 
     @staticmethod
     def _is_standalone_page_marker(p_tag: Tag) -> bool:
@@ -273,55 +273,24 @@ class FBEParser:
 
     def consolidate_strings(
         self,
-        content: list[str | pyosis.HiCt | pyosis.MilestoneCt],
-    ) -> list[str | pyosis.HiCt | pyosis.MilestoneCt]:
+        content: list[InlinePart],
+    ) -> list[InlinePart]:
         """Merge consecutive strings to work around pyosis serialisation quirk."""
-        if not content:
-            return []
-        result: list[str | pyosis.HiCt | pyosis.MilestoneCt] = []
-        current: str | None = None
-        for item in content:
-            if isinstance(item, str):
-                current = (current or "") + item
-            else:
-                if current is not None:
-                    result.append(current)
-                    current = None
-                result.append(item)
-        if current is not None:
-            result.append(current)
-        return result
+        return consolidate_inline_strings(content)
 
     def parse_inline_annotations(
         self,
         element: Tag | NavigableString,
         is_green_font: bool = False,
-    ) -> list[str | pyosis.HiCt | pyosis.MilestoneCt]:
+    ) -> list[InlinePart]:
         """Recursively parse inline HTML, converting formatting to OSIS equivalents."""
         if isinstance(element, NavigableString):
             text = str(element)
             if is_green_font:
-                # Detect page-marker pattern "p. 5" or "p. ix"
-                parts: list[str | pyosis.HiCt | pyosis.MilestoneCt] = []
-                last_end = 0
-                for m in re.finditer(
-                    r"\s*p\.\s+(\d+|[ivxlcdm]+)\s*", text, re.IGNORECASE
-                ):
-                    if m.start() > last_end:
-                        parts.append(text[last_end : m.start()])
-                    parts.append(pyosis.MilestoneCt(type_value="page", n=m.group(1)))
-                    last_end = m.end()
-                if last_end < len(text):
-                    parts.append(text[last_end:])
-                return [
-                    p
-                    for p in parts
-                    if isinstance(p, pyosis.MilestoneCt)
-                    or (isinstance(p, str) and p.strip())
-                ]
+                return parse_page_marker_text(text)
             return [text] if text.strip() else []
 
-        result: list[str | pyosis.HiCt | pyosis.MilestoneCt] = []
+        result: list[InlinePart] = []
         skip_set: set[Tag] = set()
 
         for child in element.children:
@@ -378,16 +347,10 @@ class FBEParser:
 
     def _extract_text(
         self,
-        parts: list[str | pyosis.HiCt | pyosis.MilestoneCt],
+        parts: list[InlinePart],
     ) -> str:
         """Flatten annotation parts to plain text."""
-        out = ""
-        for p in parts:
-            if isinstance(p, str):
-                out += p
-            elif hasattr(p, "content"):
-                out += self._extract_text(p.content)  # type: ignore[arg-type]
-        return out
+        return extract_plain_text(parts)
 
     # ------------------------------------------------------------------
     # Chapter-number extraction
@@ -396,14 +359,7 @@ class FBEParser:
     @staticmethod
     def roman_to_int(s: str) -> int:
         """Convert a Roman numeral string to an integer."""
-        vals = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
-        total = 0
-        prev = 0
-        for ch in reversed(s.upper()):
-            v = vals.get(ch, 0)
-            total += v if v >= prev else -v
-            prev = v
-        return total
+        return shared_roman_to_int(s)
 
     def extract_chapter_number(self, heading_text: str) -> int | None:
         """Extract chapter number from an <h3> heading.

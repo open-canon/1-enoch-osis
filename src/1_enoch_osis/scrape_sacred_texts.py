@@ -24,6 +24,19 @@ from bs4 import BeautifulSoup, NavigableString, Tag
 from tqdm import tqdm
 
 from .http_client import CachedHttpFetcher
+from .osis_parsing import (
+    InlinePart,
+    consolidate_inline_strings,
+    extract_plain_text,
+    is_navigation_text,
+    parse_page_marker_text,
+)
+from .osis_parsing import (
+    normalize_whitespace as shared_normalize_whitespace,
+)
+from .osis_parsing import (
+    roman_to_int as shared_roman_to_int,
+)
 
 LOGGER = logging.getLogger(__name__)
 
@@ -119,43 +132,18 @@ class SacredTextsParser:
     def close(self) -> None:
         self.http.close()
 
-    def consolidate_strings(
-        self, content: list[str | pyosis.HiCt | pyosis.MilestoneCt]
-    ) -> list[str | pyosis.HiCt | pyosis.MilestoneCt]:
+    def consolidate_strings(self, content: list[InlinePart]) -> list[InlinePart]:
         """Consolidate consecutive strings in a content list.
 
         pyosis has a bug where PCt/LCt/VerseCt don't handle multiple consecutive
         strings correctly - they only keep the first and last, dropping middle ones.
         This function merges consecutive strings to avoid that bug.
         """
-        if not content:
-            return []
-
-        result = []
-        current_string = None
-
-        for item in content:
-            if isinstance(item, str):
-                if current_string is None:
-                    current_string = item
-                else:
-                    current_string += item
-            else:
-                # Hit a non-string (HiCt or MilestoneCt)
-                if current_string is not None:
-                    result.append(current_string)
-                    current_string = None
-                result.append(item)
-
-        # Don't forget the last accumulated string
-        if current_string is not None:
-            result.append(current_string)
-
-        return result
+        return consolidate_inline_strings(content)
 
     def parse_inline_annotations(
         self, element: Tag | NavigableString, is_green_font: bool = False
-    ) -> list[str | pyosis.HiCt | pyosis.MilestoneCt]:
+    ) -> list[InlinePart]:
         """Parse text, preserving inline formatting, brackets, and page markers.
 
         Converts HTML formatting tags to OSIS equivalents:
@@ -176,36 +164,12 @@ class SacredTextsParser:
             text = str(element)
             # Only convert page markers if inside a green font tag
             if is_green_font:
-                # Pattern: "p. 31" or "p. xvii" (roman numerals)
-                parts = []
-                last_end = 0
-                for match in re.finditer(
-                    r"\s*p\.\s+(\d+|[ivxlcdm]+)\s*", text, re.IGNORECASE
-                ):
-                    # Add text before the page marker
-                    if match.start() > last_end:
-                        parts.append(text[last_end : match.start()])
-                    # Add milestone element for the page marker
-                    page_n = match.group(1)
-                    parts.append(pyosis.MilestoneCt(type_value="page", n=page_n))
-                    last_end = match.end()
-
-                # Add any remaining text after the last page marker
-                if last_end < len(text):
-                    parts.append(text[last_end:])
-
-                # Filter out empty strings
-                return [
-                    p
-                    for p in parts
-                    if isinstance(p, pyosis.MilestoneCt)
-                    or (isinstance(p, str) and p.strip())
-                ]
+                return parse_page_marker_text(text)
             else:
                 # Not in green font - preserve text as-is
                 return [text] if text.strip() else []
 
-        result: list[str | pyosis.HiCt | pyosis.MilestoneCt] = []
+        result: list[InlinePart] = []
 
         # Track elements to skip (footnote number links)
         skip_elements = set()
@@ -311,19 +275,7 @@ class SacredTextsParser:
         text_parts = self.parse_inline_annotations(verse_element)
 
         # Extract plain text for comparison (flatten HiCt content)
-        full_text = ""
-        for part in text_parts:
-            if isinstance(part, str):
-                full_text += part
-            elif hasattr(part, "content"):
-                # Recursively extract text from HiCt content
-                for item in part.content:
-                    if isinstance(item, str):
-                        full_text += item
-                    elif hasattr(item, "content"):
-                        full_text += "".join(
-                            str(c) for c in item.content if isinstance(c, str)
-                        )
+        full_text = extract_plain_text(text_parts)
 
         # Check if verse contains poetry (multiple line breaks)
         has_poetry = bool(verse_element.find_all(["br"]))
@@ -384,17 +336,7 @@ class SacredTextsParser:
     @staticmethod
     def roman_to_int(s: str) -> int:
         """Convert Roman numeral to integer."""
-        roman_values = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
-        total = 0
-        prev_value = 0
-        for char in reversed(s.upper()):
-            value = roman_values.get(char, 0)
-            if value < prev_value:
-                total -= value
-            else:
-                total += value
-            prev_value = value
-        return total
+        return shared_roman_to_int(s)
 
     def start_book(self) -> None:
         """Initialize the OSIS book structure."""
@@ -414,22 +356,12 @@ class SacredTextsParser:
     @staticmethod
     def normalize_whitespace(text: str) -> str:
         """Collapse internal whitespace so scraped headings compare consistently."""
-        return re.sub(r"\s+", " ", text).strip()
+        return shared_normalize_whitespace(text)
 
     @staticmethod
     def is_navigation_text(text: str) -> bool:
         """Return True if text is site navigation or other sacred-texts chrome."""
-        nav_phrases = [
-            "Next:",
-            "Previous:",
-            "Sacred Texts",
-            "Buy this Book",
-            "Index",
-            "«",
-            "»",
-            "sacred-texts.com",
-        ]
-        return any(phrase in text for phrase in nav_phrases)
+        return is_navigation_text(text)
 
     def should_skip_front_matter_paragraph(self, p_tag: Tag) -> bool:
         """Return True if a front-matter paragraph is site chrome or metadata."""
