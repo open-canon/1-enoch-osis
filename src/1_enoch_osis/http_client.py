@@ -82,6 +82,9 @@ class CachedHttpFetcher:
             f"Failed to fetch {url} after {retry_count} attempts"
         ) from last_exc
 
+    def cache_path_for(self, url: str) -> Path | None:
+        return self._cache_path(url)
+
     def _build_client(self) -> httpx.Client:
         return httpx.Client(
             headers=self.headers,

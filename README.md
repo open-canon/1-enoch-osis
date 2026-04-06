@@ -10,15 +10,18 @@ This repository contains OSIS XML documents for 1 Enoch and related works from T
 
 - `documents/1-enoch.xml` - OSIS document scraped from sacred-texts.com using the `1_enoch_osis.scrape_sacred_texts` module, with formatting preserved but without inline annotations
 - `documents/adam-and-eve.xml` - Combined OSIS document containing the First and Second Books of Adam and Eve as separate OSIS book divs
+- `documents/vita-adae-et-evae.xml` - OSIS document for Charles's `Vita Adae et Evae`, scraped from sacred-texts.com
 - `src/1_enoch_osis/scrape_fbe.py` - Forgotten Books of Eden scraper that combines the Adam and Eve books into one document, uses canonical OSIS IDs such as `2En`, normalizes simple intro pages to an `Introduction` title plus source-heading subtitle, and preserves more complex source title blocks where needed
 - `src/1_enoch_osis/scrape_sacred_texts.py` - Python module to download and parse from sacred-texts.com
+- `src/1_enoch_osis/scrape_vita_adae_et_evae.py` - Python module to download and parse `Vita Adae et Evae` from sacred-texts.com as a single-page work with inline chapter and verse markers
 - `pdf.py` - Previous pyosis compiler example (for reference)
 - `tests/test_scrape_fbe_snapshot.py` - Snapshot regression test that regenerates FBE XML from the local HTML cache and compares it against the committed OSIS XML files
 - `tests/test_scrape_sacred_texts_snapshot.py` - Snapshot regression test that regenerates the 1 Enoch XML from the local HTML cache and compares it against the committed OSIS XML file
+- `tests/test_scrape_vita_adae_et_evae_snapshot.py` - Snapshot regression test that regenerates the Vita Adae et Evae XML from the local cache and compares it against the committed OSIS XML file
 
 ## Regression Testing
 
-The repository includes snapshot tests for `1_enoch_osis.scrape_fbe` and `1_enoch_osis.scrape_sacred_texts`. They regenerate the OSIS XML documents and compare them against the committed XML files in `documents/`.
+The repository includes snapshot tests for `1_enoch_osis.scrape_fbe`, `1_enoch_osis.scrape_sacred_texts`, and `1_enoch_osis.scrape_vita_adae_et_evae`. They regenerate the OSIS XML documents and compare them against the committed XML files in `documents/`.
 
 The test is intentionally narrow:
 
@@ -27,6 +30,8 @@ The test is intentionally narrow:
 - It uses the local `.cache/html/` directory as the shared scraper input source so the tests can run offline.
 
 The cache layout mirrors the source URLs under the shared cache directory. For example, pages from `https://sacred-texts.com/bib/boe/boe012.htm` and `https://sacred-texts.com/bib/fbe/fbe014.htm` are cached at `.cache/html/sacred-texts.com/bib/boe/boe012.htm` and `.cache/html/sacred-texts.com/bib/fbe/fbe014.htm`.
+
+For `Vita Adae et Evae`, the scraper reads and writes the cache entry at `.cache/html/www.sacred-texts.com/chr/apo/adamnev.htm`.
 
 Run it with:
 
@@ -39,6 +44,28 @@ If the relevant source subtree under `.cache/html/` is missing, the matching tes
 ## Scraping from sacred-texts.com
 
 The `1_enoch_osis.scrape_sacred_texts` module downloads each chapter page from <https://sacred-texts.com/bib/boe/> and converts it to OSIS XML format using pyosis.
+
+## Scraping Vita Adae et Evae
+
+The `1_enoch_osis.scrape_vita_adae_et_evae` module downloads the single-page `Vita Adae et Evae` witness from <https://www.sacred-texts.com/chr/apo/adamnev.htm> and converts it to OSIS XML.
+
+### Vita Usage
+
+```bash
+uv run python -m 1_enoch_osis.scrape_vita_adae_et_evae
+
+uv run python -m 1_enoch_osis.scrape_vita_adae_et_evae \
+  --output=documents/vita-adae-et-evae.xml \
+  --delay=1.5 \
+  --cache_dir=.cache/html \
+  --log_level=INFO
+```
+
+### Vita Notes
+
+The source page is a single document with inline Roman-numeral chapter markers and verse numbers. The scraper normalizes that stream into chapter and verse OSIS elements.
+
+The sacred-texts page for this work may return a Cloudflare interstitial to headless clients. When that happens, the scraper now fails rather than using an alternate source, so the practical workaround is to rely on an already-populated local cache for repeatable runs in this environment.
 
 ### Features
 
