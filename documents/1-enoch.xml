@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace" TEIform="TEI.2">
-  <osisText canonical="true" osisIDWork="1En" osisRefWork="1 Enoch" xml:lang="en" xml:space="default" TEIform="text">
+  <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="1En" osisRefWork="1 Enoch" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.05T15:56:17</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.12T15:39:49</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/boe/, and converted to OSIS by Andrew P. Sansom.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -15,7 +15,7 @@
         <creator role="trl">Robert Henry (R.H.) Charles</creator>
         <description>Excerpt from "The Apocrypha and Pseudepigrapha of the Old Testament in English : with introductions and critical and explanatory notes to the several books" by Robert Henry Charles, 1913. Transcribed by Joshua Williams, Northwest Nazarene College, 1995. Converted to OSIS by Andrew P. Sansom, 2026.</description>
         <publisher>The Clarendon Press</publisher>
-        <type type="OSIS" />
+        <type type="OSIS"/>
       </work>
     </header>
     <div canonical="true" type="book" osisID="1En" TEIform="div">
@@ -34,7 +34,7 @@
       </div>
       <div canonical="false" type="front" TEIform="div">
         <title canonical="false" type="main" TEIform="title">Editors' Preface</title>
-        <milestone type="page" n="vi" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="vi" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">THE object of this series of translations is primarily to furnish students with short, cheap, and handy text-books, which, it is hoped, will facilitate the study of the particular texts in class under competent teachers. But it is also hoped that the volumes will be acceptable to the general reader who may be interested in the subjects with which they deal. It has been thought advisable, as a general rule, to restrict the notes and comments to a small compass; more especially as, in most cases, excellent works of a more elaborate character are available. Indeed, it is much to be desired that these translations may have the effect of inducing readers to study the larger works.</p>
         <p TEIform="p">Our principal aim, in a word, is to make some difficult texts, important for the study of Christian origins, more generally accessible in faithful and scholarly translations.</p>
         <p TEIform="p">In most cases these texts are not available in a cheap and handy form. In one or two cases texts have been included of books which are available in the official Apocrypha; but in every such case reasons exist for putting forth these texts in a new translation, with an Introduction, in this series.</p>
@@ -43,9 +43,9 @@
       </div>
       <div canonical="false" type="front" TEIform="div">
         <title canonical="false" type="main" TEIform="title">Introduction</title>
-        <milestone type="page" n="vii" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="vii" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">As the Book of Enoch is, in some respects, the most notable extant apocalyptic work outside the canonical Scriptures, it will not be inappropriate to offer a few remarks here on the Apocalyptic Literature generally. In writing about the books which belong to this literature, Prof. Burkitt says very pointedly that "they are the most characteristic survival of what I will venture to call, with all its narrowness and its incoherence, the heroic age of Jewish history, the age when the nation attempted to realize in action the part of the peculiar people of God. It ended in catastrophe, but the nation left two successors, the Christian Church and the Rabbinical Schools, each of which carried on some of the old national aims. And of the two it was the Christian Church that was most faithful to the ideas enshrined in the Apocalypses, and it did consider itself, not without some reason, the fulfilment of those ideas. What is wanted, therefore, in studying the Apocalypses is, above all, sympathy with the ideas that underlie them, and especially with the belief in the New Age. And those who believe that in Christianity a new Era really did dawn for us ought, I think, to have that sympathy. . . . We study the Apocalypses to learn how our spiritual ancestors hoped again that God would make all right in the end; and that we, their children, are here to-day studying them is an indication</p>
-        <milestone type="page" n="viii" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="viii" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">that their hope was not wholly unfounded." 
           <note canonical="false" type="explanation" n="viii:1" TEIform="note">Jewish and Christian Apocalypses , pp. 15, 16 (1913).</note>
         </p>
@@ -54,32 +54,32 @@
         <p TEIform="p">"And they shall all belong to God, And they shall all be prospered, And they shall all be blessed.</p>
         <p TEIform="p">"And He will help them all, And light shall appear unto them, And He will make peace with them" (1 Enoch i. 8).</p>
         <p TEIform="p">In all the books belonging to this literature which have come down to us this hope is expressed more or</p>
-        <milestone type="page" n="ix" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="ix" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">less vividly; nor is the dark background wanting. with prophecies of coming wrath. It will, therefore, be realized that the Apocalyptic Literature is almost wholly concerned with the future; it is true that again and again the Apocalyptist glances at the contemporary history of the world around him, to which many a cryptic reference is made--a fact which necessitates some knowledge of the history of this period (
           <hi type="italic" TEIform="hi">circa</hi> 200 B.C.-A.D. 100) for a full understanding of the books in question--but these references are only made with a view to comforting the oppressed and afflicted with the thought that even the most mighty of earthly powers are shortly to be overthrown by. the advent of the new and glorious era when every injustice and all the incongruities of life will be done away with. So that every reference to the present is merely a position taken up from which to point to the future. Now, since, as we have seen, the Apocalyptists despair of any bettering of the present world, and therefore contemplate its destruction as the preliminary of the new order of things, they look 
           <hi type="italic" TEIform="hi">away</hi> from this world in their visions of the future; they conceive of other-worldly forces coming into play in the reconstitution of things, and of society generally; and since these 
           <hi type="italic" TEIform="hi">are</hi> other-worldly forces the supernatural plays a great part in the Apocalyptic Literature. This supernatural colouring will often strike the reader of this literature as fantastic, and at times 
           <hi type="italic" TEIform="hi">bizarre</hi>; but this should not be permitted to obscure the reality which often lies behind these weird shadows. Mental visions are not always easily expressed in words; the seer who in a vision has received a message in some fantastic guise necessarily has the impress upon his mind of what he has seen when giving his message; and when he describes his vision the picture he presents is, in the nature of the case, more fantastic to the ear of the hearer than to the eye of him who saw it. Allowance should be made for this; especially by us Westerns who are so lacking in the rich imaginativeness
         </p>
-        <milestone type="page" n="x" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="x" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">of the Oriental. Our love of literalness hinders the play of the imagination because we are so apt to "materialize" a mental picture presented by another. The Apocalypses were written by and for Orientals, and we cannot do justice to them unless we remember this; but it would be best if we could get into the Oriental mind and look at things from that point of view.</p>
         <p TEIform="p">Another thing which the reader of the Apocalyptic Literature must be prepared for is the frequent inconsistency of thought to be found there, together with variableness of teaching often involving contradiction. The reason of this is not to be sought simply in the fact that in the Apocalypses the hand of more than one author is frequently to be discerned, a fact which would easily account for divergence of views in one and the same book-no, the chief reason is that, on the one hand. the minds of the Apocalyptists were saturated with the traditional thoughts and ideas of the Old Testament, and, on the, other, they were eagerly absorbing the newer conceptions which the spirit of the age had brought into being. This occasioned a continual conflict of thought in their minds; the endeavour to harmonize the old and the new would not always succeed, and in consequence there often resulted a compromise which was illogical and which presented contradictions. Inconsistency of teaching on certain points is, therefore, not surprising under the circumstances.</p>
         <p TEIform="p">Again, to realize the significance of much that is found in these Apocalypses one has to reckon with a rigid predestinarianism which was characteristic of the Apocalyptists as a whole. They started with the absolute conviction that the whole course of the world, from beginning to end, both as regards its physical changes and also in all that concerns the history of nations, their growth and decline, and of every single individual, was in every respect predetermined by God Almighty before all time. This</p>
-        <milestone type="page" n="xi" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xi" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">belief of the Apocalyptists is well illustrated in one of the later Apocalypses by these words:</p>
         <p TEIform="p">"For He hath weighed the age in the balance, And by number hath He numbered the seasons; Neither will He move nor stir things, Till the measure appointed be fulfilled."                       (ii. (iv.) Esdras iv. 36, 37.)</p>
         <p TEIform="p">Thus "the times and periods of the course of the world's history have been predetermined by God. The numbers of the years have been exactly fixed. This was a fundamental postulate of the Apocalyptists, who devoted much of their energy to calculations, based upon a close study of prophecy, as to the exact period when history should reach its consummation . . . the underlying idea is predestinarian." 
           <note canonical="false" type="explanation" n="xi:1" TEIform="note">G. H. Box, The Ezra Apocalypse , pp. 35, 36 (1912).</note> But all these things, according to the Apocalyptists, were divine secrets hidden from the beginning the world, but revealed to God-fearing men to whom was accorded the faculty of peering into the hidden things of God and of understanding them; upon these men was laid the privilege and duty of revealing the divine secrets to others, hence their name of Apocalyptists or "revealers." It was because the Apocalyptists believed so firmly in this power which they possessed of looking into the deep things of God that they claimed to be able to measure the significance of what had happened in the past and of what was happening in the present; and upon the basis of this knowledge they believed that they also had the power, given them by God, of foreseeing the march of future events; above all, of knowing when the end of the world would come, a consummation towards which the whole history of the world had been tending from the beginning.
         </p>
         <p TEIform="p">In spite of all the mysticism, sometimes of a rather fantastic kind, and of the frequently supra-mundane vision with which the Apocalyptic Literature abounds,</p>
-        <milestone type="page" n="xii" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xii" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">the Apocalyptists fully realized the need of practical religion; they were upholders, of the Law, the loyal observance of which they regard as a necessity for all God-fearing men. In this the Apocalyptists were at one, in principle, with Pharisaism; but their conception of what constituted loyal observance of the Law differed from that of the Pharisees, for, unlike these, the Apocalyptists laid all stress on the spirit of its observance rather than upon the letter. Characteristic of their attitude here are the words in 1 Enoch v. 4:</p>
         <p TEIform="p">"But ye--ye have not been steadfast, nor done the commandments of the Lord, But ye have turned away, and have spoken proud and hard words With your impure mouths against His greatness, O ye hard-hearted, ye shall find no peace."</p>
         <p TEIform="p">And again, in xcix. 2:</p>
         <p TEIform="p">"Woe to them that pervert the words of uprightness,            And transgress the eternal Law."</p>
         <p TEIform="p">We do not find in this Literature that insistence on the literal carrying-out of the minutest precepts of the Law which was characteristic of Pharisaism. Veneration for the Law is whole-hearted; it is the real guide of life; punishment awaits those who ignore its guidance; but the Pharisaic interpretation of the Law and its requirements is alien to the spirit of the Apocalyptists.</p>
         <p TEIform="p">As a whole, the Apocalyptic Literature presents an universalistic attitude very different from the nationalistic narrowness of the Pharisees. It is true, the Apocalyptists are not always consistent in this, but normally they embrace the Gentiles equally with the men of their own nation in the divine scheme of salvation; and, in the same way, the wicked who are</p>
-        <milestone type="page" n="xiii" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xiii" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">excluded are not restricted to the Gentiles, but the Jews equally with them shall suffer torment hereafter according to their deserts. 
           <note canonical="false" type="explanation" n="xiii:1" TEIform="note">The general Pharisaic point of view regarding this may be gathered from Matt. iii. 7-10.</note>
         </p>
@@ -88,7 +88,7 @@
           <hi type="italic" TEIform="hi">The Secrets of Enoch</hi>, known as 2 Enoch. The former is also called the Ethiopic Enoch, the latter the Slavonic Enoch, after the languages of the earliest versions extant of each respectively. No manuscript of the original language of either is known to be in existence.
         </p>
         <p TEIform="p">According to Canon Charles, the various elements of which our book in its present form is made up belong to different dates. The following table will show the dates of the different parts of the book. Canon Charles believes that these are approximately</p>
-        <milestone type="page" n="xiv" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xiv" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">correct, without committing himself to the certainty of this in each case:</p>
         <p TEIform="p">CHAPTERSxii.-xxxvi. xclii. xci. 12-17"The Apocalypse of Weeks."The oldest pre-Maccabæan portions.vi.-xi. liv. 7-lv. 2 lx. lxv.-lxix. 25 cvi., cvii.Fragments of "The Book of Noah."Pre-Maccabæan at the latest.lxxxiii.-xc."The Dream-Visions," 165-161 B.C.lxxii.-lxxxii."The Book of the Heavenly Luminaries."Before 110 B.C.xxxvii.-lxxi. xci. 1-11, 18, 19-civ."The Parables," or "Similitudes."circa 105-64 B.C.i.-v.The latest portion,but pre-Christian.</p>
         <p TEIform="p">CHAPTERS</p>
@@ -112,14 +112,14 @@
         <p TEIform="p">but pre-Christian.</p>
         <p TEIform="p">[paragraph continues] Chapter cv, which consists of only two verses, cannot be dated; while cviii. is in the nature of an appendix, probably added subsequently, to the whole work.</p>
         <p TEIform="p">While these dates may be regarded as approximately correct, it should be pointed out that differences of opinion exist among scholars on the subject. Schürer holds, for example, that, with the exception of chapters xxxvii.-lxxi. (the "Parables," or "Similitudes"), the entire book belongs to the period 130-100 B.C.; the "Parables" he assigns to a time not earlier than Herod the Great. Beer thinks that the "Dream-Visions" (chapters lxxxiii.-xc.) belong to the time of John Hyrcanus (135-105 B.C.), and he includes under the pre-Maccabæan portions only xci. 12-17, xcii. xciii. 1-14; and holds that the rest of the book was written before 64 B.C. Dalman maintains that it cannot be proved that the important section xxxvii.-lxxi. (the "Similitudes") is "the product of the pre-Christian period," though he fully</p>
-        <milestone type="page" n="xv" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xv" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">recognizes its Jewish character. Burkitt regards the writer as "almost contemporary" with the philosopher Posidonius (135-51 B.C.). There is thus some diversity of opinion as to the date of the book among leading authorities. That it is, as a whole, pre-Christian, may be regarded as definitely established. More difficult is the question whether any portions of it are pre-Maccabæan; Charles gives various reasons for his belief that considerable parts are pre-Maccabæan; we are inclined to agree with him, though it may be questioned whether the last word on the subject has been spoken.</p>
         <p TEIform="p">As the various parts of the book 
           <note canonical="false" type="explanation" n="xv:1" TEIform="note">Burkitt rightly insists that we should speak of the collection as the books. not the book, of Enoch.</note> clearly belong to different dates, diversity of authorship is what one is naturally led to expect; and of this there can, indeed, be no shadow of doubt. The author of the earliest portions was a Jew who lived, as Burkitt has shown, in northern Palestine, in the land of Dan, south-west of the Hermon range, near the headwaters of the Jordan. This is important, as it tends to show that the book, or books, is really Palestinian, and one which, therefore, circulated among Jews in Palestine. "If, moreover, the author came from the north, that helps to explain the influence the book had upon the Religion that was cradled in Galilee." 
           <note canonical="false" type="explanation" n="xv:2" TEIform="note">Burkitt, op. cit., 28-30.</note> Of the authors of the other three books of which "Enoch" is made up (viz. "The Dream-Visions," "The Book of the Heavenly Luminaries," and "The Similitudes") we know nothing save what can be gathered from their writings as to their religious standpoint.
         </p>
         <p TEIform="p">Charles holds that though there is not unity of authorship there is, none the less, uniformity; for,</p>
-        <milestone type="page" n="xvi" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xvi" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">according to him, all the books were written by 
           <hi type="italic" TEIform="hi">Chassidim</hi>, 
           <note canonical="false" type="explanation" n="xvi:1" TEIform="note">i.e. the " Pious ones." or " Saints."</note> or by their successors, the Pharisees. This contention has been strongly assailed and much weakened by Leszynsky in a recent work on the Sadducees. 
@@ -131,7 +131,7 @@
           <note canonical="false" type="explanation" n="xvi:6" TEIform="note">Gen. v. 24.</note>
           <hi type="italic" TEIform="hi">i.e.</hi> that he ascended into the heavens, is also significant; for he would thereby be just the one to know all about the heavenly luminaries; he was just the most appropriate author of a book which was to deal with astronomical questions. "The Sadducæan character of the original work," says Leszynsky, "is seen most clearly in the discussion regarding the calendar; chapters
         </p>
-        <milestone type="page" n="xvii" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xvii" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">lxxii.-lxxxii. are rightly called the Book of Astronomy: 
           <note canonical="false" type="explanation" n="xvii:1" TEIform="note">i.e. "The Book of the Heavenly Luminaries." as Charles calls it.</note> 'the book of the courses of the luminaries of the heaven, the relations of each, according to their classes, their dominion and their seasons, according to their names and places of origin, and according to their months . . . with regard to all the years of the world and unto eternity, till the new creation is accomplished which endureth till all eternity' (lxxii. 1). That sounds almost as though the author of the Book of jubilees had written it. That it is not a merely scientific interest which impels the writer to give expression to his astronomical theories may be seen from the words at the conclusion of the section: 'Blessed are all the righteous, blessed are all those who walk in the way of righteousness, and sin not as the sinners in the reckoning of all their days, in which the sun traverseth the heaven, entering into and departing from the portals for thirty days . . .' (lxxxii. 4-7). Herein one can discern quite clearly the tendency of the writer. He desires the adoption of the solar year, while his contemporaries wrongly followed a different reckoning, and therefore celebrated the feasts at the wrong time. The 'sinners who sin in the reckoning of the year' are the Pharisees; and the righteous ones who are blessed, the 
           <hi type="italic" TEIform="hi">Zaddîkim</hi>, 
@@ -142,7 +142,7 @@
         <p TEIform="p">The pre-Maccabæan portions (assuming that some portions of it are pre-Maccabæan) of the book of Enoch must certainly be ascribed to the 
           <hi type="italic" TEIform="hi">Chassidim</hi>;
         </p>
-        <milestone type="page" n="xviii" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xviii" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">but it is not on that account necessary to ascribe 
           <hi type="italic" TEIform="hi">all</hi> the later portions to the Pharisees. Three points especially militate against this: some of the teaching concerning the Messiah; the, generally speaking, universalistic spirit, which is quite un-Pharisaic, and the attitude towards the Law, which is not that of the Pharisees. It is not to be denied that some portions (
           <hi type="italic" TEIform="hi">e.g.</hi> cii. 6 ff.) are from the hands of Pharisees; nor can it be doubted that the whole collection in its present form has been worked over by a Pharisee, or Pharisees; but that all the post-Maccabæan portions in their original form emanated from Pharisaic circles does not appear to have been proved. It seems more likely that, with the exceptions already referred to, the various component parts of the book were written by Apocalyptists who belonged neither to Pharisaic nor yet to Sadducæan circles.
@@ -150,7 +150,7 @@
         <p TEIform="p">The Book of Enoch exists only in the Ethiopic Version; this was translated from the Greek Version, of which only a few portions are extant. 
           <note canonical="false" type="explanation" n="xviii:1" TEIform="note">Chaps. i.-xxxii. 6. and xix. 3-xxi. 9 in a duplicate form were discovered at Akhmîm in 1886-1887; vi.-x. 14. xv. 8-xvi. x, and viii. 4-ix. 4 in a duplicate form, have been preserved in Syncellus; lxxxix. 42-49 occurs in a Greek Vatican MS. (No. 1809); there are also a few quotations in early Greek ecclesiastical writings; and i. 9, v. 4. xxvii. 2 are quoted in the Epistle of St. Jude 14, 15.</note> The Latin Version, which was also made from the Greek, is not extant, with the exception of i. 9, and cvi. 1-18; the fragment containing these two passages was discovered by the Rev. Al. R. James, of King's College, Cambridge, in the British Museum. The book was originally written either in Hebrew or Aramaic; Charles thinks that chapters vi.-xxxvi., lxxxiii.-xc. were Aramaic, the rest Hebrew. It is, however, very difficult to say for certain which of these two languages was really the original, because,
         </p>
-        <milestone type="page" n="xix" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xix" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">as Burkitt says, "most of the most convincing proofs that the Greek text of Enoch is a translation from a Semitic language fit equally well with a Hebrew or an Aramaic original"; his opinion is that Aramaic was the original language, "but that a few passages do seem to suggest a Hebrew origin, yet not decisively." 
           <note canonical="false" type="explanation" n="xix:1" TEIform="note">Op. cit. , p. 27.</note>
         </p>
@@ -158,7 +158,7 @@
           <note canonical="false" type="explanation" n="xix:2" TEIform="note">It is a great pity that one system of chapter-enumeration runs through the whole volume; if each separate book began with chap. i. it would be much better. For obvious reasons this cannot be done here; see Editors' General Preface.</note> But, in any case, it will be found most useful to have some general idea of the contents of each of the different books before beginning to read them. For this purpose a brief 
           <hi type="italic" TEIform="hi">résumé</hi> of each is given here.
         </p>
-        <milestone type="page" n="xx" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xx" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">i. 
           <hi type="italic" TEIform="hi">The Book of Enoch</hi> (chapters xii.-xxxvi.). The book begins With a Dream-Vision of Enoch. In this dream Enoch is asked to intercede for the watchers of heaven, 
           <hi type="italic" TEIform="hi">i.e.</hi> the angels, who had left their heavenly home to commit iniquity with the daughters of men. He writes out the petition (cp. the title "Enoch the Scribe") the fallen angels make, and then retires to await the answer, which comes to him in a series of visions. These visions are not quite easy to follow; they are evidently incomplete and somewhat confused; in all probability the text has suffered in transmission. At any rate, the petition is refused; Enoch declares to the fallen angels the doom which, as he has been taught in the visions, is to be their lot; the final words of the message which he is bidden to give them are: "You have no peace" (xii.-xvi.). There follow then accounts of the different journeys which Enoch makes, being conducted by angels of light, through certain parts of the earth, and through Sheol. After the account of the 
@@ -166,7 +166,7 @@
           <hi type="italic" TEIform="hi">second journey</hi> is described the place of final punishment of the fallen angels: "This place is the prison of the angels and here they will imprisoned for ever." From thence Enoch is taken to Sheol; then to the west, where he sees the luminaries of heaven. After that the angels show him "seven magnificent mountains," upon one of which is the throne of God; he sees also the Tree of Life, which is to be given to the holy and. righteous after the great judgement. From thence he comes back to the centre of the earth and sees the "blessed place," Jerusalem, and the "accursed valley" (xxi.-xxvii.). The book concludes with what appear to be fragments of other journeys, to the east, to the north, and to the south. Of special interest here is the mention of the Garden of Righteousness, and the Tree of Wisdom (xxviii.-xxxvi.).
         </p>
         <p TEIform="p">Much that is written in these chapters may appear</p>
-        <milestone type="page" n="xxi" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xxi" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">pointless and uninspiring; but we must bear in mind the purpose that lies behind it all. The fallen angels were believed to have brought sin on to the earth; all the wickedness of the world the Apocalyptist traces back to them. This cause of sin must be wholly destroyed before righteousness can come truly to its own. Therefore the Apocalyptist has a practical aim in view when describing in much detail the final place of punishment of the fallen angels; for here, too, are to come all those who by sin are the offspring of this race. No less does he delight in telling of the abode of joy prepared for the righteous. That all these descriptions were constructed out of the imagination of the Apocalyptist, based largely, no doubt, upon popular tradition, did not detract from their practical value for the people of his day. He was a preacher of righteousness who looked forward in absolute conviction to the final overthrow of sin; and all his visions have as their motive-power the yearning for and belief in the triumph of righteousness over sin. One of a like mind wrote later on, in a kind of preface to his book, these significant words, which sum up the essence of the teaching of this book:</p>
         <p TEIform="p">And destroy all the spirits of the reprobate, and the children of the Watchers. because they have wronged mankind. Destroy all wrong from the face of the earth, and let every evil work come to an end: and let the plant of righteousness and truth appear: and it shall prove a blessing: the works of righteousness and truth shall be planted in truth and joy for evermore.</p>
         <p TEIform="p">ii. 
@@ -175,7 +175,7 @@
         <p TEIform="p">The 
           <hi type="italic" TEIform="hi">first parable</hi> (xxxviii.-xliv.) is a prophecy of coming judgement upon the wicked, and especially the kings and mighty ones on the earth. On the
         </p>
-        <milestone type="page" n="xxii" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xxii" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">other hand, the Apocalyptist sees in his vision the abode and resting-places of the righteous who are continually praising the "Lord of Spirits "; this is the usual title given -to God in this book. Here occurs the first mention of the "Elect One" (cp. Luke xxiii. 35). In the presence of the Lord of Spirits are also the four Archangels and innumerable companies of other angels. Here he learns many secrets of the heavens; a fragment on Wisdom (xlii.), which recalls some passages in Ecclus. xxiv., comes in the middle of the secrets, and is clearly out of place. The 
           <hi type="italic" TEIform="hi">second parable</hi> (xlv.-lvii.) continues the same theme and further develops it. Of special importance is the sitting of the Elect One on the throne of glory as Judge (xlv. 3), and the mention of His title, "Son of Man" (xlvi. 2). The thought of the vindication of the righteous is marred by their joy at vengeance upon the wicked. A particularly striking passage is chapter xlviii. 1-7, which speaks of the inexhaustible fountain of righteousness reserved for the holy and elect in the presence of the Son of Man and of the Lord of Spirits. The Apocalyptist prophesies further of the repentance of the Gentiles (chapter l.), an universalistic note of significance, and speaks of the Resurrection of the dead in a notable passage:
         </p>
@@ -183,7 +183,7 @@
         <p TEIform="p">[paragraph continues] The parable ends with an account of the judgement, followed by two short passages on the last struggle of the heathen powers against Israel (lvi. 5-8), and the return from the Dispersion (lvii.), which do not appear to be in their original place. The 
           <hi type="italic" TEIform="hi">third parable</hi> (lviii.-lxxi.) has clearly suffered largely from the intrusion of alien matter, and is probably incomplete. Its main theme is the final judgement upon all flesh, and especially upon the great ones of -the earth; the judge is the Son of Man. Some of
         </p>
-        <milestone type="page" n="xxiii" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xxiii" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">the passages which speak of the future reward of the righteous are full of beauty; the following is well worth quoting:</p>
         <p TEIform="p">And the righteous and elect shall have risen from the earth, And ceased to be of downcast countenance. And they shall have been clothed with garments of glory. And they shall be garments of life from the Lord of Spirits: And your garments shall not grow old. Nor your glory pass away before the Lord of Spirits.</p>
         <p TEIform="p">A large Noah fragment comes in the middle of the Parable (see p. xxvi below). The close of this Parable is contained in lxix. 26-29; the account of Enoch's final translation (lxx.), and two of Enoch's visions (lxxi.) are out of place.</p>
@@ -192,7 +192,7 @@
           <note canonical="false" type="explanation" n="xxiii:1" TEIform="note">See also lxxxii. 4-6. it.</note> This gives the key-note of this book, viz. that time is to be reckoned by the sun, not by the moon (see further on this the section on Authorship, above). Until we come to chapter lxxx. this book is uninteresting in the extreme; it purports to tell in detail of the laws by which the sun, moon, stars and the winds are governed; they are described by Uriel, "the holy angel," to the Apocalyptist. The four quarters of the world, the seven mountains and the seven rivers are also dealt with. "The author has no other interest save a scientific one coloured by Jewish conceptions and beliefs." 
           <note canonical="false" type="explanation" n="xxiii:2" TEIform="note">Charles, The Book of Enoch , p. 147 (1912).</note> It is, however, different when we come to chapter lxxx. 2-8; the whole tone alters in these verses, in which it is said that owing to the sin of men the moon and the sun will mislead them. An ethical thought is thus brought in
         </p>
-        <milestone type="page" n="xxiv" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xxiv" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">which is wholly lacking in the previous chapters of this book; this is also true of chapter lxxxi.; it is probable that neither of these chapters stood here originally.</p>
         <p TEIform="p">Regarding the point of the 364 days to the year which the writer of this book makes, Charles says that "he did this only through sheer incapacity for appreciating an thing better; for he must have been acquainted with the solar year of 365Â¼ days. His acquaintance with the Greek cycles shows this. . . . The author's reckoning of the year at 364 days may be partly due to his opposition to heathen systems, and partly to the fact that 364 is divisible by seven, and amounts to fifty-two weeks exactly." 
           <note canonical="false" type="explanation" n="xxiv:1" TEIform="note">Op. cit. p. 150.</note> In any case, he is opposed to the lunar year, the Pharisaic way of reckoning time; and this is an important point in favour of Sadducæan authorship. It will be noted that this book was written in post-Maccabæan times; it was after the Maccabæan struggle that the Sadducees and Pharisees appeared as parties definitely opposed to one another. 
@@ -201,7 +201,7 @@
         <p TEIform="p">iv. 
           <hi type="italic" TEIform="hi">The Dream-Visions</hi> (chapters lxxxiii.-xc.). This book consists of two dream-visions; the first deals with the judgement brought upon the world by the deluge on account of sin; the origin of sin is again traced to the angels who fell. It concludes with a hymn of praise to God in which a prayer is offered that all flesh may not be destroyed (lxxxiii.-lxxxiv.). The second dream-vision is much longer; it gives in brief outline the history of the world to the founding of the Messianic Kingdom. First, the patriarchs, symbolized by bulls, etc. (lxxxv.); then the fallen angels, also described in symbolic language, and their punishment (lxxxvi.-lxxxviii.). The history then proceeds to deal more specifically with Israel from the time of Noah to the Maccabæan revolt (lxxxix.-xc. 19).
         </p>
-        <milestone type="page" n="xxv" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xxv" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">[paragraph continues] Throughout the dream-vision symbolic language is used; the faithful in Israel are spoken of as the sheep, while the Gentiles are symbolized by wild beasts and birds of prey.</p>
         <p TEIform="p">The dream-vision concludes with some familiar eschatological notes: the judgement and condemnation of the wicked; the establishment of the New Jerusalem; the conversion of the Gentiles, who become subject to Israel; the gathering-in of the dispersed Israelites; the resurrection of the righteous dead and the setting-up of the Messianic Kingdom on the appearance of the Messiah (xc. 20-38).</p>
         <p TEIform="p">v. 
@@ -209,7 +209,7 @@
           <hi type="super" TEIform="hi">d</hi>, xcvi. 2. The dislocations of the text are a more important feature of the book. They are confined (with the exception of xciii. 13-14, and of cvi. 17
           <hi type="super" TEIform="hi">a</hi> which should be read immediately after cvi. 14) to xci.-xciii. All critics are agreed as to the chief of these. xci. 12-17 should undoubtedly be read directly after xciii. . . . Taken together xciii. 1-10, xci. 12-17 form an independent whole--the Apocalypse of Weeks--which has been incorporated in xci.-civ. . . . The remaining dislocations need only to be pointed out in order to be acknowledged. On other grounds we find that xci.-civ. is a book of different authorship from that of the rest of the sections. Now, this being so, this section obviously begins with xcii.: 'Written by Enoch the Scribe.' etc. On xcii. follows xci. 1-10, 18, 19 as a natural sequel, where
         </p>
-        <milestone type="page" n="xxvi" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xxvi" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">[paragraph continues] Enoch summons his children to receive his parting words. Then comes the Apocalypse of weeks, xciii. 1-10, xci. 12-17. The original order of the text, therefore, was: xcii. xci. 1-10, 18, 19, xciii. 1-10, xci. 12-17. xciv. These dislocations were the work of the editor, who put the different books of Enoch together, and added lxxx. and lxxxi." 
           <note canonical="false" type="explanation" n="xxvi:1" TEIform="note">Op. cit. , p. 218.</note>
         </p>
@@ -219,12 +219,12 @@
           <hi type="italic" TEIform="hi">i.e.</hi> the Deluge, and the preservation of Noah.
         </p>
         <p TEIform="p">The first five chapters are generally field to be as late as any part of the whole collection; they deal with the punishment hereafter of the wicked and</p>
-        <milestone type="page" n="xxvii" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xxvii" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">the blessedness of the righteous. Chapter cviii., which reads like a final word to the whole collection, touches upon the same theme.</p>
         <p TEIform="p">This is a subject which cannot be thoroughly appreciated without studying the book in detail, especially from its doctrinal standpoint, and seeing in how many aspects it represents the doctrine and the popular conceptions of the Jews during the two last pre-Christian centuries. To do this here would involve a far too extended investigation; it must suffice to indicate a few of the many points which should be studied; from these it will be seen how important the book is for the study of Christian origins. Charles says that "the influence of 1 Enoch on the New Testament has been greater than that of all the other apocryphal and pseudepigraphical books put together"; and he gives a formidable list of passages in the New Testament which "either in phraseology or idea directly depend on, or are illustrative of, passages in 1 Enoch," as well as a further list showing that various doctrines in 1 Enoch had "an undoubted share in moulding the corresponding New Testament doctrines." These passages should be studied--and they will be found to be a most interesting study--in Charles's work already referred to several times, pp. xcv.-ciii.; and with these should be read the section on the Theology of the Book of Enoch, pp. ciii.-cx. Another book of great value and interest--also already quoted--is Burkitt's 
           <hi type="italic" TEIform="hi">Jewish and Christian Apocalypses</hi>. In dealing with the subject of 1 Enoch and the Gospels, this writer points out that the former "contains a serious attempt to account for the presence of Evil in human history, and this attempt claims our attention, because it is in essentials the view presupposed in the Gospels, especially in the Synoptic Gospels.
         </p>
-        <milestone type="page" n="xxviii" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xxviii" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">[paragraph continues] It is when you study Matthew, Mark, and Luke against the background of the Books of Enoch that you see them in their true perspective. In saying this I have no intention of detracting from the importance of what the, Gospels report to us. On the contrary, it puts familiar words into their proper setting. Indeed, it seems to me that some of the best-known Sayings of Jesus only appear in their true light if regarded as 
           <hi type="italic" TEIform="hi">Midrash</hi> upon words and concepts that were familiar to those who heard the Prophet of Galilee, though now they have been forgotten by Jew and Christian alike" (p. 21). He then gives an illustration of this from Matt. xii. 43-45, Luke xi. 24--26. Of still greater interest are his remarks upon the relationship between 1 Enoch lxii. and Matt. xxv, 31-46; he believes that "the Similitudes of Enoch are presupposed in the scene from Matthew." The whole of the discussion which follows should be read.
         </p>
@@ -232,7 +232,7 @@
       </div>
       <div canonical="false" type="front" TEIform="div">
         <title canonical="false" type="main" TEIform="title">Abbreviations, Brackets and Symbols</title>
-        <milestone type="page" n="xxx" marker="DEFAULT" TEIform="milestone" />
+        <milestone type="page" n="xxx" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">E denotes the Ethiopic Version.</p>
         <p TEIform="p">G
           <hi type="super" TEIform="hi">s</hi> denotes the fragments of the Greek Version preserved In Syncellus: in the case of 8
@@ -278,7 +278,7 @@
             <l TEIform="l">And the high mountains shall be shaken,</l>
             <l TEIform="l"> And the high hills shall be made low,</l>
             <l TEIform="l"> And shall melt like wax before the flame 
-              <milestone type="page" n="32" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="32" marker="DEFAULT" TEIform="milestone"/>
             </l>
           </lgCT>
         </verse>
@@ -302,9 +302,9 @@
         <title canonical="false" type="main" TEIform="title">CHAPTER II.</title>
         <verse canonical="true" osisID="1En.2.1">Observe ye everything that takes place in the heaven, how they do not change their orbits, ⌈and⌉ the luminaries which are in the heaven, how they all rise and set in order each in its season, and transgress not against their appointed order.</verse>
         <verse canonical="true" osisID="1En.2.2">Behold ye the earth, and give heed to the things which take place upon it from first to last, ⌈how 
-          <hi type="bold" TEIform="hi">steadfast</hi> they are⌉, how ⌈none of the things upon earth⌉ change, ⌈but⌉ all the works of God appear ⌈to you⌉.</verse>
-        <verse canonical="true" osisID="1En.2.3">Behold the summer and the winter, ⌈⌈how the whole earth is filled with water, and clouds and dew and rain lie upon it⌉⌉.
+          <hi type="bold" TEIform="hi">steadfast</hi> they are⌉, how ⌈none of the things upon earth⌉ change, ⌈but⌉ all the works of God appear ⌈to you⌉.
         </verse>
+        <verse canonical="true" osisID="1En.2.3">Behold the summer and the winter, ⌈⌈how the whole earth is filled with water, and clouds and dew and rain lie upon it⌉⌉.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.3" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER III.</title>
@@ -353,9 +353,9 @@
       <div canonical="true" type="chapter" osisID="1En.8" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER VIII.</title>
         <verse canonical="true" osisID="1En.8.1">And Azâzêl taught men to make swords, and knives, and shields, and breastplates, and made known to them 
-          <hi type="bold" TEIform="hi">the metals</hi>〈of the earth〉 and the art of working them, and bracelets, and ornaments, and the use of antimony, and the beautifying of the eyelids, and all kinds of costly stones, and all colouring tinctures.</verse>
-        <verse canonical="true" osisID="1En.8.2">And there arose much godlessness, and they committed fornication, and they were led astray, and became corrupt in all their ways. Semjâzâ taught enchantments, and root-cuttings, Armârôs the resolving of enchantments, Barâqîjâl,
+          <hi type="bold" TEIform="hi">the metals</hi>〈of the earth〉 and the art of working them, and bracelets, and ornaments, and the use of antimony, and the beautifying of the eyelids, and all kinds of costly stones, and all colouring tinctures.
         </verse>
+        <verse canonical="true" osisID="1En.8.2">And there arose much godlessness, and they committed fornication, and they were led astray, and became corrupt in all their ways. Semjâzâ taught enchantments, and root-cuttings, Armârôs the resolving of enchantments, Barâqîjâl,</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.9" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER IX.</title>
@@ -369,7 +369,8 @@
       <div canonical="true" type="chapter" osisID="1En.10" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER X.</title>
         <verse canonical="true" osisID="1En.10.1">Then said the Most High, the Holy and Great One spake, and sent 
-          <hi type="bold" TEIform="hi">Uriel</hi> to the son of Lamech, and said to him:</verse>
+          <hi type="bold" TEIform="hi">Uriel</hi> to the son of Lamech, and said to him:
+        </verse>
         <verse canonical="true" osisID="1En.10.2">'〈Go to Noah〉 and tell him in my name "Hide thyself!" and reveal to him the end that is approaching: that the whole earth will be destroyed, and a deluge is about to come upon the whole earth, and will destroy all that is on it.</verse>
         <verse canonical="true" osisID="1En.10.3">And now instruct him that he may escape and his seed may be preserved for all the generations of the world.'</verse>
         <verse canonical="true" osisID="1En.10.4">And again the Lord said to Raphael: 'Bind Azâzêl hand and foot, and cast him into the darkness: and make an opening in the desert, which is in Dûdâêl, and cast him therein.</verse>
@@ -392,11 +393,11 @@
         <verse canonical="true" osisID="1En.12.1">Before these things Enoch was hidden, and no one of the children of men knew where he was hidden, and where he abode, and what had become of him.</verse>
         <verse canonical="true" osisID="1En.12.2">And his activities had to do with the Watchers, and his days were with the holy ones.</verse>
         <verse canonical="true" osisID="1En.12.3">And I, Enoch was blessing the Lord of 
-          <hi type="bold" TEIform="hi">majesty</hi> and the King of the ages, and lo! the Watchers called me--Enoch the scribe--and said to me:</verse>
+          <hi type="bold" TEIform="hi">majesty</hi> and the King of the ages, and lo! the Watchers called me--Enoch the scribe--and said to me:
+        </verse>
         <verse canonical="true" osisID="1En.12.4">'Enoch, thou scribe of righteousness, go, †declare† to the Watchers of the heaven who have left the high heaven, the holy eternal place, and have defiled themselves with women, and have done as the children of earth do, and have taken unto themselves wives: "Ye have wrought great destruction on the earth:</verse>
         <verse canonical="true" osisID="1En.12.5">And ye shall have no peace nor forgiveness of sin: and inasmuch as †they† delight themselves in †their† children,</verse>
-        <verse canonical="true" osisID="1En.12.6">The murder of †their† beloved ones shall †they† see, and over the destruction of †their† children shall †they† lament, and shall make supplication unto eternity, but mercy and peace shall ye not attain."'
-        </verse>
+        <verse canonical="true" osisID="1En.12.6">The murder of †their† beloved ones shall †they† see, and over the destruction of †their† children shall †they† lament, and shall make supplication unto eternity, but mercy and peace shall ye not attain."'</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.13" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XIII.</title>
@@ -425,13 +426,13 @@
         <verse canonical="true" osisID="1En.17.1">And they took ⌈and⌉ brought me to a place in which those who were there were like flaming fire, and, when they wished, they appeared as men.</verse>
         <verse canonical="true" osisID="1En.17.2">And they brought me to the place of darkness, and to a mountain the point of whose summit reached to heaven.</verse>
         <verse canonical="true" osisID="1En.17.3">And I saw the places of the luminaries ⌈and the treasuries of the stars⌉ and of the thunder ⌈and⌉ in the 
-          <hi type="bold" TEIform="hi">uttermost depths</hi>, where were a fiery bow and arrows and their quiver, and ⌈⌈a fiery sword⌉⌉ and all the lightnings.</verse>
+          <hi type="bold" TEIform="hi">uttermost depths</hi>, where were a fiery bow and arrows and their quiver, and ⌈⌈a fiery sword⌉⌉ and all the lightnings.
+        </verse>
         <verse canonical="true" osisID="1En.17.4">And they took me to the living waters, and to the fire of the west, which receives every setting of the sun.</verse>
         <verse canonical="true" osisID="1En.17.5">And I came to a river of fire in which the fire flows like water and discharges itself into the great sea towards the west.</verse>
         <verse canonical="true" osisID="1En.17.6">I saw the great rivers and came to the great ⌈river and to the great⌉ darkness, and went to the place where no flesh walks.</verse>
         <verse canonical="true" osisID="1En.17.7">I saw the mountains of the darkness of winter and the place whence all the waters of the deep flow.</verse>
-        <verse canonical="true" osisID="1En.17.8">I saw the mouths of all the rivers of the earth and the mouth of the deep.
-        </verse>
+        <verse canonical="true" osisID="1En.17.8">I saw the mouths of all the rivers of the earth and the mouth of the deep.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.18" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XVIII</title>
@@ -473,16 +474,17 @@
         <verse canonical="true" osisID="1En.22.5">I saw the spirits of the children of men who were dead, and their voice went forth to heaven and made suit.</verse>
         <verse canonical="true" osisID="1En.22.6">Then I asked Raphael the angel who was with me, and I said unto him: 'This spirit--whose is it whose voice goeth forth and maketh suit?'</verse>
         <verse canonical="true" osisID="1En.22.5">I saw (the spirit of) 
-          <hi type="bold" TEIform="hi">a dead man</hi> making suit, and his voice went forth to heaven and made suit.</verse>
-        <verse canonical="true" osisID="1En.22.6">And I asked Raphael the angel who was with me, and I said unto him: 'This spirit which maketh suit, whose is it, whose voice goeth forth and maketh suit to heaven?'
+          <hi type="bold" TEIform="hi">a dead man</hi> making suit, and his voice went forth to heaven and made suit.
         </verse>
+        <verse canonical="true" osisID="1En.22.6">And I asked Raphael the angel who was with me, and I said unto him: 'This spirit which maketh suit, whose is it, whose voice goeth forth and maketh suit to heaven?'</verse>
         <verse canonical="true" osisID="1En.22.7">And he answered me saying: 'This is the spirit which went forth from Abel, whom his brother Cain slew, and he makes his suit against him till his seed is destroyed from the face of the earth, and his seed is annihilated from amongst the seed of men.'</verse>
         <verse canonical="true" osisID="1En.22.8">Then I asked regarding it, and regarding all the 
           <hi type="bold" TEIform="hi">hollow places</hi>: 'Why as one separated from the other?'
         </verse>
         <verse canonical="true" osisID="1En.22.9">And he answered me and said unto me: 'These three have been made that the spirits of the dead might be separated. And such a division has been made 〈for〉 the spirits of the righteous, in which there as the 
           <hi type="bold" TEIform="hi">bright</hi> spring of 
-          <hi type="bold" TEIform="hi">water</hi>.</verse>
+          <hi type="bold" TEIform="hi">water</hi>.
+        </verse>
         <verse canonical="true" osisID="1En.22.10">
           <hi type="bold" TEIform="hi">And</hi> such has
         </verse>
@@ -490,7 +492,8 @@
           <hi type="bold" TEIform="hi">hollow places</hi>: 'Why is one separated from the other?'
         </verse>
         <verse canonical="true" osisID="1En.22.9">And he answered me saying: 'These three have been made that the spirits of the dead might be separated. And 
-          <hi type="bold" TEIform="hi">this</hi> division has been made for the spirits of the righteous, in which there is the bright spring of water.</verse>
+          <hi type="bold" TEIform="hi">this</hi> division has been made for the spirits of the righteous, in which there is the bright spring of water.
+        </verse>
         <verse canonical="true" osisID="1En.22.10">And 
           <hi type="bold" TEIform="hi">this</hi> has been made for sinners
         </verse>
@@ -547,7 +550,8 @@
         <title canonical="false" type="main" TEIform="title">CHAPTER XXXI.</title>
         <verse canonical="true" osisID="1En.31.1">And I saw other mountains, and amongst them were ⌈groves of⌉ trees, and there flowed forth from them nectar, which is named sarara and galbanum.</verse>
         <verse canonical="true" osisID="1En.31.2">And beyond these mountains I saw another mountain ⌈to the east of the ends of the earth⌉, ⌈⌈whereon were aloe trees⌉⌉, and all the trees were full 
-          <hi type="bold" TEIform="hi">of stacte</hi>, being like almond-trees.</verse>
+          <hi type="bold" TEIform="hi">of stacte</hi>, being like almond-trees.
+        </verse>
         <verse canonical="true" osisID="1En.31.3">And when one 
           <hi type="bold" TEIform="hi">burnt</hi> it, it smelt sweeter than any fragrant odour.
         </verse>
@@ -595,9 +599,9 @@
         <verse canonical="true" osisID="1En.37.2">And this is the beginning of the words of wisdom which I lifted up my voice to speak and say to those which dwell on earth: Hear, ye men of old time, and see, ye that come after, the words of the Holy One which I will speak before the Lord of Spirits.</verse>
         <verse canonical="true" osisID="1En.37.3">It were better to declare (them only) to the men of old time, but even from those that come after we will not withhold the beginning of wisdom.</verse>
         <verse canonical="true" osisID="1En.37.4">Till the present day such wisdom has never been given 
-          <hi type="bold" TEIform="hi">by</hi> the Lord of Spirits as I have received according to my insight, according to the good pleasure of the Lord of Spirits by whom the lot of eternal life has been given to me.</verse>
-        <verse canonical="true" osisID="1En.37.5">Now three parables were imparted to me, and I lifted up my voice and recounted them to those that dwell on the earth.
+          <hi type="bold" TEIform="hi">by</hi> the Lord of Spirits as I have received according to my insight, according to the good pleasure of the Lord of Spirits by whom the lot of eternal life has been given to me.
         </verse>
+        <verse canonical="true" osisID="1En.37.5">Now three parables were imparted to me, and I lifted up my voice and recounted them to those that dwell on the earth.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.38" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XXXVIII</title>
@@ -614,7 +618,7 @@
             <l TEIform="l">And when the Righteous One shall appear before the eyes of the righteous,</l>
             <l TEIform="l"> Whose elect works hang upon the Lord of Spirits,</l>
             <l TEIform="l"> And light shall appear to the righteous and the elect who dwell on the earth, 
-              <milestone type="page" n="57" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="57" marker="DEFAULT" TEIform="milestone"/>
             </l>
             <l TEIform="l"> Where then will be the dwelling of the sinners,</l>
             <l TEIform="l"> And where the resting-place of those who have denied the Lord of Spirits?</l>
@@ -673,11 +677,11 @@
         <verse canonical="true" osisID="1En.40.5">And the second voice I heard blessing the Elect One and the elect ones who hang upon the Lord of Spirits.</verse>
         <verse canonical="true" osisID="1En.40.6">And the third voice I heard 
           <hi type="bold" TEIform="hi">pray and intercede</hi> for those who dwell on the earth and 
-          <hi type="bold" TEIform="hi">supplicate</hi> in the name of the Lord of Spirits.</verse>
+          <hi type="bold" TEIform="hi">supplicate</hi> in the name of the Lord of Spirits.
+        </verse>
         <verse canonical="true" osisID="1En.40.7">And I heard the fourth voice fending off the Satans and forbidding them to come before the Lord of Spirits to accuse them who dwell on the earth.</verse>
         <verse canonical="true" osisID="1En.40.8">After that I asked the angel of peace who went with me, who showed me everything that is hidden: 'Who are these four presences which I have seen and whose words I have heard and written down?'</verse>
-        <verse canonical="true" osisID="1En.40.9">And he said to me: 'This first is Michael, the merciful and long-suffering: and the second, who
-        </verse>
+        <verse canonical="true" osisID="1En.40.9">And he said to me: 'This first is Michael, the merciful and long-suffering: and the second, who</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.41" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XLI.</title>
@@ -718,7 +722,7 @@
             <l TEIform="l"> Such shall be the lot of the sinners</l>
             <l TEIform="l"> Who have denied the name of the Lord of Spirits,</l>
             <l TEIform="l"> Who are thus preserved for the day of suffering and tribulation.
-              <milestone type="page" n="63" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="63" marker="DEFAULT" TEIform="milestone"/>
             </l>
           </lgCT>
         </verse>
@@ -853,7 +857,7 @@
             <l TEIform="l"> For he hath preserved the lot of the righteous,</l>
             <l TEIform="l"> Because they have hated and despised this world of unrighteousness,</l>
             <l TEIform="l"> And have hated all its works and ways in the name of the Lord of Spirits: 
-              <milestone type="page" n="67" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="67" marker="DEFAULT" TEIform="milestone"/>
             </l>
             <l TEIform="l"> For in his name they are saved,</l>
             <l TEIform="l"> And according to his good pleasure hath it been in regard to their life.</l>
@@ -882,7 +886,7 @@
             <l TEIform="l"> Because the Elect One standeth before the Lord of Spirits,</l>
             <l TEIform="l"> And his glory is for ever and ever,</l>
             <l TEIform="l"> And his might unto all generations. 
-              <milestone type="page" n="68" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="68" marker="DEFAULT" TEIform="milestone"/>
             </l>
           </lgCT>
         </verse>
@@ -1035,9 +1039,9 @@
         <verse canonical="true" osisID="1En.55.1">And after that the Head of Days repented and said: 'In vain have I destroyed all who dwell on the earth.'</verse>
         <verse canonical="true" osisID="1En.55.2">And He sware by His great name: 'Henceforth I will not do so to all who dwell on the earth, and I will set a sign in the heaven: and this shall be a pledge of good faith between Me and them for ever, so long as heaven is above the earth. And this is in accordance with My command.'</verse>
         <verse canonical="true" osisID="1En.55.3">When I have desired to take hold of them by the hand of the angels on the day of tribulation and pain 
-          <hi type="bold" TEIform="hi">because of</hi> this, I will cause My chastisement and My wrath to abide upon them, saith God, the Lord of Spirits.</verse>
-        <verse canonical="true" osisID="1En.55.4">Ye †mighty kings† who dwell on the earth, ye shall have to behold Mine Elect One, how he sits on the throne of glory and judges Azâzêl, and all his associates, and all his hosts in the name of the Lord of Spirits.'
+          <hi type="bold" TEIform="hi">because of</hi> this, I will cause My chastisement and My wrath to abide upon them, saith God, the Lord of Spirits.
         </verse>
+        <verse canonical="true" osisID="1En.55.4">Ye †mighty kings† who dwell on the earth, ye shall have to behold Mine Elect One, how he sits on the throne of glory and judges Azâzêl, and all his associates, and all his hosts in the name of the Lord of Spirits.'</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.56" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LVI.</title>
@@ -1064,7 +1068,7 @@
         <verse canonical="true" osisID="1En.56.6">
           <lgCT TEIform="lg">
             <l TEIform="l">And they shall go up and tread under foot the land of His elect ones, 
-              <milestone type="page" n="74" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="74" marker="DEFAULT" TEIform="milestone"/>
             </l>
             <l TEIform="l">[And the land of His elect ones shall be before them a threshing-floor and a highway:]</l>
             <l TEIform="l"> 7 But the city of my righteous shall be a hindrance to their horses.</l>
@@ -1080,7 +1084,7 @@
       <div canonical="true" type="chapter" osisID="1En.58" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LVIII.</title>
         <verse canonical="true" osisID="1En.58.1">And I began to speak the third Parable concerning the righteous and elect. 
-          <milestone type="page" n="75" marker="DEFAULT" TEIform="milestone" />
+          <milestone type="page" n="75" marker="DEFAULT" TEIform="milestone"/>
         </verse>
         <verse canonical="true" osisID="1En.58.2">
           <lgCT TEIform="lg">
@@ -1128,9 +1132,9 @@
       <div canonical="true" type="chapter" osisID="1En.60" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LX.</title>
         <verse canonical="true" osisID="1En.60.1">In the year five hundred, in the seventh month, on the fourteenth day of the month in the life of †Enoch†. In that Parable I saw how a mighty quaking made the heaven of heavens to quake, and the host of the Most High, and the angels, a thousand thousands and ten thousand times 
-          <hi type="bold" TEIform="hi">ten</hi> thousand, were disquieted with a great disquiet.</verse>
-        <verse canonical="true" osisID="1En.60.2">And the Head of Days sat on the throne of His glory, and the angels and the righteous stood around Him.
+          <hi type="bold" TEIform="hi">ten</hi> thousand, were disquieted with a great disquiet.
         </verse>
+        <verse canonical="true" osisID="1En.60.2">And the Head of Days sat on the throne of His glory, and the angels and the righteous stood around Him.</verse>
         <verse canonical="true" osisID="1En.60.3">
           <lgCT TEIform="lg">
             <l TEIform="l">And a great trembling seized me,</l>
@@ -1147,11 +1151,11 @@
         <verse canonical="true" osisID="1En.60.10">And he said to me: 'Thou son of man, herein thou dost seek to know what is hidden.'</verse>
         <verse canonical="true" osisID="1En.60.11">And the other angel who went with me and showed me what was hidden told me what is first and last in the heaven in the height, and beneath the earth in the depth, and at the ends of the heaven, and on the foundation of the heaven.</verse>
         <verse canonical="true" osisID="1En.60.12">And the chambers of the winds, and how the winds are divided, and how they are weighed, and (how) the 
-          <hi type="bold" TEIform="hi">portals</hi> of the winds are reckoned, each according to the power of the wind, and the power of the lights of the moon, and according to the power that is fitting: and the divisions of the stars according to their names, and how all the divisions are divided.</verse>
+          <hi type="bold" TEIform="hi">portals</hi> of the winds are reckoned, each according to the power of the wind, and the power of the lights of the moon, and according to the power that is fitting: and the divisions of the stars according to their names, and how all the divisions are divided.
+        </verse>
         <verse canonical="true" osisID="1En.60.13">And the thunders according to the places where they fall, and all the divisions that are made among the lightnings that it may lighten, and their host that they may at once obey.</verse>
         <verse canonical="true" osisID="1En.60.14">For the thunder has †places of rest† (which) are assigned (to it) while it is waiting for its peal; and the thunder and lightning are inseparable, and although not one and undivided, they both go together through the spirit and separate not.</verse>
-        <verse canonical="true" osisID="1En.60.15">For when the lightning lightens, the thunder utters its voice, and the spirit enforces a pause during the peal, and divides equally between them; for the
-        </verse>
+        <verse canonical="true" osisID="1En.60.15">For when the lightning lightens, the thunder utters its voice, and the spirit enforces a pause during the peal, and divides equally between them; for the</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.61" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXI.</title>
@@ -1186,7 +1190,7 @@
             <l TEIform="l">And that One (with) their first words they blessed,</l>
             <l TEIform="l"> And extolled and lauded with wisdom,</l>
             <l TEIform="l"> And they were wise in utterance and in the spirit of life. 
-              <milestone type="page" n="80" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="80" marker="DEFAULT" TEIform="milestone"/>
             </l>
           </lgCT>
         </verse>
@@ -1218,7 +1222,7 @@
         <verse canonical="true" osisID="1En.61.13">
           <lgCT TEIform="lg">
             <l TEIform="l">For great is the mercy of the Lord of Spirits, and He is long-suffering, 
-              <milestone type="page" n="81" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="81" marker="DEFAULT" TEIform="milestone"/>
             </l>
             <l TEIform="l"> And all His works and all that He has created He has revealed to the righteous and elect</l>
             <l TEIform="l"> In the name of the Lord of Spirits.</l>
@@ -1312,7 +1316,7 @@
           <lgCT TEIform="lg">
             <l TEIform="l">And the righteous and elect shall be saved on that day,</l>
             <l TEIform="l"> And they shall never thenceforward see the face of the sinners and unrighteous. 
-              <milestone type="page" n="83" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="83" marker="DEFAULT" TEIform="milestone"/>
             </l>
           </lgCT>
         </verse>
@@ -1338,7 +1342,7 @@
           <lgCT TEIform="lg">
             <l TEIform="l">We have now learnt that we should glorify</l>
             <l TEIform="l"> And bless the Lord of kings and Him who is king over all kings.' 
-              <milestone type="page" n="84" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="84" marker="DEFAULT" TEIform="milestone"/>
             </l>
           </lgCT>
         </verse>
@@ -1412,9 +1416,9 @@
         <title canonical="false" type="main" TEIform="title">CHAPTER LXVI.</title>
         <verse canonical="true" osisID="1En.66.1">And after that he showed me the angels of punishment who are prepared to come and let loose all the powers of the waters which are beneath in the earth in order to bring judgement and destruction on all who [abide and] dwell on the earth.</verse>
         <verse canonical="true" osisID="1En.66.2">And the Lord of Spirits gave commandment to the angels who were going forth, that they should not cause 
-          <hi type="bold" TEIform="hi">the waters</hi> to rise but should hold them in check; for those angels were over the powers of the waters.</verse>
-        <verse canonical="true" osisID="1En.66.3">And I went away from the presence of Enoch.
+          <hi type="bold" TEIform="hi">the waters</hi> to rise but should hold them in check; for those angels were over the powers of the waters.
         </verse>
+        <verse canonical="true" osisID="1En.66.3">And I went away from the presence of Enoch.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.67" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXVII.</title>
@@ -1434,23 +1438,24 @@
         <title canonical="false" type="main" TEIform="title">CHAPTER LXVIII.</title>
         <verse canonical="true" osisID="1En.68.1">And after that my grandfather Enoch gave me the teaching of all the secrets in the book in the Parables which had been given to him, and he put them together for me in the words of the book of the Parables.</verse>
         <verse canonical="true" osisID="1En.68.2">And on that day Michael answered Raphael and said: 'The power of the spirit transports and 
-          <hi type="bold" TEIform="hi">makes me to tremble</hi> because of the severity of the judgement of the secrets, the judgement of the angels: who can endure the severe judgement which has been executed, and before which they melt away?'</verse>
-        <verse canonical="true" osisID="1En.68.3">And Michael answered again, and said to Raphael: 'Who is he whose heart is not softened concerning it, and whose reins are not troubled by this word of judgement (that) has gone forth upon them because of those who have thus led them out?'</verse>
-        <verse canonical="true" osisID="1En.68.4">And it came to pass when he stood before the Lord of Spirits, Michael said thus to Raphael: 'I will not
+          <hi type="bold" TEIform="hi">makes me to tremble</hi> because of the severity of the judgement of the secrets, the judgement of the angels: who can endure the severe judgement which has been executed, and before which they melt away?'
         </verse>
+        <verse canonical="true" osisID="1En.68.3">And Michael answered again, and said to Raphael: 'Who is he whose heart is not softened concerning it, and whose reins are not troubled by this word of judgement (that) has gone forth upon them because of those who have thus led them out?'</verse>
+        <verse canonical="true" osisID="1En.68.4">And it came to pass when he stood before the Lord of Spirits, Michael said thus to Raphael: 'I will not</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.69" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXIX.</title>
         <verse canonical="true" osisID="1En.69.4">The name of the first Jeqôn: that is, the one who led astray ⌈all⌉ the sons of 
-          <hi type="bold" TEIform="hi">God</hi>, and brought them down to the earth, and led them astray through the daughters of men.</verse>
-        <verse canonical="true" osisID="1En.69.5">And the second was named Asbeêl: he imparted to the holy sons of 
-          <hi type="bold" TEIform="hi">God</hi> evil counsel, and led them astray so that they defiled their bodies with the daughters of men.</verse>
-        <verse canonical="true" osisID="1En.69.6">And the third was named Gâdreêl: he it is who showed the children of men all the blows of death, and he led astray Eve, and showed ⌈the weapons of death to the sons of men⌉ the shield and the coat of mail, and the sword for battle, and all the weapons of death to the
+          <hi type="bold" TEIform="hi">God</hi>, and brought them down to the earth, and led them astray through the daughters of men.
         </verse>
+        <verse canonical="true" osisID="1En.69.5">And the second was named Asbeêl: he imparted to the holy sons of 
+          <hi type="bold" TEIform="hi">God</hi> evil counsel, and led them astray so that they defiled their bodies with the daughters of men.
+        </verse>
+        <verse canonical="true" osisID="1En.69.6">And the third was named Gâdreêl: he it is who showed the children of men all the blows of death, and he led astray Eve, and showed ⌈the weapons of death to the sons of men⌉ the shield and the coat of mail, and the sword for battle, and all the weapons of death to the</verse>
         <verse canonical="true" osisID="1En.69.17">
           <lgCT TEIform="lg">
             <l TEIform="l">And through it the earth was founded upon the water, 
-              <milestone type="page" n="91" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="91" marker="DEFAULT" TEIform="milestone"/>
             </l>
             <l TEIform="l"> And from the secret recesses of the mountains come beautiful waters,</l>
             <l TEIform="l"> From the creation of the world and unto eternity.</l>
@@ -1573,7 +1578,7 @@
             <l TEIform="l">And my spirit saw the girdle which girt that house of fire,</l>
             <l TEIform="l"> And on its four sides were streams full of living fire,</l>
             <l TEIform="l"> And they girt that house.
-              <milestone type="page" n="94" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="94" marker="DEFAULT" TEIform="milestone"/>
             </l>
           </lgCT>
         </verse>
@@ -1647,13 +1652,13 @@
         <verse canonical="true" osisID="1En.73.1">And after this law I saw another law dealing with the smaller luminary, which is named the Moon.</verse>
         <verse canonical="true" osisID="1En.73.2">And her circumference is like the circumference of the heaven, and her chariot in which she rides is driven by the wind, and light is given to her in (definite) measure.</verse>
         <verse canonical="true" osisID="1En.73.3">And her rising and setting change every month: and her days are like the days of the sun, and when her light is uniform (
-          <hi type="italic" TEIform="hi">i.e.</hi> full) it amounts to the seventh part of the light of the sun.</verse>
+          <hi type="italic" TEIform="hi">i.e.</hi> full) it amounts to the seventh part of the light of the sun.
+        </verse>
         <verse canonical="true" osisID="1En.73.4">And thus she rises. And her first phase in the east comes forth on the thirtieth morning: and on that day she becomes visible, and constitutes for you the first phase of the moon on the thirtieth day together with the sun in the portal where the sun rises.</verse>
         <verse canonical="true" osisID="1En.73.5">And the one half of her goes forth by a seventh part, and her whole circumference is empty, without light, with the exception of one-seventh part of it, (and) the fourteenth part of her light.</verse>
         <verse canonical="true" osisID="1En.73.6">And when she receives one-seventh part of the half of her light, her light amounts to one-seventh part and the half thereof.</verse>
         <verse canonical="true" osisID="1En.73.7">And she sets with the sun, and when the sun rises the moon rises with him and receives the half of one part of light, and in that night in the beginning of her morning [in the commencement of the lunar day] the moon sets with the sun, and is invisible that night with the fourteen parts and the half of one of them.</verse>
-        <verse canonical="true" osisID="1En.73.8">And she rises on that day with exactly a seventh part, and comes forth and recedes from the rising of the sun, and in her remaining days she becomes bright in the (remaining) thirteen parts.
-        </verse>
+        <verse canonical="true" osisID="1En.73.8">And she rises on that day with exactly a seventh part, and comes forth and recedes from the rising of the sun, and in her remaining days she becomes bright in the (remaining) thirteen parts.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.74" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXXIV.</title>
@@ -1665,11 +1670,11 @@
         <verse canonical="true" osisID="1En.75.1">And the leaders of the heads of the thousands, who are placed over the whole creation and over all the stars, have also to do with the four intercalary days, being inseparable from their office, according to the reckoning of the year, and these render service on the four days which are not reckoned in the reckoning of the year.</verse>
         <verse canonical="true" osisID="1En.75.2">And owing to them men go wrong therein, for those luminaries truly render service on the world-stations, one in the first portal, one in the third portal of the heaven, one in the fourth portal, and one in the sixth portal, and the exactness of the year is accomplished through its separate three hundred and sixty-four stations.</verse>
         <verse canonical="true" osisID="1En.75.3">For the signs and the times and the years and the days the angel Uriel showed to me, whom the Lord of glory hath set for ever over all the luminaries of the heaven, in the heaven and in the world, that they should rule on the face of the heaven and be seen on the earth, and be leaders for the day and the night, 
-          <hi type="italic" TEIform="hi">i.e.</hi> the sun, moon, and stars, and all the ministering creatures which make their revolution in all the chariots of the heaven.</verse>
+          <hi type="italic" TEIform="hi">i.e.</hi> the sun, moon, and stars, and all the ministering creatures which make their revolution in all the chariots of the heaven.
+        </verse>
         <verse canonical="true" osisID="1En.75.4">In like manner twelve doors Uriel showed me, open in the circumference of the sun's chariot in the heaven, through which the rays of the sun break forth: and from them is warmth diffused over the earth, when they are opened at their appointed seasons.</verse>
         <verse canonical="true" osisID="1En.75.5">[And for the winds and the spirit of the dew† when they are opened, standing open in the heavens at the ends.]</verse>
-        <verse canonical="true" osisID="1En.75.6">As for the twelve portals in the heaven, at the ends of the earth, out of which go forth the sun, moon, and stars, and all
-        </verse>
+        <verse canonical="true" osisID="1En.75.6">As for the twelve portals in the heaven, at the ends of the earth, out of which go forth the sun, moon, and stars, and all</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.76" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXXVI.</title>
@@ -1687,9 +1692,11 @@
         <verse canonical="true" osisID="1En.77.1">And the first 
           <hi type="bold" TEIform="hi">quarter</hi> is called the east, because it is the first: and the second, the south, because the Most High 
           <hi type="bold" TEIform="hi">will descend</hi> there, yea, there in quite a special sense will He who is blessed for ever 
-          <hi type="bold" TEIform="hi">descend</hi>.</verse>
+          <hi type="bold" TEIform="hi">descend</hi>.
+        </verse>
         <verse canonical="true" osisID="1En.77.2">And the west 
-          <hi type="bold" TEIform="hi">quarter</hi> is named the diminished, because there all the luminaries of the heaven wane and go down.</verse>
+          <hi type="bold" TEIform="hi">quarter</hi> is named the diminished, because there all the luminaries of the heaven wane and go down.
+        </verse>
         <verse canonical="true" osisID="1En.77.3">And the fourth 
           <hi type="bold" TEIform="hi">quarter</hi>, named the north, is divided into three parts: the first of them is for the dwelling of men: and the second contains seas of water, and the abysses and forests and rivers, and darkness and clouds; and the third part contains the garden of righteousness.
         </verse>
@@ -1726,7 +1733,7 @@
             <l TEIform="l">And in the days of the sinners the years shall be shortened,</l>
             <l TEIform="l"> And their seed shall be tardy on their lands and fields,</l>
             <l TEIform="l"> And all things on the earth shall alter, 
-              <milestone type="page" n="107" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="107" marker="DEFAULT" TEIform="milestone"/>
             </l>
             <l TEIform="l"> And shall not appear in their time:</l>
             <l TEIform="l"> And the rain shall be kept back</l>
@@ -1837,15 +1844,15 @@
         </verse>
         <verse canonical="true" osisID="1En.82.4">Blessed are all the righteous, blessed are all those who walk in the way of righteousness and sin not as the sinners, in the reckoning of all their days in which the sun traverses the heaven, entering into and departing from the portals for thirty days with the heads of thousands of the order of the stars, together with the four which are intercalated which divide the four portions of the year, which lead them and enter with them four days.</verse>
         <verse canonical="true" osisID="1En.82.5">Owing to them men shall be at fault and not reckon them in the 
-          <hi type="bold" TEIform="hi">whole reckoning of the year</hi>: yea, men shall be at fault, and not recognize them accurately.</verse>
-        <verse canonical="true" osisID="1En.82.6">For they belong to the reckoning of the year and are truly recorded (thereon) for ever, one in the first portal and one in the third, and
+          <hi type="bold" TEIform="hi">whole reckoning of the year</hi>: yea, men shall be at fault, and not recognize them accurately.
         </verse>
+        <verse canonical="true" osisID="1En.82.6">For they belong to the reckoning of the year and are truly recorded (thereon) for ever, one in the first portal and one in the third, and</verse>
         <verse canonical="true" osisID="1En.82.7">And the account thereof is accurate and the recorded reckoning thereof exact; for the luminaries, and months and festivals, and years and days, has Uriel shown and revealed to me, 
           <hi type="bold" TEIform="hi">to whom</hi> the Lord of the whole creation of the world hath 
-          <hi type="bold" TEIform="hi">subjected</hi> the host of heaven.</verse>
-        <verse canonical="true" osisID="1En.82.8">And he has power over night and day in the heaven to cause the light to give light to men--sun, moon, and stars, and all the powers of the heaven which revolve in their circular chariots.</verse>
-        <verse canonical="true" osisID="1En.82.9">And these are the orders of the stars, which set in their places, and in their seasons and festivals and months.
+          <hi type="bold" TEIform="hi">subjected</hi> the host of heaven.
         </verse>
+        <verse canonical="true" osisID="1En.82.8">And he has power over night and day in the heaven to cause the light to give light to men--sun, moon, and stars, and all the powers of the heaven which revolve in their circular chariots.</verse>
+        <verse canonical="true" osisID="1En.82.9">And these are the orders of the stars, which set in their places, and in their seasons and festivals and months.</verse>
         <verse canonical="true" osisID="1En.82.10">And these are the names of those who lead them, who watch that they enter at their times, in their orders, in their seasons, in their months, in their periods of dominion, and in their positions.</verse>
         <verse canonical="true" osisID="1En.82.11">Their four leaders who divide the four parts of the year enter first; and after them the twelve leaders of the orders who divide the months; and for the three hundred and sixty (days) there are heads over thousands who divide the days; and for the four intercalary days there are the leaders which sunder the four parts of the year.</verse>
         <verse canonical="true" osisID="1En.82.12">And these heads over thousands are intercalated between leader and leader, each behind a station, but their leaders make the division. And these are the names of the leaders who divide the four parts of the year which are ordained: Mîlkî’êl, Hel’emmêlêk, and Mêl’êjal, and Nârêl.</verse>
@@ -1960,10 +1967,12 @@
         <verse canonical="true" osisID="1En.89.42">And the dogs and the foxes and the wild boars began to devour those sheep till the Lord of the sheep raised up [another sheep] a ram from their midst, which led them.</verse>
         <verse canonical="true" osisID="1En.89.43">And that ram began to butt on either side those dogs, foxes, and wild boars till he had destroyed them †all†.</verse>
         <verse canonical="true" osisID="1En.89.44">And that sheep whose eyes were opened saw that ram, which was amongst the sheep, 
-          <hi type="bold" TEIform="hi">till</hi> it †forsook its glory† and began to butt those sheep, and trampled upon them, and behaved itself unseemly.</verse>
+          <hi type="bold" TEIform="hi">till</hi> it †forsook its glory† and began to butt those sheep, and trampled upon them, and behaved itself unseemly.
+        </verse>
         <verse canonical="true" osisID="1En.89.45">And the Lord of the sheep sent the 
           <hi type="bold" TEIform="hi">lamb</hi> to another 
-          <hi type="bold" TEIform="hi">lamb</hi> and raised it to being a ram and leader of the sheep instead of that ram which had †forsaken its glory†.</verse>
+          <hi type="bold" TEIform="hi">lamb</hi> and raised it to being a ram and leader of the sheep instead of that ram which had †forsaken its glory†.
+        </verse>
         <verse canonical="true" osisID="1En.89.46">And it went to it and spake to it alone, and raised it to being a ram, and made it the prince and leader of the sheep; but during all these things those dogs oppressed the sheep.</verse>
         <verse canonical="true" osisID="1En.89.47">And the first ram pursued that second ram, and that second ram arose and fled before it; and I saw till those dogs pulled down the first ram.</verse>
         <verse canonical="true" osisID="1En.89.48">And that second ram arose and led the [little] sheep.</verse>
@@ -2009,26 +2018,27 @@
         <verse canonical="true" osisID="1En.90.15">And I saw till the Lord of the sheep came unto them in wrath, and all who saw Him fled, and they all fell †into His shadow† from before His face.</verse>
         <verse canonical="true" osisID="1En.90.18">And I saw till the Lord of the sheep came unto them and took in His hand the staff of His wrath, and smote the earth, and the earth clave asunder, and all the beasts and all the birds of the heaven fell from among those sheep, and were swallowed up in the earth and it covered them.</verse>
         <verse canonical="true" osisID="1En.90.20">And I saw till a throne was erected in the pleasant land, and the Lord of the sheep sat Himself thereon, and 
-          <hi type="bold" TEIform="hi">the other</hi> took the sealed books and opened those books before the Lord of the sheep.</verse>
+          <hi type="bold" TEIform="hi">the other</hi> took the sealed books and opened those books before the Lord of the sheep.
+        </verse>
         <verse canonical="true" osisID="1En.90.21">And the Lord called those men the seven first white ones, and commanded that they should bring before Him, beginning with the first star which led the way, 
           <hi type="bold" TEIform="hi">all the</hi> stars whose privy members were like those of horses, and they brought them all before
         </verse>
         <verse canonical="true" osisID="1En.90.28">And I stood up to see till they folded up that old house; and carried off all the pillars, and all the beams and ornaments of the house were at the same time folded up with it, and they carried it off and laid it in a place in the south of the land.</verse>
         <verse canonical="true" osisID="1En.90.29">And I saw till the Lord of the sheep brought a new house greater and loftier than that first, and set it up in the place of the first which had beer folded up: all its pillars were new, and its ornaments were new and larger than those of the first, the old one which He had taken away, and all the sheep were within it.</verse>
         <verse canonical="true" osisID="1En.90.30">And I saw all the sheep which had been left, and all the beasts on the earth, and all the birds of the heaven, falling down and doing homage to those sheep and making petition to and obeying them in every 
-          <hi type="bold" TEIform="hi">thing</hi>.</verse>
-        <verse canonical="true" osisID="1En.90.31">And thereafter those three who
+          <hi type="bold" TEIform="hi">thing</hi>.
         </verse>
+        <verse canonical="true" osisID="1En.90.31">And thereafter those three who</verse>
         <verse canonical="true" osisID="1En.90.37">And I saw that a white bull was born, with large horns and all the beasts of the field and all the birds of the air feared him and made petition to him all the time.</verse>
         <verse canonical="true" osisID="1En.90.38">And I saw till all their generations were transformed, and they all became white bulls; and the first among them became a 
           <hi type="bold" TEIform="hi">lamb</hi>, and that 
           <hi type="bold" TEIform="hi">lamb</hi> became a great animal and had great black horns on its head; and the Lord of the sheep rejoiced over 
-          <hi type="bold" TEIform="hi">it</hi> and over all the oxen.</verse>
+          <hi type="bold" TEIform="hi">it</hi> and over all the oxen.
+        </verse>
         <verse canonical="true" osisID="1En.90.39">And I slept in their midst: and I awoke and saw everything.</verse>
         <verse canonical="true" osisID="1En.90.40">This is the vision which I saw while I slept, and I awoke and blessed the Lord of righteousness and gave Him glory.</verse>
         <verse canonical="true" osisID="1En.90.41">Then I wept with a great weeping and my tears stayed not till I could no longer endure it: when I saw, they flowed on account of what I had seen; for everything shall come and be fulfilled, and all the deeds of men in their order were shown to me.</verse>
-        <verse canonical="true" osisID="1En.90.42">On that night I remembered the first dream, and because of it I wept and was troubled--because I had seen that vision.'
-        </verse>
+        <verse canonical="true" osisID="1En.90.42">On that night I remembered the first dream, and because of it I wept and was troubled--because I had seen that vision.'</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.92" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XCII.</title>
@@ -2066,7 +2076,7 @@
           <lgCT TEIform="lg">
             <l TEIform="l">'And now, my son Methuselah, call to me all thy brothers</l>
             <l TEIform="l"> And gather together to me all the sons of thy mother; 
-              <milestone type="page" n="130" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="130" marker="DEFAULT" TEIform="milestone"/>
             </l>
             <l TEIform="l"> For the word calls me,</l>
             <l TEIform="l"> And the spirit is poured out upon me,</l>
@@ -2095,7 +2105,7 @@
             <l TEIform="l">And when sin and unrighteousness and blasphemy</l>
             <l TEIform="l"> And violence in all kinds of deeds increase,</l>
             <l TEIform="l"> And apostasy and transgression and uncleanness increase, 
-              <milestone type="page" n="131" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="131" marker="DEFAULT" TEIform="milestone"/>
             </l>
           </lgCT>
         </verse>
@@ -2173,7 +2183,7 @@
           <lgCT TEIform="lg">
             <l TEIform="l">And after that in the fifth week, at its close,</l>
             <l TEIform="l"> The house of glory and dominion shall be built for ever. 
-              <milestone type="page" n="133" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="133" marker="DEFAULT" TEIform="milestone"/>
             </l>
           </lgCT>
         </verse>
@@ -2205,7 +2215,7 @@
             <l TEIform="l">And after that there shall be another, the eighth week, that of righteousness,</l>
             <l TEIform="l"> And a sword shall be given to it that a righteous judgement may be executed on the oppressors,</l>
             <l TEIform="l"> And sinners shall be delivered into the hands of the righteous. 
-              <milestone type="page" n="134" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="134" marker="DEFAULT" TEIform="milestone"/>
             </l>
           </lgCT>
         </verse>
@@ -2245,7 +2255,7 @@
             <l TEIform="l">And to certain men of a generation shall the paths of violence and of death be revealed,</l>
             <l TEIform="l"> And they shall hold themselves afar from them,</l>
             <l TEIform="l"> And shall not follow them. 
-              <milestone type="page" n="135" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="135" marker="DEFAULT" TEIform="milestone"/>
             </l>
           </lgCT>
         </verse>
@@ -2295,7 +2305,7 @@
           <lgCT TEIform="lg">
             <l TEIform="l">Ye have committed blasphemy and unrighteousness,</l>
             <l TEIform="l"> And have become ready for the day of slaughter, 
-              <milestone type="page" n="136" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="136" marker="DEFAULT" TEIform="milestone"/>
             </l>
             <l TEIform="l"> And the day of darkness and the day of the great judgement.</l>
           </lgCT>
@@ -2418,7 +2428,7 @@
             <l TEIform="l">Woe to you, ye mighty,</l>
             <l TEIform="l"> Who with might oppress the righteous;</l>
             <l TEIform="l"> For the day of your destruction is coming. 
-              <milestone type="page" n="138" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="138" marker="DEFAULT" TEIform="milestone"/>
             </l>
             <l TEIform="l"> In those days many and good days shall come to the righteous--in the day of your judgement.</l>
           </lgCT>
@@ -2476,7 +2486,7 @@
             <l TEIform="l">Woe to you who acquire silver and gold in unrighteousness and say:</l>
             <l TEIform="l"> "We have become rich with riches and have possessions;</l>
             <l TEIform="l"> And have acquired everything we have desired.
-              <milestone type="page" n="139" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="139" marker="DEFAULT" TEIform="milestone"/>
             </l>
           </lgCT>
         </verse>
@@ -2525,7 +2535,7 @@
             <l TEIform="l"> And a hill does not become the handmaid of a woman,</l>
             <l TEIform="l"> Even so sin has not been sent upon the earth,</l>
             <l TEIform="l"> But man of himself has created it, 
-              <milestone type="page" n="140" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="140" marker="DEFAULT" TEIform="milestone"/>
             </l>
             <l TEIform="l"> And under a great curse shall they fall who commit it.</l>
           </lgCT>
@@ -2649,7 +2659,7 @@
         <verse canonical="true" osisID="1En.99.15">
           <lgCT TEIform="lg">
             <l TEIform="l">Woe to them who work unrighteousness and help oppression, 
-              <milestone type="page" n="143" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="143" marker="DEFAULT" TEIform="milestone"/>
             </l>
             <l TEIform="l"> And slay their neighbours until the day of the great judgement.</l>
           </lgCT>
@@ -2686,7 +2696,7 @@
             <l TEIform="l">And over all the righteous and holy He will appoint guardians from amongst the holy angels</l>
             <l TEIform="l"> To guard them as the apple of an eye,</l>
             <l TEIform="l"> Until He makes an end of all wickedness and all sin, 
-              <milestone type="page" n="144" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="144" marker="DEFAULT" TEIform="milestone"/>
             </l>
             <l TEIform="l"> And though the righteous sleep a long sleep, they have nought to fear.</l>
           </lgCT>
@@ -2732,9 +2742,9 @@
         <verse canonical="true" osisID="1En.101.2">If He closes the windows of heaven, and withholds the rain and the dew from descending on the earth on your account, what will ye do then?</verse>
         <verse canonical="true" osisID="1En.101.3">And if He sends His anger upon you because of your deeds, ye cannot petition Him; for ye spake proud and insolent words against His righteousness: therefore ye shall have no peace.</verse>
         <verse canonical="true" osisID="1En.101.4">And see ye not the 
-          <hi type="bold" TEIform="hi">sailors</hi> of the ships, how their ships are tossed to and fro by the waves, and are shaken by the winds, and are in sore trouble?</verse>
-        <verse canonical="true" osisID="1En.101.5">And therefore do they fear because all their goodly possessions go upon the sea with them, and they have evil forebodings of heart that the sea will swallow them and they will perish therein.
+          <hi type="bold" TEIform="hi">sailors</hi> of the ships, how their ships are tossed to and fro by the waves, and are shaken by the winds, and are in sore trouble?
         </verse>
+        <verse canonical="true" osisID="1En.101.5">And therefore do they fear because all their goodly possessions go upon the sea with them, and they have evil forebodings of heart that the sea will swallow them and they will perish therein.</verse>
         <verse canonical="true" osisID="1En.101.6">Are not the entire sea and all its waters, and all its movements, the work of the Most High, and has He not set limits to its doings, and confined it throughout by the sand?</verse>
         <verse canonical="true" osisID="1En.101.7">And at His reproof it is afraid and dries up, and all its fish die and all that is in it; But ye sinners that are on the earth fear Him not.</verse>
         <verse canonical="true" osisID="1En.101.8">Has He not made the heaven and the earth, and all that is therein? Who has given understanding and wisdom to everything that moves on the earth and in the sea.</verse>
@@ -2749,7 +2759,7 @@
             <l TEIform="l">In those days when He hath brought a grievous fire upon you,</l>
             <l TEIform="l"> Whither will ye flee, and where will ye find deliverance?</l>
             <l TEIform="l"> And when He launches forth His Word against you Will you not be affrighted and fear? 
-              <milestone type="page" n="146" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="146" marker="DEFAULT" TEIform="milestone"/>
             </l>
           </lgCT>
         </verse>
@@ -2848,7 +2858,7 @@
           <lgCT TEIform="lg">
             <l TEIform="l">And how they have died in prosperity and in wealth,</l>
             <l TEIform="l"> And have not seen tribulation or murder in their life; 
-              <milestone type="page" n="148" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="148" marker="DEFAULT" TEIform="milestone"/>
             </l>
             <l TEIform="l"> And they have died in honour,</l>
             <l TEIform="l"> And judgement has not been executed on them during their life."</l>
@@ -2900,7 +2910,7 @@
           <lgCT TEIform="lg">
             <l TEIform="l">We desired to get away from them that we might escape and be at rest,</l>
             <l TEIform="l"> But found no place whereunto we should flee and be safe from them. 
-              <milestone type="page" n="149" marker="DEFAULT" TEIform="milestone" />
+              <milestone type="page" n="149" marker="DEFAULT" TEIform="milestone"/>
             </l>
           </lgCT>
         </verse>
@@ -2942,12 +2952,12 @@
         <verse canonical="true" osisID="1En.108.1">Another book which Enoch wrote for his son Methuselah and for those who will come after him, and keep the law in the last days.</verse>
         <verse canonical="true" osisID="1En.108.2">Ye who have done good shall wait for those days till an end is made of those who work evil; and an end of the might of the transgressors.</verse>
         <verse canonical="true" osisID="1En.108.3">And wait ye indeed till sin has passed away, for their names shall be blotted out of the book of life and out of the holy books, and their seed shall be destroyed for ever, and their spirits shall be slain, and they shall cry and make lamentation in a place that is a chaotic wilderness, and 
-          <hi type="bold" TEIform="hi">in the fire shall they burn</hi>; for there is no earth there.</verse>
+          <hi type="bold" TEIform="hi">in the fire shall they burn</hi>; for there is no earth there.
+        </verse>
         <verse canonical="true" osisID="1En.108.4">And I saw there something like an invisible cloud; for by reason of its depth I could not look over, and I saw a flame of fire blazing brightly, and things like shining mountains circling and sweeping to and fro.</verse>
         <verse canonical="true" osisID="1En.108.5">And I asked one of the holy angels who was with me and said unto him: 'What is this shining thing? for it is not a heaven but only the flame of a blazing fire, and the voice of weeping and crying and lamentation and strong pain.'</verse>
         <verse canonical="true" osisID="1En.108.6">And he said unto me: 'This place which thou seest--here are cast the spirits of sinners and blasphemers, and of those who work wickedness, and of those who pervert everything that the Lord hath spoken through the mouth of the prophets--(even) the things that shall be.</verse>
-        <verse canonical="true" osisID="1En.108.7">For some of them are written and
-        </verse>
+        <verse canonical="true" osisID="1En.108.7">For some of them are written and</verse>
       </div>
     </div>
   </osisText>
