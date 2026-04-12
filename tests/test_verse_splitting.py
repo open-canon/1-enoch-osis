@@ -169,9 +169,14 @@ class TestSplitMultiVersePoetryLines:
 class TestParsePageUnnumberedPoetry:
     """Tests for parse_page() handling of poetry paragraphs without a verse number.
 
-    Sacred-texts.com sometimes omits the verse number prefix from a poetry
-    stanza that begins the next verse (e.g. 1 Enoch 1:4).  The parser should
-    assign such a paragraph to ``current_verse + 1``.
+    Sacred-texts.com sometimes places a poetry stanza that straddles two verses
+    inside an unnumbered <p>.  The paragraph may start with tail lines that belong
+    to the *current* verse, followed by an inline "N." marker that opens the next
+    verse.  The parser should extend the already-emitted current verse with those
+    tail lines, and add the remaining lines as the new verse.
+
+    If the unnumbered paragraph contains no inline verse markers, all lines are
+    assigned to ``current_verse + 1`` (simpler case).
     """
 
     def _make_parser_with_chapter(self) -> SacredTextsParser:
@@ -179,8 +184,76 @@ class TestParsePageUnnumberedPoetry:
         p.start_book()
         return p
 
-    def test_unnumbered_poetry_assigned_to_next_verse(self) -> None:
-        """An unnumbered <br>-separated paragraph after verse 3 becomes verse 4."""
+    def test_inline_marker_splits_correctly(self) -> None:
+        """Unnumbered poetry with an inline '4.' marker: first line → verse 3, rest → verse 4."""
+        parser = self._make_parser_with_chapter()
+        # Simulates the actual sacred-texts.com structure for 1 Enoch 1:3-4:
+        # verse 3 <p> is plain text, then an unnumbered <p> holds the tail of verse 3
+        # and the body of verse 4 separated by an inline "4." marker.
+        html = (
+            "<html><body>"
+            "<h3>CHAPTER I.</h3>"
+            "<p>3. Concerning the elect I said, and took up my parable concerning them:</p>"
+            "<p>The Holy and Great One will come forth from His dwelling,<br/>"
+            " 4. And the eternal God will tread upon the earth, (even) on Mount Sinai,<br/>"
+            " ⌈And appear from His camp⌉<br/>"
+            " And appear in the strength of His might from the heaven of heavens.</p>"
+            "<p>5. And all shall be smitten with fear<br/>"
+            "And the Watchers shall quake.</p>"
+            "</body></html>"
+        )
+        parser.parse_page(html, page_num=5)
+
+        div = parser.current_div
+        assert div is not None
+
+        verse_ids = [
+            item.osis_id[0]
+            for item in div.content
+            if hasattr(item, "osis_id") and item.osis_id
+        ]
+
+        # Both verse 3 and verse 4 must be present
+        assert "1En.1.3" in verse_ids, f"1En.1.3 missing from {verse_ids}"
+        assert "1En.1.4" in verse_ids, f"1En.1.4 missing from {verse_ids}"
+        assert verse_ids.index("1En.1.3") < verse_ids.index("1En.1.4")
+        assert verse_ids.index("1En.1.4") < verse_ids.index("1En.1.5")
+
+        # Verse 3 must now be poetry (its existing content was extended with
+        # the tail line "The Holy and Great One...")
+        verse3 = next(
+            item
+            for item in div.content
+            if hasattr(item, "osis_id") and item.osis_id and item.osis_id[0] == "1En.1.3"
+        )
+        has_lg_v3 = any(isinstance(c, pyosis.LgCt) for c in verse3.content)
+        assert has_lg_v3, "verse 3 should have a linegroup after being extended"
+        lg_v3 = next(c for c in verse3.content if isinstance(c, pyosis.LgCt))
+        v3_texts = [
+            lc.content[0] if lc.content and isinstance(lc.content[0], str) else ""
+            for lc in lg_v3.l
+        ]
+        assert any("Holy and Great One" in t for t in v3_texts), (
+            f"verse 3 should include 'The Holy and Great One' line, got {v3_texts}"
+        )
+
+        # Verse 4 must be poetry with 3 lines (starting from "And the eternal God")
+        verse4 = next(
+            item
+            for item in div.content
+            if hasattr(item, "osis_id") and item.osis_id and item.osis_id[0] == "1En.1.4"
+        )
+        has_lg_v4 = any(isinstance(c, pyosis.LgCt) for c in verse4.content)
+        assert has_lg_v4, "verse 4 should be wrapped in a linegroup (lgCt)"
+        lg_v4 = next(c for c in verse4.content if isinstance(c, pyosis.LgCt))
+        assert len(lg_v4.l) == 3, f"verse 4 should have 3 lines, got {len(lg_v4.l)}"
+        v4_first = lg_v4.l[0].content[0] if lg_v4.l[0].content else ""
+        assert "eternal God" in v4_first, (
+            f"verse 4 first line should be 'And the eternal God...', got {v4_first!r}"
+        )
+
+    def test_no_inline_marker_all_lines_go_to_next_verse(self) -> None:
+        """Unnumbered poetry with NO inline verse marker → all lines become verse 4."""
         parser = self._make_parser_with_chapter()
         html = (
             "<html><body>"
@@ -198,10 +271,11 @@ class TestParsePageUnnumberedPoetry:
         div = parser.current_div
         assert div is not None
 
-        verse_ids = []
-        for item in div.content:
-            if hasattr(item, "osis_id") and item.osis_id:
-                verse_ids.append(item.osis_id[0])
+        verse_ids = [
+            item.osis_id[0]
+            for item in div.content
+            if hasattr(item, "osis_id") and item.osis_id
+        ]
 
         # Verse 4 must now be present between verse 3 and verse 5
         assert "1En.1.4" in verse_ids, f"1En.1.4 missing from {verse_ids}"

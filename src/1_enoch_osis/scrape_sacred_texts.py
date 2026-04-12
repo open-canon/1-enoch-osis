@@ -455,8 +455,8 @@ class SacredTextsParser:
     def start_chapter(self, chapter_num: int, title: str = "") -> None:
         """Start a new chapter."""
         if self.current_div and self.current_chapter:
-            # Close previous chapter
-            pass
+            # Check for verse gaps before closing the previous chapter
+            self._check_verse_gaps()
 
         self.current_chapter = chapter_num
         chapter_osis_id = f"{OSIS_BOOK_ID}.{chapter_num}"
@@ -509,6 +509,81 @@ class SacredTextsParser:
 
         self.current_div.content.append(verse)
         self.current_verse = verse_num
+
+    def _extend_verse_with_poetry(
+        self, verse_num: int, extra_lines: list[list[InlinePart]]
+    ) -> None:
+        """Append additional poetry lines to the most recently added verse.
+
+        When sacred-texts.com places the tail of a verse in a separate unnumbered
+        ``<p>`` that also contains the opening of the *next* verse (separated by an
+        inline ``N.`` marker), the tail lines belong to the already-emitted verse
+        rather than starting a new verse element.  This helper appends those tail
+        lines to the existing verse in-place, converting a plain-text verse to
+        poetry if necessary.
+
+        Args:
+            verse_num: The verse number whose content should be extended.
+            extra_lines: Parsed poetry lines to append.
+        """
+        if not self.current_div or not self.current_chapter:
+            return
+
+        verse_osis_id = f"{OSIS_BOOK_ID}.{self.current_chapter}.{verse_num}"
+        new_l_elements = [pyosis.LCt(content=lp) for lp in extra_lines]
+
+        for item in reversed(self.current_div.content):
+            if (
+                hasattr(item, "osis_id")
+                and item.osis_id
+                and item.osis_id[0] == verse_osis_id
+            ):
+                # Extend an existing LgCt if present
+                for c in item.content:
+                    if isinstance(c, pyosis.LgCt):
+                        c.l.extend(new_l_elements)
+                        return
+                # No LgCt yet (verse was plain text) — append a new linegroup
+                lg = pyosis.LgCt(l=new_l_elements)
+                item.content.append(lg)
+                return
+
+        # Verse not found — add as a new verse (fallback)
+        seg_content = VerseContent(
+            text="",
+            content_parts=[],
+            has_poetry=True,
+            poetry_lines=extra_lines,
+        )
+        self.add_verse(verse_num, seg_content)
+
+    def _check_verse_gaps(self) -> None:
+        """Log a warning for any gaps in verse numbering within the current chapter.
+
+        Called just before closing a chapter (i.e. when a new chapter starts) so
+        that missing verses are surfaced to the user early.
+        """
+        if not self.current_div or not self.current_chapter:
+            return
+
+        verse_osis_prefix = f"{OSIS_BOOK_ID}.{self.current_chapter}."
+        verse_nums = sorted(
+            int(item.osis_id[0][len(verse_osis_prefix) :])
+            for item in self.current_div.content
+            if (
+                hasattr(item, "osis_id")
+                and item.osis_id
+                and item.osis_id[0].startswith(verse_osis_prefix)
+            )
+        )
+
+        for i in range(len(verse_nums) - 1):
+            if verse_nums[i + 1] - verse_nums[i] > 1:
+                for missing in range(verse_nums[i] + 1, verse_nums[i + 1]):
+                    LOGGER.warning(
+                        f"Verse {verse_osis_prefix}{missing} appears to be missing "
+                        f"(gap between {verse_nums[i]} and {verse_nums[i + 1]})"
+                    )
 
     def split_multi_verse_content(
         self,
@@ -785,30 +860,66 @@ class SacredTextsParser:
                 and self.current_verse is not None
             ):
                 # Paragraph without a verse number following a known verse:
-                # sacred-texts.com sometimes omits the verse number for a poetry
-                # stanza that begins the next verse (e.g. 1 Enoch 1:4, which starts
-                # in a linegroup opened under verse 3). When the paragraph contains
-                # only poetry lines, treat it as the immediately following verse.
+                # sacred-texts.com sometimes places a poetry stanza that straddles
+                # two verses in an unnumbered <p>.  The paragraph may begin with
+                # tail lines that still belong to the current verse, followed by an
+                # inline "N." marker that starts the next verse.
+                #
+                # Strategy: split starting from current_verse so that
+                # split_multi_verse_poetry_lines can detect the "N+1." marker.
+                # - If the split produces >1 segment the first segment extends the
+                #   already-emitted current verse; subsequent segments are new verses.
+                # - If no inline marker is found the whole paragraph is the next verse.
                 verse_content = self.parse_verse_text(p)
                 if verse_content.has_poetry and verse_content.poetry_lines:
-                    verse_num = self.current_verse + 1
-                    for seg_verse_num, seg_lines in self.split_multi_verse_poetry_lines(
-                        verse_content.poetry_lines, verse_num
-                    ):
+                    segments = self.split_multi_verse_poetry_lines(
+                        verse_content.poetry_lines, self.current_verse
+                    )
+                    if len(segments) == 1:
+                        # No inline verse marker — the entire paragraph is the next verse
+                        seg_verse_num = self.current_verse + 1
                         seg_content = VerseContent(
                             text="",
                             content_parts=[],
                             has_poetry=True,
-                            poetry_lines=seg_lines,
+                            poetry_lines=segments[0][1],
                         )
                         self.add_verse(seg_verse_num, seg_content)
                         LOGGER.debug(
                             f"Added verse {self.current_chapter}.{seg_verse_num}"
                             " (unnumbered poetry paragraph)"
                         )
+                    else:
+                        # First segment extends the current verse; the rest are new
+                        for i, (seg_verse_num, seg_lines) in enumerate(segments):
+                            if i == 0:
+                                self._extend_verse_with_poetry(
+                                    self.current_verse, seg_lines
+                                )
+                                LOGGER.debug(
+                                    f"Extended verse"
+                                    f" {self.current_chapter}.{self.current_verse}"
+                                    " with continuation poetry"
+                                )
+                            else:
+                                seg_content = VerseContent(
+                                    text="",
+                                    content_parts=[],
+                                    has_poetry=True,
+                                    poetry_lines=seg_lines,
+                                )
+                                self.add_verse(seg_verse_num, seg_content)
+                                LOGGER.debug(
+                                    f"Added verse"
+                                    f" {self.current_chapter}.{seg_verse_num}"
+                                    " (unnumbered poetry paragraph)"
+                                )
 
     def generate_osis(self) -> pyosis.OsisXML:
         """Generate complete OSIS document."""
+        # Check for verse gaps in the final chapter before generating output
+        self._check_verse_gaps()
+
         # Get current date in ISO format
         from datetime import datetime
 
