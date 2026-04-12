@@ -28,6 +28,7 @@ _scrape_fbe = importlib.import_module("1_enoch_osis.scrape_fbe")
 _scrape_vita = importlib.import_module("1_enoch_osis.scrape_vita_adae_et_evae")
 
 Settings = _cli.Settings
+CommonScraperSettings = _cli.CommonScraperSettings
 EnochSettings = _cli.EnochSettings
 JubileesSettings = _cli.JubileesSettings
 FBESettings = _cli.FBESettings
@@ -108,6 +109,48 @@ class TestVitaDefaults:
 
     def test_log_level_default(self) -> None:
         assert VitaSettings().log_level == "INFO"
+
+
+# ---------------------------------------------------------------------------
+# CommonScraperSettings: shared base and enabled flag
+# ---------------------------------------------------------------------------
+
+
+class TestCommonScraperSettings:
+    def test_enabled_default(self) -> None:
+        for cls in (EnochSettings, JubileesSettings, FBESettings, VitaSettings):
+            assert cls().enabled is True
+
+    def test_common_fields_inherited(self) -> None:
+        from pydantic import BaseModel
+
+        for cls in (EnochSettings, JubileesSettings, FBESettings, VitaSettings):
+            assert issubclass(cls, CommonScraperSettings)
+            assert issubclass(CommonScraperSettings, BaseModel)
+
+    def test_enabled_false_skips_enoch(self) -> None:
+        s = EnochSettings(output="out.xml", delay=0.0, cache_dir="", log_level="WARNING", enabled=False)
+        with patch.object(_scrape_sacred_texts, "main") as mock_main:
+            s.cli_cmd()
+        mock_main.assert_not_called()
+
+    def test_enabled_false_skips_jubilees(self) -> None:
+        s = JubileesSettings(output="jub.xml", delay=0.0, cache_dir="", log_level="WARNING", enabled=False)
+        with patch.object(_scrape_jubilees, "main") as mock_main:
+            s.cli_cmd()
+        mock_main.assert_not_called()
+
+    def test_enabled_false_skips_fbe(self) -> None:
+        s = FBESettings(output_dir="docs", delay=0.0, cache_dir="", log_level="WARNING", enabled=False)
+        with patch.object(_scrape_fbe, "main") as mock_main:
+            s.cli_cmd()
+        mock_main.assert_not_called()
+
+    def test_enabled_false_skips_vita(self) -> None:
+        s = VitaSettings(output="vita.xml", delay=0.0, cache_dir="", log_level="WARNING", enabled=False)
+        with patch.object(_scrape_vita, "main") as mock_main:
+            s.cli_cmd()
+        mock_main.assert_not_called()
 
 
 # ---------------------------------------------------------------------------

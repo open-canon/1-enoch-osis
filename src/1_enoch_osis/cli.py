@@ -3,9 +3,8 @@
 from __future__ import annotations
 
 import logging
-from typing import Optional
 
-from pydantic import Field
+from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings, CliApp, CliSubCommand
 
 from .scrape_fbe import (
@@ -30,11 +29,37 @@ def _configure_logging(log_level: str) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Shared base settings
+# ---------------------------------------------------------------------------
+
+
+class CommonScraperSettings(BaseModel):
+    """Common settings shared by all scrapers."""
+
+    enabled: bool = Field(
+        default=True,
+        description="Whether to run this scraper.",
+    )
+    delay: float = Field(
+        default=1.5,
+        description="Delay between HTTP requests in seconds.",
+    )
+    cache_dir: str = Field(
+        default=".cache/html",
+        description="Directory for caching downloaded HTML. Empty string disables caching.",
+    )
+    log_level: str = Field(
+        default="INFO",
+        description="Logging level: DEBUG, INFO, WARNING, ERROR.",
+    )
+
+
+# ---------------------------------------------------------------------------
 # Per-scraper sub-command settings
 # ---------------------------------------------------------------------------
 
 
-class EnochSettings(BaseSettings):
+class EnochSettings(CommonScraperSettings):
     """Settings for the 1 Enoch scraper (sacred-texts.com/bib/boe/)."""
 
     output: str = Field(
@@ -49,21 +74,11 @@ class EnochSettings(BaseSettings):
         default=ENOCH_FILE_RANGE[1],
         description="Last page to process.",
     )
-    delay: float = Field(
-        default=1.5,
-        description="Delay between HTTP requests in seconds.",
-    )
-    cache_dir: str = Field(
-        default=".cache/html",
-        description="Directory for caching downloaded HTML. Empty string disables caching.",
-    )
-    log_level: str = Field(
-        default="INFO",
-        description="Logging level: DEBUG, INFO, WARNING, ERROR.",
-    )
 
     def cli_cmd(self) -> None:
         """Run the 1 Enoch scraper."""
+        if not self.enabled:
+            return
         _configure_logging(self.log_level)
         from .scrape_sacred_texts import main
 
@@ -77,28 +92,18 @@ class EnochSettings(BaseSettings):
         )
 
 
-class JubileesSettings(BaseSettings):
+class JubileesSettings(CommonScraperSettings):
     """Settings for the Jubilees scraper (sacred-texts.com/bib/jub/)."""
 
     output: str = Field(
         default=JUBILEES_DEFAULT_OUTPUT,
         description="Output XML filename.",
     )
-    delay: float = Field(
-        default=1.5,
-        description="Delay between HTTP requests in seconds.",
-    )
-    cache_dir: str = Field(
-        default=".cache/html",
-        description="Directory for caching downloaded HTML. Empty string disables caching.",
-    )
-    log_level: str = Field(
-        default="INFO",
-        description="Logging level: DEBUG, INFO, WARNING, ERROR.",
-    )
 
     def cli_cmd(self) -> None:
         """Run the Jubilees scraper."""
+        if not self.enabled:
+            return
         _configure_logging(self.log_level)
         from .scrape_jubilees import main
 
@@ -110,7 +115,7 @@ class JubileesSettings(BaseSettings):
         )
 
 
-class FBESettings(BaseSettings):
+class FBESettings(CommonScraperSettings):
     """Settings for the Forgotten Books of Eden scraper (sacred-texts.com/bib/fbe/)."""
 
     output_dir: str = Field(
@@ -125,21 +130,11 @@ class FBESettings(BaseSettings):
         default=FBE_FILE_RANGE[1],
         description="Last page number to fetch.",
     )
-    delay: float = Field(
-        default=1.5,
-        description="Delay between HTTP requests in seconds.",
-    )
-    cache_dir: str = Field(
-        default=".cache/html",
-        description="Directory for caching downloaded HTML. Empty string disables caching.",
-    )
-    log_level: str = Field(
-        default="INFO",
-        description="Logging level: DEBUG, INFO, WARNING, ERROR.",
-    )
 
     def cli_cmd(self) -> None:
         """Run the Forgotten Books of Eden scraper."""
+        if not self.enabled:
+            return
         _configure_logging(self.log_level)
         from .scrape_fbe import main
 
@@ -153,28 +148,18 @@ class FBESettings(BaseSettings):
         )
 
 
-class VitaSettings(BaseSettings):
+class VitaSettings(CommonScraperSettings):
     """Settings for the Vita Adae et Evae scraper (sacred-texts.com/chr/apo/adamnev.htm)."""
 
     output: str = Field(
         default=VITA_DEFAULT_OUTPUT,
         description="Output XML filename.",
     )
-    delay: float = Field(
-        default=1.5,
-        description="Delay between HTTP requests in seconds.",
-    )
-    cache_dir: str = Field(
-        default=".cache/html",
-        description="Directory for caching downloaded HTML. Empty string disables caching.",
-    )
-    log_level: str = Field(
-        default="INFO",
-        description="Logging level: DEBUG, INFO, WARNING, ERROR.",
-    )
 
     def cli_cmd(self) -> None:
         """Run the Vita Adae et Evae scraper."""
+        if not self.enabled:
+            return
         _configure_logging(self.log_level)
         from .scrape_vita_adae_et_evae import main
 
