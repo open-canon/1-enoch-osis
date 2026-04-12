@@ -10,6 +10,7 @@ import importlib
 import sys
 from pathlib import Path
 
+import pyosis
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -196,8 +197,6 @@ class TestParsePageUnnumberedPoetry:
 
         div = parser.current_div
         assert div is not None
-
-        import pyosis
 
         verse_ids = []
         for item in div.content:
