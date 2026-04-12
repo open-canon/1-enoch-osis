@@ -109,18 +109,6 @@ The `1_enoch_osis.scrape_sacred_texts` module downloads each chapter page from <
 
 The `1_enoch_osis.scrape_vita_adae_et_evae` module downloads the single-page `Vita Adae et Evae` witness from <https://www.sacred-texts.com/chr/apo/adamnev.htm> and converts it to OSIS XML.
 
-### Vita Usage
-
-```bash
-uv run python -m 1_enoch_osis.scrape_vita_adae_et_evae
-
-uv run python -m 1_enoch_osis.scrape_vita_adae_et_evae \
-  --output=documents/vita-adae-et-evae.xml \
-  --delay=1.5 \
-  --cache_dir=.cache/html \
-  --log_level=INFO
-```
-
 ### Vita Notes
 
 The source page is a single document with inline Roman-numeral chapter markers and verse numbers. The scraper normalizes that stream into chapter and verse OSIS elements.
@@ -130,18 +118,6 @@ The sacred-texts page for this work may return a Cloudflare interstitial to head
 ## Scraping Jubilees
 
 The `1_enoch_osis.scrape_jubilees` module downloads Charles's `The Book of Jubilees` witness from <https://sacred-texts.com/bib/jub/> and converts it to OSIS XML.
-
-### Jubilees Usage
-
-```bash
-uv run python -m 1_enoch_osis.scrape_jubilees
-
-uv run python -m 1_enoch_osis.scrape_jubilees \
-  --output=documents/jubilees.xml \
-  --delay=1.5 \
-  --cache_dir=.cache/html \
-  --log_level=INFO
-```
 
 ### Jubilees Notes
 
@@ -162,27 +138,7 @@ Inline footnote callouts are now preserved as OSIS `<note>` elements with the sa
 - Handles rate limiting with exponential backoff retry logic
 - Generates valid OSIS XML output with proper metadata
 
-### Usage
-
-```bash
-# Basic usage (fastest when cached)
-uv run python -m 1_enoch_osis.scrape_sacred_texts
-
-# Custom options
-uv run python -m 1_enoch_osis.scrape_sacred_texts \
-  --start_page=0 \
-  --end_page=112 \
-  --output=documents/1-enoch-new.xml \
-  --delay=1.5 \
-  --cache_dir=.cache/html \
-  --log_level=INFO
-
-# Skip front matter and start at Chapter I
-uv run python -m 1_enoch_osis.scrape_sacred_texts \
-  --start_page=4
-```
-
-### Parameters
+### Parameters (1 Enoch / `enoch` sub-command)
 
 - `--output`: Output XML filename (default: `documents/1-enoch.xml`)
 - `--start_page`: First page to process (default: 0 for Title Page, use 4 to skip front matter)
@@ -204,13 +160,6 @@ If you still encounter 429 errors:
 
 - Increase the `--delay` parameter (try 3.0 or higher)
 - Wait several hours before retrying if temporarily blocked
-
-**Recommended Approach**:
-
-```bash
-# Use cached pages when available
-uv run python -m 1_enoch_osis.scrape_sacred_texts
-```
 
 ### How It Works
 

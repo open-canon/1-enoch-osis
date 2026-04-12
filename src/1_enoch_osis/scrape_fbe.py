@@ -2,7 +2,6 @@
 # requires-python = ">=3.13"
 # dependencies = [
 #     "beautifulsoup4",
-#     "fire",
 #     "httpx",
 #     "pyosis",
 #     "tqdm",
@@ -31,7 +30,6 @@ from datetime import datetime
 from pathlib import Path
 from typing import Final
 
-import fire
 import pyosis
 from bs4 import BeautifulSoup, NavigableString, Tag
 from tqdm import tqdm
@@ -1431,7 +1429,3 @@ def main(
         LOGGER.info("Done!")
     finally:
         parser.close()
-
-
-if __name__ == "__main__":
-    fire.Fire(main)
