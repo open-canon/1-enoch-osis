@@ -12,6 +12,7 @@ This repository contains OSIS XML documents for 1 Enoch and related works from T
 - `documents/adam-and-eve.xml` - Combined OSIS document containing the First and Second Books of Adam and Eve as separate OSIS book divs
 - `documents/jubilees.xml` - OSIS document for Charles's `The Book of Jubilees`, scraped from sacred-texts.com with page-level sections nested inside chapter divs
 - `documents/vita-adae-et-evae.xml` - OSIS document for Charles's `Vita Adae et Evae`, scraped from sacred-texts.com
+- `src/1_enoch_osis/cli.py` - Unified CLI that dispatches to all scrapers via pydantic-settings sub-commands (`enoch`, `jubilees`, `fbe`, `vita`)
 - `src/1_enoch_osis/scrape_fbe.py` - Forgotten Books of Eden scraper that combines the Adam and Eve books into one document, uses canonical OSIS IDs such as `2En`, normalizes simple intro pages to an `Introduction` title plus source-heading subtitle, and preserves more complex source title blocks where needed
 - `src/1_enoch_osis/scrape_jubilees.py` - Python module to download and parse `The Book of Jubilees` from sacred-texts.com while preserving the source's section-per-page structure and inline footnotes inside canonical chapters
 - `src/1_enoch_osis/scrape_sacred_texts.py` - Python module to download and parse from sacred-texts.com
@@ -46,7 +47,61 @@ pytest tests
 
 If the relevant source subtree under `.cache/html/` is missing, the matching test will skip. In that case, populate the cache by running the corresponding scraper once before relying on the snapshot tests. Generated XML documents now live under `documents/` by default.
 
-## Scraping from sacred-texts.com
+## Unified CLI
+
+All scrapers are accessible through the `scrape` entry point, powered by
+[pydantic-settings](https://docs.pydantic.dev/latest/concepts/pydantic_settings/).
+
+### Available sub-commands
+
+| Sub-command | Scraper module | Source |
+|-------------|---------------|--------|
+| `enoch` | `scrape_sacred_texts` | sacred-texts.com/bib/boe/ |
+| `jubilees` | `scrape_jubilees` | sacred-texts.com/bib/jub/ |
+| `fbe` | `scrape_fbe` | sacred-texts.com/bib/fbe/ |
+| `vita` | `scrape_vita_adae_et_evae` | sacred-texts.com/chr/apo/adamnev.htm |
+
+### Usage
+
+```bash
+# Show top-level help
+python -m 1_enoch_osis.cli --help
+
+# Show help for a specific sub-command
+python -m 1_enoch_osis.cli enoch --help
+python -m 1_enoch_osis.cli jubilees --help
+python -m 1_enoch_osis.cli fbe --help
+python -m 1_enoch_osis.cli vita --help
+
+# Run a scraper with defaults
+python -m 1_enoch_osis.cli enoch
+python -m 1_enoch_osis.cli jubilees
+python -m 1_enoch_osis.cli fbe
+python -m 1_enoch_osis.cli vita
+
+# Run with custom options
+python -m 1_enoch_osis.cli enoch \
+  --output=documents/1-enoch.xml \
+  --start_page=4 \
+  --end_page=112 \
+  --delay=1.5 \
+  --cache_dir=.cache/html \
+  --log_level=INFO
+
+python -m 1_enoch_osis.cli fbe \
+  --output_dir=documents \
+  --delay=1.5 \
+  --cache_dir=.cache/html
+```
+
+When installed as a package, the `scrape` script is available directly:
+
+```bash
+scrape enoch --output=documents/1-enoch.xml
+scrape fbe --output_dir=documents
+```
+
+
 
 The `1_enoch_osis.scrape_sacred_texts` module downloads each chapter page from <https://sacred-texts.com/bib/boe/> and converts it to OSIS XML format using pyosis.
 
