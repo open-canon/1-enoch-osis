@@ -568,7 +568,7 @@ class SacredTextsParser:
 
         verse_osis_prefix = f"{OSIS_BOOK_ID}.{self.current_chapter}."
         verse_nums = sorted(
-            int(item.osis_id[0][len(verse_osis_prefix) :])
+            int(item.osis_id[0][len(verse_osis_prefix):])
             for item in self.current_div.content
             if (
                 hasattr(item, "osis_id")
