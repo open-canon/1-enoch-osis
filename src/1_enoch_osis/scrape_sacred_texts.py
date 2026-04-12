@@ -779,6 +779,34 @@ class SacredTextsParser:
                             f"Added verse {self.current_chapter}.{seg_verse_num}"
                         )
 
+            elif (
+                not verse_match
+                and self.current_chapter
+                and self.current_verse is not None
+            ):
+                # Paragraph without a verse number following a known verse:
+                # sacred-texts.com sometimes omits the verse number for a poetry
+                # stanza that begins the next verse (e.g. 1 Enoch 1:4, which starts
+                # in a linegroup opened under verse 3). When the paragraph contains
+                # only poetry lines, treat it as the immediately following verse.
+                verse_content = self.parse_verse_text(p)
+                if verse_content.has_poetry and verse_content.poetry_lines:
+                    verse_num = self.current_verse + 1
+                    for seg_verse_num, seg_lines in self.split_multi_verse_poetry_lines(
+                        verse_content.poetry_lines, verse_num
+                    ):
+                        seg_content = VerseContent(
+                            text="",
+                            content_parts=[],
+                            has_poetry=True,
+                            poetry_lines=seg_lines,
+                        )
+                        self.add_verse(seg_verse_num, seg_content)
+                        LOGGER.debug(
+                            f"Added verse {self.current_chapter}.{seg_verse_num}"
+                            " (unnumbered poetry paragraph)"
+                        )
+
     def generate_osis(self) -> pyosis.OsisXML:
         """Generate complete OSIS document."""
         # Get current date in ISO format

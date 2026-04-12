@@ -1,7 +1,8 @@
 """Unit tests for the verse-splitting helpers in scrape_sacred_texts.
 
-These tests exercise split_multi_verse_content() and split_multi_verse_poetry_lines()
-directly and do NOT require a network connection or HTML cache.
+These tests exercise split_multi_verse_content(), split_multi_verse_poetry_lines(),
+and the parse_page() handling of unnumbered poetry paragraphs directly and do NOT
+require a network connection or HTML cache.
 """
 from __future__ import annotations
 
@@ -157,3 +158,112 @@ class TestSplitMultiVersePoetryLines:
         result = parser.split_multi_verse_poetry_lines(lines, 4)
         assert len(result) == 2
         assert result[1][1][0][0].strip() == "Line B"
+
+
+# ---------------------------------------------------------------------------
+# parse_page: unnumbered poetry paragraphs
+# ---------------------------------------------------------------------------
+
+
+class TestParsePageUnnumberedPoetry:
+    """Tests for parse_page() handling of poetry paragraphs without a verse number.
+
+    Sacred-texts.com sometimes omits the verse number prefix from a poetry
+    stanza that begins the next verse (e.g. 1 Enoch 1:4).  The parser should
+    assign such a paragraph to ``current_verse + 1``.
+    """
+
+    def _make_parser_with_chapter(self) -> SacredTextsParser:
+        p = SacredTextsParser(cache_dir=None, delay=0)
+        p.start_book()
+        return p
+
+    def test_unnumbered_poetry_assigned_to_next_verse(self) -> None:
+        """An unnumbered <br>-separated paragraph after verse 3 becomes verse 4."""
+        parser = self._make_parser_with_chapter()
+        html = (
+            "<html><body>"
+            "<h3>CHAPTER I.</h3>"
+            "<p>3. Concerning the elect I said, and took up my parable concerning them:</p>"
+            "<p>The Holy and Great One will come forth from His dwelling,<br/>"
+            "And the eternal God will tread upon the earth, (even) on Mount Sinai,<br/>"
+            "And appear in the strength of His might from the heaven of heavens.</p>"
+            "<p>5. And all shall be smitten with fear<br/>"
+            "And the Watchers shall quake.</p>"
+            "</body></html>"
+        )
+        parser.parse_page(html, page_num=5)
+
+        div = parser.current_div
+        assert div is not None
+
+        import pyosis
+
+        verse_ids = []
+        for item in div.content:
+            if hasattr(item, "osis_id") and item.osis_id:
+                verse_ids.append(item.osis_id[0])
+
+        # Verse 4 must now be present between verse 3 and verse 5
+        assert "1En.1.4" in verse_ids, f"1En.1.4 missing from {verse_ids}"
+        assert verse_ids.index("1En.1.3") < verse_ids.index("1En.1.4")
+        assert verse_ids.index("1En.1.4") < verse_ids.index("1En.1.5")
+
+        # Verse 4 must be poetry (lgCt wrapper)
+        verse4 = next(
+            item
+            for item in div.content
+            if hasattr(item, "osis_id") and item.osis_id and item.osis_id[0] == "1En.1.4"
+        )
+        has_lg = any(isinstance(c, pyosis.LgCt) for c in verse4.content)
+        assert has_lg, "verse 4 should be wrapped in a linegroup (lgCt)"
+
+    def test_unnumbered_prose_paragraph_is_ignored(self) -> None:
+        """An unnumbered paragraph WITHOUT <br> tags is not treated as a verse."""
+        parser = self._make_parser_with_chapter()
+        html = (
+            "<html><body>"
+            "<h3>CHAPTER I.</h3>"
+            "<p>3. First verse text.</p>"
+            "<p>This is a prose continuation without br tags or a verse number.</p>"
+            "<p>5. Poetry verse<br/>Line two.</p>"
+            "</body></html>"
+        )
+        parser.parse_page(html, page_num=5)
+
+        div = parser.current_div
+        assert div is not None
+
+        verse_ids = [
+            item.osis_id[0]
+            for item in div.content
+            if hasattr(item, "osis_id") and item.osis_id
+        ]
+        # Only verse 3 and verse 5 should be present; no spurious verse 4
+        assert "1En.1.3" in verse_ids
+        assert "1En.1.5" in verse_ids
+        assert "1En.1.4" not in verse_ids, "prose paragraph should not become verse 4"
+
+    def test_unnumbered_poetry_before_first_verse_is_ignored(self) -> None:
+        """A poetry paragraph before any verse has been added is ignored."""
+        parser = self._make_parser_with_chapter()
+        html = (
+            "<html><body>"
+            "<h3>CHAPTER I.</h3>"
+            "<p>Some poetry before first verse<br/>Line two.</p>"
+            "<p>1. First verse text.</p>"
+            "</body></html>"
+        )
+        parser.parse_page(html, page_num=5)
+
+        div = parser.current_div
+        assert div is not None
+
+        verse_ids = [
+            item.osis_id[0]
+            for item in div.content
+            if hasattr(item, "osis_id") and item.osis_id
+        ]
+        # Only verse 1 should be present; no verse 0 created from pre-verse poetry
+        assert "1En.1.1" in verse_ids
+        assert len([v for v in verse_ids if v.startswith("1En.1.")]) == 1
