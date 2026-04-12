@@ -10,21 +10,24 @@ This repository contains OSIS XML documents for 1 Enoch and related works from T
 
 - `documents/1-enoch.xml` - OSIS document scraped from sacred-texts.com using the `1_enoch_osis.scrape_sacred_texts` module, with formatting preserved but without inline annotations
 - `documents/adam-and-eve.xml` - Combined OSIS document containing the First and Second Books of Adam and Eve as separate OSIS book divs
+- `documents/jasher.xml` - OSIS document for `The Book of Jasher`, scraped from sacred-texts.com with index-derived front matter and one source page per canonical chapter
 - `documents/jubilees.xml` - OSIS document for Charles's `The Book of Jubilees`, scraped from sacred-texts.com with page-level sections nested inside chapter divs
 - `documents/vita-adae-et-evae.xml` - OSIS document for Charles's `Vita Adae et Evae`, scraped from sacred-texts.com
 - `src/1_enoch_osis/scrape_fbe.py` - Forgotten Books of Eden scraper that combines the Adam and Eve books into one document, uses canonical OSIS IDs such as `2En`, normalizes simple intro pages to an `Introduction` title plus source-heading subtitle, and preserves more complex source title blocks where needed
+- `src/1_enoch_osis/scrape_jasher.py` - Python module to download and parse `The Book of Jasher` from sacred-texts.com as a 91-chapter work with title-page and introduction front matter pulled from the index page
 - `src/1_enoch_osis/scrape_jubilees.py` - Python module to download and parse `The Book of Jubilees` from sacred-texts.com while preserving the source's section-per-page structure and inline footnotes inside canonical chapters
 - `src/1_enoch_osis/scrape_sacred_texts.py` - Python module to download and parse from sacred-texts.com
 - `src/1_enoch_osis/scrape_vita_adae_et_evae.py` - Python module to download and parse `Vita Adae et Evae` from sacred-texts.com as a single-page work with inline chapter and verse markers
 - `pdf.py` - Previous pyosis compiler example (for reference)
 - `tests/test_scrape_fbe_snapshot.py` - Snapshot regression test that regenerates FBE XML from the local HTML cache and compares it against the committed OSIS XML files
+- `tests/test_scrape_jasher_snapshot.py` - Snapshot regression test that regenerates the Jasher XML from the local HTML cache and compares it against the committed OSIS XML file
 - `tests/test_scrape_jubilees_snapshot.py` - Snapshot regression test that regenerates the Jubilees XML from the local cache and compares it against the committed OSIS XML file
 - `tests/test_scrape_sacred_texts_snapshot.py` - Snapshot regression test that regenerates the 1 Enoch XML from the local HTML cache and compares it against the committed OSIS XML file
 - `tests/test_scrape_vita_adae_et_evae_snapshot.py` - Snapshot regression test that regenerates the Vita Adae et Evae XML from the local cache and compares it against the committed OSIS XML file
 
 ## Regression Testing
 
-The repository includes snapshot tests for `1_enoch_osis.scrape_fbe`, `1_enoch_osis.scrape_jubilees`, `1_enoch_osis.scrape_sacred_texts`, and `1_enoch_osis.scrape_vita_adae_et_evae`. They regenerate the OSIS XML documents and compare them against the committed XML files in `documents/`.
+The repository includes snapshot tests for `1_enoch_osis.scrape_fbe`, `1_enoch_osis.scrape_jasher`, `1_enoch_osis.scrape_jubilees`, `1_enoch_osis.scrape_sacred_texts`, and `1_enoch_osis.scrape_vita_adae_et_evae`. They regenerate the OSIS XML documents and compare them against the committed XML files in `documents/`.
 
 The test is intentionally narrow:
 
@@ -35,6 +38,8 @@ The test is intentionally narrow:
 The cache layout mirrors the source URLs under the shared cache directory. For example, pages from `https://sacred-texts.com/bib/boe/boe012.htm` and `https://sacred-texts.com/bib/fbe/fbe014.htm` are cached at `.cache/html/sacred-texts.com/bib/boe/boe012.htm` and `.cache/html/sacred-texts.com/bib/fbe/fbe014.htm`.
 
 For `Vita Adae et Evae`, the scraper reads and writes the cache entry at `.cache/html/www.sacred-texts.com/chr/apo/adamnev.htm`.
+
+For `The Book of Jasher`, the scraper reads and writes cache entries under `.cache/html/sacred-texts.com/chr/apo/jasher/`, for example `.cache/html/sacred-texts.com/chr/apo/jasher/1.htm`.
 
 For `Jubilees`, the scraper reads and writes cache entries under `.cache/html/sacred-texts.com/bib/jub/`, for example `.cache/html/sacred-texts.com/bib/jub/jub14.htm`.
 
@@ -71,6 +76,28 @@ uv run python -m 1_enoch_osis.scrape_vita_adae_et_evae \
 The source page is a single document with inline Roman-numeral chapter markers and verse numbers. The scraper normalizes that stream into chapter and verse OSIS elements.
 
 The sacred-texts page for this work may return a Cloudflare interstitial to headless clients. When that happens, the scraper now fails rather than using an alternate source, so the practical workaround is to rely on an already-populated local cache for repeatable runs in this environment.
+
+## Scraping The Book of Jasher
+
+The `1_enoch_osis.scrape_jasher` module downloads the `The Book of Jasher` witness from <https://sacred-texts.com/chr/apo/jasher/> and converts it to OSIS XML.
+
+### Jasher Usage
+
+```bash
+uv run python -m 1_enoch_osis.scrape_jasher
+
+uv run python -m 1_enoch_osis.scrape_jasher \
+  --output=documents/jasher.xml \
+  --delay=1.5 \
+  --cache_dir=.cache/html \
+  --log_level=INFO
+```
+
+### Jasher Notes
+
+The sacred-texts edition exposes its front matter on the index page, then serves one numbered HTML page per chapter. The scraper converts the index title page and introductory prose into front matter divs, then emits chapters 1-91 as canonical chapter and verse OSIS elements.
+
+The chapter pages use malformed bare `<P>` tags, and the final paragraph on each page is immediately followed by sacred-texts navigation markup. The scraper parses the raw HTML between the chapter heading and the footer `<HR>` so those duplicated paragraph artifacts and footer links do not leak into the OSIS output.
 
 ## Scraping Jubilees
 
