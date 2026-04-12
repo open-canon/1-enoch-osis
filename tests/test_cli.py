@@ -22,6 +22,10 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
 _cli = importlib.import_module("1_enoch_osis.cli")
+_scrape_sacred_texts = importlib.import_module("1_enoch_osis.scrape_sacred_texts")
+_scrape_jubilees = importlib.import_module("1_enoch_osis.scrape_jubilees")
+_scrape_fbe = importlib.import_module("1_enoch_osis.scrape_fbe")
+_scrape_vita = importlib.import_module("1_enoch_osis.scrape_vita_adae_et_evae")
 
 Settings = _cli.Settings
 EnochSettings = _cli.EnochSettings
@@ -204,10 +208,8 @@ class TestCliParsing:
 
 class TestSubCommandCallsScraper:
     def test_enoch_cli_cmd_calls_scraper_main(self) -> None:
-        import importlib
-        mod = importlib.import_module("1_enoch_osis.scrape_sacred_texts")
         s = EnochSettings(output="out.xml", start_page=4, end_page=10, delay=0.0, cache_dir="", log_level="WARNING")
-        with patch.object(mod, "main") as mock_main:
+        with patch.object(_scrape_sacred_texts, "main") as mock_main:
             s.cli_cmd()
         mock_main.assert_called_once_with(
             output="out.xml",
@@ -219,10 +221,8 @@ class TestSubCommandCallsScraper:
         )
 
     def test_jubilees_cli_cmd_calls_scraper_main(self) -> None:
-        import importlib
-        mod = importlib.import_module("1_enoch_osis.scrape_jubilees")
         s = JubileesSettings(output="jub.xml", delay=0.0, cache_dir="", log_level="WARNING")
-        with patch.object(mod, "main") as mock_main:
+        with patch.object(_scrape_jubilees, "main") as mock_main:
             s.cli_cmd()
         mock_main.assert_called_once_with(
             output="jub.xml",
@@ -232,10 +232,8 @@ class TestSubCommandCallsScraper:
         )
 
     def test_fbe_cli_cmd_calls_scraper_main(self) -> None:
-        import importlib
-        mod = importlib.import_module("1_enoch_osis.scrape_fbe")
         s = FBESettings(output_dir="docs", start_page=1, end_page=5, delay=0.0, cache_dir="", log_level="WARNING")
-        with patch.object(mod, "main") as mock_main:
+        with patch.object(_scrape_fbe, "main") as mock_main:
             s.cli_cmd()
         mock_main.assert_called_once_with(
             output_dir="docs",
@@ -247,10 +245,8 @@ class TestSubCommandCallsScraper:
         )
 
     def test_vita_cli_cmd_calls_scraper_main(self) -> None:
-        import importlib
-        mod = importlib.import_module("1_enoch_osis.scrape_vita_adae_et_evae")
         s = VitaSettings(output="vita.xml", delay=0.0, cache_dir="", log_level="WARNING")
-        with patch.object(mod, "main") as mock_main:
+        with patch.object(_scrape_vita, "main") as mock_main:
             s.cli_cmd()
         mock_main.assert_called_once_with(
             output="vita.xml",
