@@ -510,6 +510,106 @@ class SacredTextsParser:
         self.current_div.content.append(verse)
         self.current_verse = verse_num
 
+    def split_multi_verse_content(
+        self,
+        content_parts: list[InlinePart],
+        starting_verse_num: int,
+    ) -> list[tuple[int, list[InlinePart]]]:
+        """Split content_parts that inline multiple verse numbers into per-verse segments.
+
+        Sacred-texts.com often places multiple verses in a single <p> tag, with verse
+        numbers like " 2. " inline in the text.  This method splits them into separate
+        lists, one per verse.
+
+        Returns a list of (verse_num, content_parts) tuples in order.
+        """
+        result: list[tuple[int, list[InlinePart]]] = []
+        current_verse = starting_verse_num
+        current_parts: list[InlinePart] = []
+
+        for part in content_parts:
+            if not isinstance(part, str):
+                current_parts.append(part)
+                continue
+
+            remaining = part
+
+            while remaining:
+                next_verse = current_verse + 1
+                # Match the next expected verse number preceded by whitespace and
+                # not preceded by another digit (avoids false matches such as
+                # "p. 32. " or "fig. 2.").
+                m = re.search(
+                    rf"(?<!\d)\s+{re.escape(str(next_verse))}\.\s+", remaining
+                )
+                if not m:
+                    break
+
+                before = remaining[: m.start()].rstrip()
+                if before:
+                    current_parts.append(before)
+
+                result.append((current_verse, current_parts))
+                current_parts = []
+                current_verse = next_verse
+                remaining = remaining[m.end() :]
+
+            if remaining:
+                current_parts.append(remaining)
+
+        if current_parts:
+            result.append((current_verse, current_parts))
+
+        # If no split was found, return the original content as a single verse
+        return result if result else [(starting_verse_num, list(content_parts))]
+
+    def split_multi_verse_poetry_lines(
+        self,
+        poetry_lines: list[list[InlinePart]],
+        starting_verse_num: int,
+    ) -> list[tuple[int, list[list[InlinePart]]]]:
+        """Split poetry lines that span multiple verses into per-verse groups.
+
+        A poetry line that begins with " N. " (where N is the expected next verse
+        number) marks the start of a new verse inside the same paragraph.
+
+        Returns a list of (verse_num, lines) tuples in order.
+        """
+        result: list[tuple[int, list[list[InlinePart]]]] = []
+        current_verse = starting_verse_num
+        current_lines: list[list[InlinePart]] = []
+
+        for line_parts in poetry_lines:
+            next_verse = current_verse + 1
+            # Check whether this line starts with the next verse number
+            if line_parts and isinstance(line_parts[0], str):
+                m = re.match(
+                    rf"^\s*{re.escape(str(next_verse))}\.\s+", line_parts[0]
+                )
+                if m:
+                    # Close out the current verse
+                    result.append((current_verse, current_lines))
+                    current_lines = []
+                    current_verse = next_verse
+
+                    # Strip the verse-number prefix from this line
+                    stripped = line_parts[0][m.end() :]
+                    new_line_parts: list[InlinePart] = (
+                        [stripped] + list(line_parts[1:])
+                        if stripped.strip()
+                        else list(line_parts[1:])
+                    )
+                    if new_line_parts:
+                        current_lines.append(new_line_parts)
+                    continue
+
+            current_lines.append(line_parts)
+
+        if current_lines:
+            result.append((current_verse, current_lines))
+
+        return result if result else [(starting_verse_num, list(poetry_lines))]
+
     def extract_footnotes(self, soup: BeautifulSoup) -> None:
         """Extract footnotes from the page and store them for inline insertion.
 
@@ -645,14 +745,39 @@ class SacredTextsParser:
                         r"^\d+\.\s+", "", verse_content.content_parts[0]
                     )
 
-                # Remove verse number from poetry lines
                 if verse_content.has_poetry and verse_content.poetry_lines:
+                    # Remove verse number from the first poetry line
                     first_line = verse_content.poetry_lines[0]
                     if first_line and isinstance(first_line[0], str):
                         first_line[0] = re.sub(r"^\d+\.\s+", "", first_line[0])
 
-                self.add_verse(verse_num, verse_content)
-                LOGGER.debug(f"Added verse {self.current_chapter}.{verse_num}")
+                    # Split poetry lines into individual per-verse segments
+                    for seg_verse_num, seg_lines in self.split_multi_verse_poetry_lines(
+                        verse_content.poetry_lines, verse_num
+                    ):
+                        seg_content = VerseContent(
+                            text="",
+                            content_parts=[],
+                            has_poetry=True,
+                            poetry_lines=seg_lines,
+                        )
+                        self.add_verse(seg_verse_num, seg_content)
+                        LOGGER.debug(
+                            f"Added verse {self.current_chapter}.{seg_verse_num}"
+                        )
+                else:
+                    # Split non-poetry content into individual per-verse segments
+                    for seg_verse_num, seg_parts in self.split_multi_verse_content(
+                        verse_content.content_parts, verse_num
+                    ):
+                        seg_content = VerseContent(
+                            text=extract_plain_text(seg_parts),
+                            content_parts=seg_parts,
+                        )
+                        self.add_verse(seg_verse_num, seg_content)
+                        LOGGER.debug(
+                            f"Added verse {self.current_chapter}.{seg_verse_num}"
+                        )
 
     def generate_osis(self) -> pyosis.OsisXML:
         """Generate complete OSIS document."""
