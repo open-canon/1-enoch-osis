@@ -236,6 +236,16 @@ class TestParsePageUnnumberedPoetry:
         assert any("Holy and Great One" in t for t in v3_texts), (
             f"verse 3 should include 'The Holy and Great One' line, got {v3_texts}"
         )
+        # The prose text ("Concerning the elect...") must remain OUTSIDE the lgCt,
+        # as plain text in verse3.content — not wrapped inside the linegroup.
+        plain_texts = [c for c in verse3.content if isinstance(c, str)]
+        assert any("elect" in t for t in plain_texts), (
+            f"verse 3 prose text should be outside the linegroup, got content={verse3.content}"
+        )
+        assert not any(
+            "elect" in (lc.content[0] if lc.content and isinstance(lc.content[0], str) else "")
+            for lc in lg_v3.l
+        ), "'Concerning the elect' line must not appear inside the linegroup"
 
         # Verse 4 must be poetry with 3 lines (starting from "And the eternal God")
         verse4 = next(
